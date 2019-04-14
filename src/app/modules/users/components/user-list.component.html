@@ -1,0 +1,44 @@
+<div class="animated fadeIn">
+    <h4 class="page-header">Users</h4>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> List of users
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Username</th>
+                                <th>Is Admin</th>
+                                <th>Options</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let data of datasource">
+                                <td>{{data.firstName}} {{data.lastName}}</td>
+                                <td>{{data.userName}}</td>
+                                <td>{{data.isAdmin==true?'Yes':'No'}}</td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td>
+                                <!-- <td>{{user.firstName}}</td>
+                                <td>{{user.userName}}</td>
+                                <td>{{user.isAdmin==true?'Yes':'No'}}</td>
+                                <td>
+                                    <span class="badge badge-success">Active</span>
+                                </td> -->
+                            </tr>
+                        </tbody>
+                    </table>
+                    <pagination [totalItems]="totalItems" [itemsPerPage]="perPage" [(ngModel)]="currentPage"
+                        (pageChanged)="getList($event)">
+                    </pagination>
+                </div>
+            </div>
+        </div>
+        <!--/.col-->
+    </div>
+</div>
