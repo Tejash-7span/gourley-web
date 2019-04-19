@@ -4,10 +4,96 @@
     margin: 5px 0;
 }
 
+.form-devider{
+    font-weight: bold;
+    border-bottom:1px solid #c8ced3;
+    padding:.75em;
+    width:100%;
+}
+
 .main .container-fluid{
     padding:30px;
 }
 
 h4.page-header{
     margin-bottom: 20px;
+}
+.width-10{
+    width:10%;
+}
+.width-15{
+    width:15%;
+}
+.width-20{
+    width:20%;
+}
+.width-25{
+    width:25%;
+}
+.width-30{
+    width:30%;
+}
+.width-35{
+    width:35%;
+}
+.width-40{
+    width:40%;
+}
+.width-45{
+    width:45%;
+}
+.width-50{
+    width:50%;
+}
+.width-55{
+    width:55%;
+}
+.width-60{
+    width:60%;
+}
+.width-65{
+    width:65%;
+}
+.width-70{
+    width:70%;
+}
+.width-75{
+    width:75%;
+}
+.width-80{
+    width:80%;
+}
+.width-85{
+    width:85%;
+}
+.width-90{
+    width:90%;
+}
+.width-95{
+    width:95%;
+}
+.width-100{
+    width:100%;
+}
+
+// button
+button.btn i.fa{
+    margin-right:5px;
+}
+
+// tables
+table tr th.center, table tr td.center{
+    text-align: center;
+}
+table tr td button{
+    margin: 0 5px;
+}
+
+// forms
+.form-control.is-invalid{
+    border:1px solid #e4e7ea;
+    background-image:none;
+}
+.form-control.is-invalid ~ .invalid-feedback{
+    font-size:90%;
 }

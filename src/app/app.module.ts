@@ -43,7 +43,7 @@ import { ChartsModule } from 'ng2-charts/ng2-charts';
 import { RestService } from './general/services/rest.service';
 import { LocalStorageService } from './general/services/localstorage.service';
 import { AuthenticationService } from './general/services/authentication.service';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './general/guards/auth.guard';
 import { MessageService } from './general/services/message.service';
 
@@ -51,6 +51,7 @@ import { MessageService } from './general/services/message.service';
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
     AppAsideModule,

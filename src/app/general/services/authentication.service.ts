@@ -29,6 +29,6 @@ export class AuthenticationService {
 
     public logout() {
         this.localStorageService.logout();
-        this.router.navigate(['/dashboard']);
+        this.router.navigate(['/login']);
     }
 }

@@ -9,3 +9,8 @@ export class PagedData<T> {
         this.totalRecords = totalRecords;
     }
 }
+
+export interface SelectedPage {
+    page: number;
+    itemsPerPage: number;
+}

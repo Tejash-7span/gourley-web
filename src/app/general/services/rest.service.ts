@@ -67,6 +67,18 @@ export class RestService {
         });
     }
 
+    public put<T>(path: string, data: any): Promise<T> {
+        const url = `${this.apiURL}/${path}`;
+        return new Promise<T>((resolve, reject) => {
+            this.httpClient.put<T>(url, data, { headers: this.requestHeaders })
+                .toPromise().then(response => {
+                    resolve(response);
+                }).catch(rejected => {
+                    reject(this.handleRejected(rejected));
+                });
+        });
+    }
+
     private handleRejected(rejected: any): RejectedResponse {
         if (rejected.status && rejected.status === 401) {
             this.messageService.sendLogoutMessage();
@@ -83,8 +95,14 @@ export class RejectedResponse {
     constructor(rejected: any) {
 
         this.rejected = rejected;
-        if (this.rejected && this.rejected.error && this.rejected.error.message) {
-            this.error = this.rejected.error.message;
+        if (this.rejected && this.rejected.error) {
+            if (this.rejected.error.message) {
+                this.error = this.rejected.error.message;
+            } else if (this.rejected.error.Error) {
+                this.error = this.rejected.error.Error;
+            } else {
+                this.error = 'Something went wrong. Please contact your administrator.';
+            }
         }
     }
 }

@@ -1,0 +1,86 @@
+<div class="animated fadeIn">
+    <h4 class="page-header">Users</h4>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <form [formGroup]="userForm" (submit)="saveUser()">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Update user details
+                        <button class="btn btn-primary pull-right" type="button" (click)="backToList()">
+                            <i class="fa fa-arrow-left"></i>Back to list
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" *ngIf="errorMessage">
+                                    {{errorMessage}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="firstName">First Name</label>
+                                <input #firstNameControl class="form-control" id="firstName" type="text"
+                                    name="firstName" formControlName="firstName"
+                                    [ngClass]="{'is-invalid': submitted && form.firstName.errors}">
+                                <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.firstName.errors.required">First Name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="lastName">Last Name</label>
+                                <input class="form-control" id="lastName" type="text" name="lastName"
+                                    formControlName="lastName"
+                                    [ngClass]="{'is-invalid': submitted && form.lastName.errors}">
+                                <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.lastName.errors.required">Last Name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="email">Email</label>
+                                <input class="form-control" id="email" type="text" name="email" formControlName="email"
+                                    [ngClass]="{'is-invalid': submitted && form.email.errors}">
+                                <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+                                    <div *ngIf="form.email.errors.email">Please enter a valid email address</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="userName">Username</label>
+                                <input class="form-control" id="userName" type="text" name="userName"
+                                    formControlName="userName"
+                                    [ngClass]="{'is-invalid': submitted && form.userName.errors}">
+                                <div *ngIf="submitted && form.userName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.userName.errors.required">Username is required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="workType">Work Type</label>
+                                <input class="form-control" id="workType" type="text" name="workType"
+                                    formControlName="workType">
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label>Is Admin?</label>
+                                <div class="clearfix"></div>
+                                <label for="admin" class="switch switch-label switch-primary">
+                                    <input class="switch-input" id="admin" type="checkbox" name="admin"
+                                        formControlName="admin">
+                                    <span class="switch-slider" data-checked="Yes" data-unchecked="No"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fa fa-dot-circle-o"></i>Submit
+                        </button>
+                        <button type="reset" class="btn btn-danger">
+                            <i class="fa fa-ban"></i>Reset
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

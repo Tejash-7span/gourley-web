@@ -13,4 +13,17 @@ export class UserService {
     public getList(page: number): Promise<PagedData<UserModel>> {
         return this.restService.getPagedData('users', page);
     }
+
+    public get(id: number): Promise<UserModel> {
+        const path = `users/${id}`;
+        return this.restService.get(path);
+    }
+
+    public createUser(user: UserModel): Promise<void> {
+        return this.restService.post('users', user);
+    }
+
+    public updateUser(user: UserModel): Promise<void> {
+        return this.restService.put(`users/${user.id}`, user);
+    }
 }

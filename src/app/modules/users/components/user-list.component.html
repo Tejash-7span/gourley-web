@@ -5,31 +5,36 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-align-justify"></i> List of users
+                    <button class="btn btn-primary pull-right" type="button" (click)="redirectTo('/users')">
+                        <i class="fa fa-plus"></i>Add new
+                    </button>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered table-striped table-sm">
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Username</th>
-                                <th>Is Admin</th>
-                                <th>Options</th>
+                                <th class="width-30">Username</th>
+                                <th class="width-30">Name</th>
+                                <th class="width-15 center">Is Admin</th>
+                                <th class="width-25 center" colspan="3">Options</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let data of datasource">
-                                <td>{{data.firstName}} {{data.lastName}}</td>
                                 <td>{{data.userName}}</td>
-                                <td>{{data.isAdmin==true?'Yes':'No'}}</td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
+                                <td>{{data.firstName}} {{data.lastName}}</td>
+                                <td class="center">{{data.admin==true?'Yes':'No'}}</td>
+                                <td class="center">
+                                    <button class="btn btn-sm btn-success" type="button"
+                                        (click)="redirectTo('/users/update/'+data.id)">Update</button>
                                 </td>
-                                <!-- <td>{{user.firstName}}</td>
-                                <td>{{user.userName}}</td>
-                                <td>{{user.isAdmin==true?'Yes':'No'}}</td>
-                                <td>
-                                    <span class="badge badge-success">Active</span>
-                                </td> -->
+                                <td class="center">
+                                    <button class="btn btn-sm btn-primary" type="button"
+                                        (click)="redirectTo('/users/set-password/'+data.id)">Set Password</button>
+                                </td>
+                                <td class="center">
+                                    <button class="btn btn-sm btn-danger" type="button">Delete</button>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -39,6 +44,6 @@
                 </div>
             </div>
         </div>
-        <!--/.col-->
+
     </div>
 </div>
