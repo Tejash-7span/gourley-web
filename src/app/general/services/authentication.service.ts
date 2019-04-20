@@ -5,6 +5,7 @@ import { LoginResponse } from '../models/login.response';
 import { LocalStorageService } from './localstorage.service';
 import { MessageService } from './message.service';
 import { Router } from '@angular/router';
+import { ROUTES } from '../models/constants';
 
 
 @Injectable()
@@ -29,6 +30,6 @@ export class AuthenticationService {
 
     public logout() {
         this.localStorageService.logout();
-        this.router.navigate(['/login']);
+        this.router.navigate([ROUTES.login]);
     }
 }

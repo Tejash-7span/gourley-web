@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Create new user
-                        <button class="btn btn-primary pull-right" type="button" (click)="backToList()">
+                        <button class="btn btn-sm btn-primary pull-right" type="button" (click)="backToList()">
                             <i class="fa fa-arrow-left"></i>Back to list
                         </button>
                     </div>
@@ -27,6 +27,7 @@
                                     [ngClass]="{'is-invalid': submitted && form.firstName.errors}">
                                 <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
                                     <div *ngIf="form.firstName.errors.required">First Name is required</div>
+                                    <div *ngIf="form.firstName.errors.maxlength">Maximum 45 characters are allowed</div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
@@ -36,6 +37,7 @@
                                     [ngClass]="{'is-invalid': submitted && form.lastName.errors}">
                                 <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
                                     <div *ngIf="form.lastName.errors.required">Last Name is required</div>
+                                    <div *ngIf="form.lastName.errors.maxlength">Maximum 45 characters are allowed</div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
@@ -44,6 +46,7 @@
                                     [ngClass]="{'is-invalid': submitted && form.email.errors}">
                                 <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
                                     <div *ngIf="form.email.errors.email">Please enter a valid email address</div>
+                                    <div *ngIf="form.email.errors.maxlength">Maximum 100 characters are allowed</div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
@@ -53,6 +56,7 @@
                                     [ngClass]="{'is-invalid': submitted && form.userName.errors}">
                                 <div *ngIf="submitted && form.userName.errors" class="invalid-feedback">
                                     <div *ngIf="form.userName.errors.required">Username is required</div>
+                                    <div *ngIf="form.userName.errors.maxlength">Maximum 45 characters are allowed</div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
@@ -92,10 +96,10 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-success">
+                        <button type="submit" class="btn btn-sm btn-success">
                             <i class="fa fa-dot-circle-o"></i>Submit
                         </button>
-                        <button type="reset" class="btn btn-danger">
+                        <button type="reset" class="btn btn-sm btn-danger">
                             <i class="fa fa-ban"></i>Reset
                         </button>
                     </div>

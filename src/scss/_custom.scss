@@ -82,6 +82,10 @@ button.btn i.fa{
 }
 
 // tables
+.table-bordered thead th, .table-bordered thead td{
+    padding-top:8px ;
+    padding-bottom:8px ;
+}
 table tr th.center, table tr td.center{
     text-align: center;
 }

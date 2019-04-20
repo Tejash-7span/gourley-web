@@ -5,6 +5,7 @@ import { mustMatch } from '../../../general/helpers/must-match.validator';
 import { UserService } from '../services/user.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { UserModel } from '../models/user.model';
+import { ROUTES } from '../../../general/models/constants';
 
 @Component({
     selector: 'app-update-user',
@@ -63,7 +64,7 @@ export class UpdateUserComponent implements OnInit {
     }
 
     backToList() {
-        this.router.navigate(['/users']);
+        this.router.navigate([ROUTES.users]);
     }
 
     private loadUser() {

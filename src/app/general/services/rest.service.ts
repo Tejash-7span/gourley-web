@@ -79,6 +79,18 @@ export class RestService {
         });
     }
 
+    public delete<T>(path: string): Promise<T> {
+        const url = `${this.apiURL}/${path}`;
+        return new Promise<T>((resolve, reject) => {
+            this.httpClient.delete<T>(url, { headers: this.requestHeaders })
+                .toPromise().then(response => {
+                    resolve(response);
+                }).catch(rejected => {
+                    reject(this.handleRejected(rejected));
+                });
+        });
+    }
+
     private handleRejected(rejected: any): RejectedResponse {
         if (rejected.status && rejected.status === 401) {
             this.messageService.sendLogoutMessage();

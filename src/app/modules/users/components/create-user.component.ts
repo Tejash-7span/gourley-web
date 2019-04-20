@@ -5,6 +5,7 @@ import { mustMatch } from '../../../general/helpers/must-match.validator';
 import { UserService } from '../services/user.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { UserModel } from '../models/user.model';
+import { ROUTES } from '../../../general/models/constants';
 
 @Component({
   selector: 'app-create-user',
@@ -31,10 +32,10 @@ export class CreateUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.userForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', Validators.email],
-      userName: ['', Validators.required],
+      firstName: ['', [Validators.required, Validators.maxLength(45)]],
+      lastName: ['', [Validators.required, Validators.maxLength(45)]],
+      email: ['', [Validators.email, Validators.maxLength(100)]],
+      userName: ['', [Validators.required, Validators.maxLength(45)]],
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       workType: [''],
@@ -65,7 +66,7 @@ export class CreateUserComponent implements OnInit {
   }
 
   backToList() {
-    this.router.navigate(['/users']);
+    this.router.navigate([ROUTES.users]);
   }
 }
 

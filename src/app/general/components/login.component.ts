@@ -7,6 +7,7 @@ import { LocalStorageService } from '../services/localstorage.service';
 import { UserSessionModel } from '../models/user-session.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
+import { ROUTES } from '../models/constants';
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.auth.isLoggedIn) {
-      this.router.navigate(['/dashboard']);
+      this.router.navigate([ROUTES.dashboard]);
     }
 
     this.loginForm = this.formBuilder.group({
@@ -42,12 +43,13 @@ export class LoginComponent implements OnInit {
 
   public login() {
     this.submitted = true;
+    this.errorMessage = null;
     if (this.loginForm.valid) {
       this.auth.login(LoginRequest.createInstance(this.loginForm))
         .then((response: LoginResponse) => {
           this.setUser(response);
           this.errorMessage = null;
-          this.router.navigate(['/dashboard']);
+          this.router.navigate([ROUTES.dashboard]);
         })
         .catch((reject: RejectedResponse) => {
           this.errorMessage = reject.error;

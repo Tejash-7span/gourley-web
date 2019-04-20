@@ -46,6 +46,8 @@ import { AuthenticationService } from './general/services/authentication.service
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthGuard } from './general/guards/auth.guard';
 import { MessageService } from './general/services/message.service';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { SharedModule } from './modules/shared/shared.module';
 
 @NgModule({
   imports: [
@@ -62,7 +64,9 @@ import { MessageService } from './general/services/message.service';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
-    ChartsModule
+    ModalModule,
+    ChartsModule,
+    SharedModule
   ],
   declarations: [
     AppComponent,

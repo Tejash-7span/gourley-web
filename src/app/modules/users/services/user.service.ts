@@ -26,4 +26,8 @@ export class UserService {
     public updateUser(user: UserModel): Promise<void> {
         return this.restService.put(`users/${user.id}`, user);
     }
+
+    public deleteUser(id: number): Promise<void> {
+        return this.restService.delete(`users/${id}`);
+    }
 }
