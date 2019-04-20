@@ -1,0 +1,99 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <h4 class="page-header">Parts</h4>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <button class="btn btn-sm btn-primary pull-right" type="button" (click)="backToList()">
+                <i class="fa fa-arrow-left"></i>Back to list
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <form [formGroup]="partForm" (submit)="savePart()">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Create new part
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" *ngIf="errorMessage">
+                                    {{errorMessage}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="description">Description</label>
+                                <input #descriptionControl class="form-control" id="description" type="text"
+                                    name="description" formControlName="description"
+                                    [ngClass]="{'is-invalid': submitted && form.description.errors}">
+                                <div *ngIf="submitted && form.description.errors" class="invalid-feedback">
+                                    <div *ngIf="form.description.errors.required">Description is required</div>
+                                    <div *ngIf="form.description.errors.maxlength">Maximum 70 characters are allowed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="avgPrice">Average Price</label>
+                                <input class="form-control  number" id="avgPrice" type="text" name="avgPrice"
+                                    formControlName="avgPrice"
+                                    [ngClass]="{'is-invalid': submitted && form.avgPrice.errors}">
+                                <div *ngIf="submitted && form.avgPrice.errors" class="invalid-feedback">
+                                    <div *ngIf="form.avgPrice.errors.invalidprice">Please enter a valid number.</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="crewCost">Crew Cost</label>
+                                <input class="form-control  number" id="crewCost" type="text" name="crewCost"
+                                    formControlName="crewCost"
+                                    [ngClass]="{'is-invalid': submitted && form.crewCost.errors}">
+                                <div *ngIf="submitted && form.crewCost.errors" class="invalid-feedback">
+                                    <div *ngIf="form.crewCost.errors.invalidprice">Please enter a valid number.</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="priceB">Price B</label>
+                                <input class="form-control  number" id="priceB" type="text" name="priceB"
+                                    formControlName="priceB"
+                                    [ngClass]="{'is-invalid': submitted && form.priceB.errors}">
+                                <div *ngIf="submitted && form.priceB.errors" class="invalid-feedback">
+                                    <div *ngIf="form.priceB.errors.invalidprice">Please enter a valid number.</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="priceC">Price C</label>
+                                <input class="form-control  number" id="priceC" type="priceC" name="priceC"
+                                    formControlName="priceC"
+                                    [ngClass]="{'is-invalid': submitted && form.priceC.errors}">
+                                <div *ngIf="submitted && form.priceC.errors" class="invalid-feedback">
+                                    <div *ngIf="form.priceC.errors.invalidprice">Please enter a valid number.</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label>Is Active?</label>
+                                <div class="clearfix"></div>
+                                <label for="active" class="switch switch-label switch-primary">
+                                    <input class="switch-input" id="active" type="checkbox" name="active"
+                                        formControlName="active">
+                                    <span class="switch-slider" data-checked="Yes" data-unchecked="No"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-success">
+                            <i class="fa fa-dot-circle-o"></i>Submit
+                        </button>
+                        <button type="reset" class="btn btn-sm btn-danger">
+                            <i class="fa fa-ban"></i>Reset
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

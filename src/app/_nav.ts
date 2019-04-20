@@ -44,6 +44,11 @@ export const navItems: NavData[] = [
     url: '/users',
     icon: 'icon-user'
   },
+  {
+    name: 'Parts',
+    url: '/parts',
+    icon: 'icon-wrench'
+  },
   // {
   //   title: true,
   //   name: 'Theme'

@@ -1,5 +1,14 @@
 <div class="animated fadeIn">
-    <h4 class="page-header">Users</h4>
+    <div class="row">
+        <div class="col-lg-6">
+            <h4 class="page-header">Users</h4>
+        </div>
+        <div class="col-lg-6">
+            <button class="btn btn-sm btn-primary pull-right" type="button" (click)="backToList()">
+                <i class="fa fa-arrow-left"></i>Back to list
+            </button>
+        </div>
+    </div>
     <div class="row">
         <div class="col-lg-12">
 
@@ -7,9 +16,6 @@
                 <div class="card">
                     <div class="card-header">
                         <i class="fa fa-align-justify"></i> Create new user
-                        <button class="btn btn-sm btn-primary pull-right" type="button" (click)="backToList()">
-                            <i class="fa fa-arrow-left"></i>Back to list
-                        </button>
                     </div>
                     <div class="card-body">
                         <div class="row">

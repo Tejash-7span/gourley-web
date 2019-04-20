@@ -10,8 +10,8 @@ export class UserService {
 
     }
 
-    public getList(page: number): Promise<PagedData<UserModel>> {
-        return this.restService.getPagedData('users', page);
+    public getList(page: number, searchTerm: string = ''): Promise<PagedData<UserModel>> {
+        return this.restService.getPagedData('users', page, searchTerm);
     }
 
     public get(id: number): Promise<UserModel> {

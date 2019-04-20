@@ -89,6 +89,9 @@ button.btn i.fa{
 table tr th.center, table tr td.center{
     text-align: center;
 }
+table tr th.right, table tr td.right{
+    text-align: right;
+}
 table tr td button{
     margin: 0 5px;
 }
@@ -96,8 +99,15 @@ table tr td button{
 // forms
 .form-control.is-invalid{
     border:1px solid #e4e7ea;
-    background-image:none;
+    background:none;
+    padding-right:.75em;
 }
 .form-control.is-invalid ~ .invalid-feedback{
     font-size:90%;
+}
+.form-control.number{
+    text-align: right;
+}
+.form-control.search{
+    max-width:200px;
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { UserService } from '../services/user.service';
-import { UserModel } from '../models/user.model';
+import { PartService } from '../services/part.service';
+import { PartModel } from '../models/part.model';
 import { PER_PAGE, PAGINATION_MAX_SIZE } from '../../../general/models/constants';
 import { SelectedPage } from '../../../general/models/paged-data.model';
 import { Router } from '@angular/router';
@@ -8,21 +8,21 @@ import { RejectedResponse } from '../../../general/services/rest.service';
 import { ConfirmModalComponent } from '../../shared/components/confirm-modal.component';
 
 @Component({
-  templateUrl: 'user-list.component.html'
+  templateUrl: 'part-list.component.html'
 })
-export class UserListComponent implements OnInit {
+export class PartListComponent implements OnInit {
   currentPage = 1;
   totalItems = 0;
   perPage = PER_PAGE;
   maxSize = PAGINATION_MAX_SIZE;
-  datasource: UserModel[] = [];
+  datasource: PartModel[] = [];
   errorMessage = null;
   searchTerm = '';
 
   @ViewChild('deleteConfirmModal')
   deleteConfirmModal: ConfirmModalComponent;
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router, private partService: PartService) {
 
   }
 
@@ -32,7 +32,7 @@ export class UserListComponent implements OnInit {
 
   getList(event: SelectedPage) {
     this.currentPage = event ? event.page : 1;
-    this.userService.getList(this.currentPage, this.searchTerm).then(response => {
+    this.partService.getList(this.currentPage, this.searchTerm).then(response => {
       this.datasource = response.data;
       this.totalItems = response.totalRecords;
     });
@@ -42,8 +42,8 @@ export class UserListComponent implements OnInit {
     this.deleteConfirmModal.show(id);
   }
 
-  deleteUser(id: number) {
-    this.userService.deleteUser(id)
+  deletePart(id: number) {
+    this.partService.deletePart(id)
       .then(response => {
         if (this.datasource.length === 1) {
           this.getList({ page: this.currentPage - 1, itemsPerPage: PER_PAGE });

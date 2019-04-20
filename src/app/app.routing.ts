@@ -60,6 +60,10 @@ export const routes: Routes = [
         loadChildren: './modules/users/users.module#UsersModule'
       },
       {
+        path: 'parts',
+        loadChildren: './modules/parts/parts.module#PartsModule'
+      },
+      {
         path: 'base',
         loadChildren: './views/base/base.module#BaseModule'
       },

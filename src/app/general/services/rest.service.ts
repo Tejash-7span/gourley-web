@@ -27,8 +27,8 @@ export class RestService {
         return headers;
     }
 
-    public getPagedData<T>(path: string, page: number): Promise<PagedData<T>> {
-        const url = `${this.apiURL}/${path}?page=${page}&perpage=${PER_PAGE}`;
+    public getPagedData<T>(path: string, page: number, searchTerm: string = ''): Promise<PagedData<T>> {
+        const url = `${this.apiURL}/${path}?page=${page}&perpage=${PER_PAGE}&searchterm=${searchTerm}`;
         return new Promise<PagedData<T>>((resolve, reject) => {
             this.httpClient.get<T[]>(url, { headers: this.requestHeaders, observe: 'response' })
                 .toPromise().then(response => {
