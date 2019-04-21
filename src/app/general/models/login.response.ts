@@ -1,7 +1,6 @@
+import { UserModel } from '../../modules/users/models/user.model';
+
 export class LoginResponse {
-    id: number;
-    userName: string;
-    firstName: string;
-    lastName: string;
+    user: UserModel;
     token: string;
 }

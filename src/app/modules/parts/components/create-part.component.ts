@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ViewChildren, AfterViewInit, QueryList, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { mustMatch } from '../../../general/helpers/must-match.validator';
@@ -7,12 +7,17 @@ import { RejectedResponse } from '../../../general/services/rest.service';
 import { PartModel } from '../models/part.model';
 import { ROUTES } from '../../../general/models/constants';
 import { priceValidator } from '../../../general/helpers/number.validator';
+import { Renderer3 } from '@angular/core/src/render3/interfaces/renderer';
 
 @Component({
   selector: 'app-create-part',
   templateUrl: 'create-part.component.html'
 })
-export class CreatePartComponent implements OnInit {
+export class CreatePartComponent implements OnInit, AfterViewInit {
+
+
+  @ViewChild('firstControl')
+  firstControl: ElementRef;
 
   errorMessage: string;
   partForm: FormGroup;
@@ -21,6 +26,7 @@ export class CreatePartComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private partService: PartService,
+    private renderer: Renderer2,
     private formBuilder: FormBuilder) {
   }
 
@@ -38,13 +44,11 @@ export class CreatePartComponent implements OnInit {
       active: ['']
     });
 
-    this.partForm.patchValue({
-      avgPrice: 0,
-      crewCost: 0,
-      priceB: 0,
-      priceC: 0,
-      active: true
-    });
+    this.resetForm();
+  }
+
+  ngAfterViewInit(): void {
+    this.firstControl.nativeElement.focus();
   }
 
   savePart() {
@@ -58,6 +62,11 @@ export class CreatePartComponent implements OnInit {
           this.errorMessage = rejected.error;
         });
     }
+  }
+
+  resetForm() {
+    this.submitted = false;
+    this.partForm.patchValue(new PartModel());
   }
 
   backToList() {

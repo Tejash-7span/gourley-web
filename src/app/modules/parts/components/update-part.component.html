@@ -4,7 +4,8 @@
             <h4 class="page-header">Parts</h4>
         </div>
         <div class="col-lg-6 col-sm-12">
-            <button class="btn btn-sm btn-primary pull-right" type="button" (click)="backToList()">
+            <button class="btn btn-sm btn-primary pull-right margin-bottom-10 full-width" type="button"
+                (click)="backToList()">
                 <i class="fa fa-arrow-left"></i>Back to list
             </button>
         </div>
@@ -27,7 +28,7 @@
                         <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
                                 <label class="form-col-form-label" for="description">Description</label>
-                                <input #descriptionControl class="form-control" id="description" type="text"
+                                <input #firstControl class="form-control" id="description" type="text"
                                     name="description" formControlName="description"
                                     [ngClass]="{'is-invalid': submitted && form.description.errors}">
                                 <div *ngIf="submitted && form.description.errors" class="invalid-feedback">
@@ -42,7 +43,8 @@
                                     formControlName="avgPrice"
                                     [ngClass]="{'is-invalid': submitted && form.avgPrice.errors}">
                                 <div *ngIf="submitted && form.avgPrice.errors" class="invalid-feedback">
-                                    <div *ngIf="form.avgPrice.errors.invalidprice">Please enter a valid number.</div>
+                                    <div *ngIf="form.avgPrice.errors.invalidprice">Please enter a valid number in 0.00
+                                        format.</div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
@@ -51,7 +53,8 @@
                                     formControlName="crewCost"
                                     [ngClass]="{'is-invalid': submitted && form.crewCost.errors}">
                                 <div *ngIf="submitted && form.crewCost.errors" class="invalid-feedback">
-                                    <div *ngIf="form.crewCost.errors.invalidprice">Please enter a valid number.</div>
+                                    <div *ngIf="form.crewCost.errors.invalidprice">Please enter a valid number in 0.00
+                                        format.</div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
@@ -60,7 +63,8 @@
                                     formControlName="priceB"
                                     [ngClass]="{'is-invalid': submitted && form.priceB.errors}">
                                 <div *ngIf="submitted && form.priceB.errors" class="invalid-feedback">
-                                    <div *ngIf="form.priceB.errors.invalidprice">Please enter a valid number.</div>
+                                    <div *ngIf="form.priceB.errors.invalidprice">Please enter a valid number in 0.00
+                                        format.</div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
@@ -69,7 +73,8 @@
                                     formControlName="priceC"
                                     [ngClass]="{'is-invalid': submitted && form.priceC.errors}">
                                 <div *ngIf="submitted && form.priceC.errors" class="invalid-feedback">
-                                    <div *ngIf="form.priceC.errors.invalidprice">Please enter a valid number.</div>
+                                    <div *ngIf="form.priceC.errors.invalidprice">Please enter a valid number in 0.00
+                                        format.</div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
@@ -84,10 +89,10 @@
                         </div>
                     </div>
                     <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-success">
+                        <button type="submit" class="btn btn-sm btn-success margin-bottom-10 full-width">
                             <i class="fa fa-dot-circle-o"></i>Submit
                         </button>
-                        <button type="reset" class="btn btn-sm btn-danger">
+                        <button type="button" class="btn btn-sm btn-danger full-width" (click)="resetForm()">
                             <i class="fa fa-ban"></i>Reset
                         </button>
                     </div>

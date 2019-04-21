@@ -4,6 +4,7 @@ import { NgModule } from '@angular/core';
 import { ModalModule } from 'ngx-bootstrap/modal/';
 import { ConfirmModalComponent } from './components/confirm-modal.component';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { UserLetterComponent } from './components/user-letter.component';
 
 // Angular
 
@@ -14,10 +15,12 @@ import { ButtonsModule } from 'ngx-bootstrap/buttons';
         ModalModule.forRoot()
     ],
     declarations: [
-        ConfirmModalComponent
+        ConfirmModalComponent,
+        UserLetterComponent
     ],
     exports: [
-        ConfirmModalComponent
+        ConfirmModalComponent,
+        UserLetterComponent
     ]
 })
 export class SharedModule { }

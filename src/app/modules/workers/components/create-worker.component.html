@@ -1,0 +1,54 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <h4 class="page-header">{{workTypeName}} Workers</h4>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <button class="btn btn-sm btn-primary pull-right margin-bottom-10 full-width" type="button"
+                (click)="backToList()">
+                <i class="fa fa-arrow-left"></i>Back to list
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <form [formGroup]="workerForm" (submit)="saveWorker()">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Create new {{workTypeName | lowercase}} worker
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" *ngIf="errorMessage">
+                                    {{errorMessage}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="name">Name</label>
+                                <input #firstControl class="form-control" id="name" type="text" name="name"
+                                    formControlName="name" [ngClass]="{'is-invalid': submitted && form.name.errors}">
+                                <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+                                    <div *ngIf="form.name.errors.required">Name is required</div>
+                                    <div *ngIf="form.name.errors.maxlength">Maximum 45 characters are allowed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-success margin-bottom-10 full-width">
+                            <i class="fa fa-dot-circle-o"></i>Submit
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger full-width" (click)="resetForm()">
+                            <i class="fa fa-ban"></i>Reset
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

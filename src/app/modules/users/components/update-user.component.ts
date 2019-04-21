@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { mustMatch } from '../../../general/helpers/must-match.validator';
@@ -11,12 +11,15 @@ import { ROUTES } from '../../../general/models/constants';
     selector: 'app-update-user',
     templateUrl: 'update-user.component.html'
 })
-export class UpdateUserComponent implements OnInit {
+export class UpdateUserComponent implements OnInit, AfterViewInit {
+    @ViewChild('firstControl')
+    firstControl: ElementRef;
 
     errorMessage: string;
     userForm: FormGroup;
     submitted = false;
     id = 0;
+    existing: UserModel;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -38,8 +41,6 @@ export class UpdateUserComponent implements OnInit {
             admin: ['']
         });
 
-        this.userForm.patchValue({ admin: false });
-
         this.route.params.subscribe(data => {
             if (data['id']) {
                 this.id = data['id'];
@@ -48,6 +49,10 @@ export class UpdateUserComponent implements OnInit {
                 }
             }
         });
+    }
+
+    ngAfterViewInit() {
+        this.firstControl.nativeElement.focus();
     }
 
     saveUser() {
@@ -63,18 +68,28 @@ export class UpdateUserComponent implements OnInit {
         }
     }
 
+    resetForm() {
+        this.submitted = false;
+        this.loadUser();
+    }
+
     backToList() {
         this.router.navigate([ROUTES.users]);
     }
 
-    private loadUser() {
-        this.userService.get(this.id)
-            .then((response: UserModel) => {
-                this.userForm.patchValue(response);
-            })
-            .catch((rejected: RejectedResponse) => {
-                this.errorMessage = rejected.error;
-            });
+    loadUser() {
+        if (this.existing) {
+            this.userForm.patchValue(this.existing);
+        } else {
+            this.userService.get(this.id)
+                .then((response: UserModel) => {
+                    this.existing = response;
+                    this.userForm.patchValue(response);
+                })
+                .catch((rejected: RejectedResponse) => {
+                    this.errorMessage = rejected.error;
+                });
+        }
     }
 }
 

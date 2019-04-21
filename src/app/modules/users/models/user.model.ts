@@ -2,13 +2,13 @@ import { FormGroup } from '@angular/forms';
 
 export class UserModel {
     id = 0;
-    firstName: string;
-    lastName: string;
-    userName: string;
-    email: string;
-    admin: boolean;
-    workType: string;
-    password: string;
+    firstName = '';
+    lastName = '';
+    userName = '';
+    email = '';
+    admin = false;
+    workType = '';
+    password = '';
 
     public static createInstance(id: number, form: FormGroup) {
         const user = new UserModel();

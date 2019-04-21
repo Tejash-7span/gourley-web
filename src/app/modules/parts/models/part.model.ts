@@ -2,12 +2,12 @@ import { FormGroup } from '@angular/forms';
 
 export class PartModel {
     id = 0;
-    description: string;
-    avgPrice: number;
-    crewCost: number;
-    priceB: number;
-    priceC: number;
-    active: boolean;
+    description = '';
+    avgPrice = 0;
+    crewCost = 0;
+    priceB = 0;
+    priceC = 0;
+    active = true;
 
     public static createInstance(id: number, form: FormGroup) {
         const part = new PartModel();

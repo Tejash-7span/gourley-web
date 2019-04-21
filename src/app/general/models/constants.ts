@@ -4,5 +4,7 @@ export const ROUTES = {
     login: '/login',
     dashboard: '/dashboard',
     users: '/users',
-    parts: '/parts'
+    parts: '/parts',
+    workers: '/workers',
+    notfound: '/404',
 };

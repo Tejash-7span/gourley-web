@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { mustMatch } from '../../../general/helpers/must-match.validator';
@@ -11,14 +11,16 @@ import { ROUTES } from '../../../general/models/constants';
   selector: 'app-create-user',
   templateUrl: 'create-user.component.html'
 })
-export class CreateUserComponent implements OnInit {
+export class CreateUserComponent implements OnInit, AfterViewInit {
+
+  @ViewChild('firstControl')
+  firstControl: ElementRef;
 
   errorMessage: string;
   userForm: FormGroup;
   submitted = false;
 
-  @ViewChild('firstNameControl')
-  firstNameControl: ElementRef;
+
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -45,11 +47,11 @@ export class CreateUserComponent implements OnInit {
       }
     );
 
-    this.userForm.patchValue({ admin: false });
+    this.resetForm();
   }
 
-  ngOnAfterViewInit() {
-    this.firstNameControl.nativeElement.focus();
+  ngAfterViewInit() {
+    this.firstControl.nativeElement.focus();
   }
 
   saveUser() {
@@ -63,6 +65,12 @@ export class CreateUserComponent implements OnInit {
           this.errorMessage = rejected.error;
         });
     }
+  }
+
+  resetForm() {
+    this.submitted = false;
+    const user = new UserModel();
+    this.userForm.patchValue({ ...user, ...{ confirmPassword: '' } });
   }
 
   backToList() {

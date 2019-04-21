@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { mustMatch } from '../../../general/helpers/must-match.validator';
@@ -12,12 +12,16 @@ import { priceValidator } from '../../../general/helpers/number.validator';
     selector: 'app-update-part',
     templateUrl: 'update-part.component.html'
 })
-export class UpdatePartComponent implements OnInit {
+export class UpdatePartComponent implements OnInit, AfterViewInit {
+
+    @ViewChild('firstControl')
+    firstControl: ElementRef;
 
     errorMessage: string;
     partForm: FormGroup;
     submitted = false;
     id = 0;
+    existing: PartModel;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -49,6 +53,10 @@ export class UpdatePartComponent implements OnInit {
         });
     }
 
+    ngAfterViewInit(): void {
+        this.firstControl.nativeElement.focus();
+    }
+
     savePart() {
         this.submitted = true;
         if (this.partForm.valid) {
@@ -62,18 +70,28 @@ export class UpdatePartComponent implements OnInit {
         }
     }
 
+    resetForm() {
+        this.submitted = false;
+        this.loadPart();
+    }
+
     backToList() {
         this.router.navigate([ROUTES.parts]);
     }
 
     private loadPart() {
-        this.partService.get(this.id)
-            .then((response: PartModel) => {
-                this.partForm.patchValue(response);
-            })
-            .catch((rejected: RejectedResponse) => {
-                this.errorMessage = rejected.error;
-            });
+        if (this.existing) {
+            this.partForm.patchValue(this.existing);
+        } else {
+            this.partService.get(this.id)
+                .then((response: PartModel) => {
+                    this.existing = response;
+                    this.partForm.patchValue(response);
+                })
+                .catch((rejected: RejectedResponse) => {
+                    this.errorMessage = rejected.error;
+                });
+        }
     }
 }
 

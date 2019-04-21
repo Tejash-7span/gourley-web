@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { mustMatch } from '../../../general/helpers/must-match.validator';
@@ -11,7 +11,10 @@ import { ROUTES } from '../../../general/models/constants';
     selector: 'app-set-password',
     templateUrl: 'set-password.component.html'
 })
-export class SetPasswordComponent implements OnInit {
+export class SetPasswordComponent implements OnInit, AfterViewInit {
+
+    @ViewChild('firstControl')
+    firstControl: ElementRef;
 
     errorMessage: string;
     userModel: UserModel;
@@ -37,16 +40,16 @@ export class SetPasswordComponent implements OnInit {
                 validators: mustMatch('password', 'confirmPassword')
             });
 
-        this.userForm.patchValue({ admin: false });
-
+        this.resetForm();
         this.route.params.subscribe(data => {
             if (data['id']) {
                 this.id = data['id'];
-                if (this.id > 0) {
-                    this.loadUser();
-                }
             }
         });
+    }
+
+    ngAfterViewInit() {
+        this.firstControl.nativeElement.focus();
     }
 
     saveUser() {
@@ -67,14 +70,9 @@ export class SetPasswordComponent implements OnInit {
         this.router.navigate([ROUTES.users]);
     }
 
-    private loadUser() {
-        this.userService.get(this.id)
-            .then((response: UserModel) => {
-                this.userModel = response;
-            })
-            .catch((rejected: RejectedResponse) => {
-                this.errorMessage = rejected.error;
-            });
+    resetForm() {
+        this.submitted = false;
+        this.userForm.patchValue({ password: '', confirmPassword: '' });
     }
 }
 

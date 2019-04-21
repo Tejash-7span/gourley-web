@@ -57,9 +57,13 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  private setUser(user: LoginResponse) {
-    this.localStorageService.loggedInUser = new UserSessionModel(user.id, user.firstName, user.lastName, user.userName);
-    this.localStorageService.token = user.token;
+  private setUser(response: LoginResponse) {
+    this.localStorageService.loggedInUser = new UserSessionModel(
+      response.user.id,
+      response.user.firstName,
+      response.user.lastName,
+      response.user.userName);
+    this.localStorageService.token = response.token;
   }
 }
 

@@ -98,7 +98,6 @@ table tr td button{
 
 // forms
 .form-control.is-invalid{
-    border:1px solid #e4e7ea;
     background:none;
     padding-right:.75em;
 }
@@ -110,4 +109,34 @@ table tr td button{
 }
 .form-control.search{
     max-width:200px;
+}
+
+// user letter
+.user-letter{
+    background: #e83e8c;
+    color:#fff !important;
+    width: 35px;
+    padding: 4px;
+    font-weight: bold;
+    font-size: 18px;
+    border-radius: 50%;
+}
+
+.no-wrap{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media only screen and (max-width : 480px){
+    .full-width{
+        width:100% !important;
+        max-width: 100% !important;
+    }
+    .margin-top-10{
+        margin-top:10px;
+    }
+    .margin-bottom-10{
+        margin-bottom:10px;
+    }
 }

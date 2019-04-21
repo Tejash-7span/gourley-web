@@ -1,19 +1,22 @@
-import { Component, OnDestroy, Inject } from '@angular/core';
+import { Component, OnDestroy, Inject, OnInit } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { navItems } from '../../_nav';
 import { MessageService } from '../../general/services/message.service';
+import { LocalStorageService } from '../../general/services/localstorage.service';
 
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './default-layout.component.html'
 })
-export class DefaultLayoutComponent implements OnDestroy {
+export class DefaultLayoutComponent implements OnInit, OnDestroy {
   public navItems = navItems;
   public sidebarMinimized = true;
   private changes: MutationObserver;
   public element: HTMLElement;
-  constructor(private messageService: MessageService, @Inject(DOCUMENT) _document?: any) {
+  public name: string;
+  public copyRightYear: number = new Date().getFullYear();
+  constructor(private localStorageService: LocalStorageService, private messageService: MessageService, @Inject(DOCUMENT) _document?: any) {
 
     this.changes = new MutationObserver((mutations) => {
       this.sidebarMinimized = _document.body.classList.contains('sidebar-minimized');
@@ -23,6 +26,10 @@ export class DefaultLayoutComponent implements OnDestroy {
       attributes: true,
       attributeFilter: ['class']
     });
+  }
+
+  ngOnInit() {
+    this.name = this.localStorageService.loggedInUser.userName;
   }
 
   ngOnDestroy(): void {

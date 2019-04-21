@@ -6,7 +6,8 @@
             <h4 class="page-header">Users</h4>
         </div>
         <div class="col-lg-6">
-            <button class="btn btn-sm btn-primary pull-right" type="button" (click)="redirectTo('/users/create')">
+            <button class="btn btn-sm btn-primary pull-right margin-bottom-10 full-width" type="button"
+                (click)="redirectTo('/users/create')">
                 <i class="fa fa-plus"></i>Add new
             </button>
         </div>
@@ -16,7 +17,8 @@
             <div class="card">
                 <div class="card-header">
                     <i class="fa fa-align-justify"></i> List of users
-                    <input type="text" class="form-control search pull-right" placeholder="Search Username" [(ngModel)]="searchTerm" (keydown.enter)="getList(null)"/>
+                    <input type="text" class="form-control search pull-right margin-top-10 full-width"
+                        placeholder="Search Username" [(ngModel)]="searchTerm" (keydown.enter)="getList(null)" />
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -45,7 +47,7 @@
                                         (click)="redirectTo('/users/update/'+data.id)">Update</button>
                                 </td>
                                 <td class="center">
-                                    <button class="btn btn-sm btn-primary" type="button"
+                                    <button class="btn btn-sm btn-primary no-wrap" type="button"
                                         (click)="redirectTo('/users/set-password/'+data.id)">Set Password</button>
                                 </td>
                                 <td class="center">

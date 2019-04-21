@@ -34,10 +34,6 @@ export const navItems: NavData[] = [
     name: 'Dashboard',
     url: '/dashboard',
     icon: 'icon-speedometer',
-    badge: {
-      variant: 'info',
-      text: 'NEW'
-    }
   },
   {
     name: 'Users',
@@ -48,6 +44,28 @@ export const navItems: NavData[] = [
     name: 'Parts',
     url: '/parts',
     icon: 'icon-wrench'
+  },
+  {
+    name: 'Workers',
+    url: '/workers',
+    icon: 'icon-user',
+    children: [
+      {
+        name: 'Drywall',
+        url: '/workers/1',
+        icon: 'icon-user'
+      },
+      {
+        name: 'Stone',
+        url: '/workers/2',
+        icon: 'icon-user'
+      },
+      {
+        name: 'Stucco',
+        url: '/workers/3',
+        icon: 'icon-user'
+      }
+    ]
   },
   // {
   //   title: true,
