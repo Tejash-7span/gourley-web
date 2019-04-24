@@ -19,6 +19,15 @@ export class UserService {
         return this.restService.get(path);
     }
 
+    public getAdmin(): Promise<UserModel> {
+        const path = `users/admin`;
+        return this.restService.get(path);
+    }
+
+    public registerUser(user: UserModel): Promise<void> {
+        return this.restService.post('register', user);
+    }
+
     public createUser(user: UserModel): Promise<void> {
         return this.restService.post('users', user);
     }

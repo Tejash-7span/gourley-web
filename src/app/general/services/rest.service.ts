@@ -103,6 +103,7 @@ export class RestService {
 export class RejectedResponse {
     rejected: any;
     error: string;
+    status = 0;
 
     constructor(rejected: any) {
 
@@ -114,6 +115,9 @@ export class RejectedResponse {
                 this.error = this.rejected.error.Error;
             } else {
                 this.error = 'Something went wrong. Please contact your administrator.';
+            }
+            if (this.rejected.status) {
+                this.status = this.rejected.status;
             }
         }
     }
