@@ -44,6 +44,9 @@ export class SetPasswordComponent implements OnInit, AfterViewInit {
         this.route.params.subscribe(data => {
             if (data['id']) {
                 this.id = data['id'];
+                this.loadUser();
+            } else {
+                this.router.navigate([ROUTES.users]);
             }
         });
     }
@@ -73,6 +76,16 @@ export class SetPasswordComponent implements OnInit, AfterViewInit {
     resetForm() {
         this.submitted = false;
         this.userForm.patchValue({ password: '', confirmPassword: '' });
+    }
+
+    loadUser() {
+        this.userService.get(this.id)
+            .then((response: UserModel) => {
+                this.userModel = response;
+            })
+            .catch((rejected: RejectedResponse) => {
+                this.errorMessage = rejected.error;
+            });
     }
 }
 

@@ -65,5 +65,9 @@ export class LoginComponent implements OnInit {
       response.user.userName);
     this.localStorageService.token = response.token;
   }
+
+  register() {
+    this.router.navigate([ROUTES.register]);
+  }
 }
 

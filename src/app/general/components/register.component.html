@@ -1,0 +1,77 @@
+<div class="app-body">
+  <main class="main d-flex align-items-center">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6 mx-auto">
+          <div class="card mx-4">
+            <div class="card-body p-4">
+              <form [formGroup]="registerationForm" (submit)="registerUser()">
+                <h1>Register</h1>
+                <p class="text-muted">Create first admin account</p>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="alert alert-danger" *ngIf="errorMessage">
+                      {{errorMessage}}
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="alert alert-success" *ngIf="successMessage">
+                      {{successMessage}}
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="alert alert-info" *ngIf="loading">
+                      Validating... Please wait.
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="!adminExists && !loading">
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-user"></i></span>
+                    </div>
+                    <input type="text" #firstControl formControlName="userName" class="form-control"
+                      [ngClass]="{'is-invalid': submitted && form.userName.errors}" placeholder="Username" />
+                    <div *ngIf="submitted && form.userName.errors" class="invalid-feedback">
+                      <div *ngIf="form.userName.errors.required">Username is required</div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" formControlName="password" class="form-control"
+                      [ngClass]="{'is-invalid': submitted && form.password.errors}" placeholder="Password" />
+                    <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+                      <div *ngIf="form.password.errors.required">Password is required</div>
+                    </div>
+                  </div>
+                  <div class="input-group mb-4">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="icon-lock"></i></span>
+                    </div>
+                    <input type="password" formControlName="confirmPassword" class="form-control"
+                      [ngClass]="{'is-invalid': submitted && form.confirmPassword.errors}"
+                      placeholder="Confirm Password" />
+                    <div *ngIf="submitted && form.confirmPassword.errors" class="invalid-feedback">
+                      <div *ngIf="form.confirmPassword.errors.required">Confirm Password is required</div>
+                      <div *ngIf="form.confirmPassword.errors.mustMatch">Confirm Password must match with
+                        Password</div>
+                    </div>
+                  </div>
+                  <button type="submit" class="btn btn-block btn-success">Create Account</button>
+                </div>
+                <button type="button" class="btn btn-block btn-success" *ngIf="adminExists || successMessage"
+                  (click)="backToLogin()">Go to login</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
