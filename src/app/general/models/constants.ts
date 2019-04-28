@@ -7,5 +7,6 @@ export const ROUTES = {
     users: '/users',
     parts: '/parts',
     workers: '/workers',
+    jobs: '/jobs',
     notfound: '/404',
 };

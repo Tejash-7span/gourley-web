@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { RestService } from '../../../general/services/rest.service';
-import { PartModel } from '../models/part.model';
 import { PagedData } from '../../../general/models/paged-data.model';
+import { PartModel } from '../../../general/models/parts/part.model';
 
 @Injectable()
 export class PartService {

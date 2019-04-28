@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { PartService } from '../services/part.service';
-import { PartModel } from '../models/part.model';
 import { PER_PAGE, PAGINATION_MAX_SIZE } from '../../../general/models/constants';
 import { SelectedPage } from '../../../general/models/paged-data.model';
 import { Router } from '@angular/router';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { ConfirmModalComponent } from '../../shared/components/confirm-modal.component';
+import { PartModel } from '../../../general/models/parts/part.model';
 
 @Component({
   templateUrl: 'part-list.component.html'

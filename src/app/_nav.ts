@@ -33,37 +33,59 @@ export const navItems: NavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    icon: 'icon-speedometer',
+    // icon: 'icon-speedometer',
   },
   {
     name: 'Users',
     url: '/users',
-    icon: 'icon-user'
+    // icon: 'icon-user'
   },
   {
     name: 'Parts',
     url: '/parts',
-    icon: 'icon-wrench'
+    // icon: 'icon-wrench'
   },
   {
     name: 'Workers',
     url: '/workers',
-    icon: 'icon-user',
+    // icon: 'icon-user',
     children: [
       {
         name: 'Drywall',
         url: '/workers/1',
-        icon: 'icon-user'
+        // icon: 'icon-user'
       },
       {
         name: 'Stone',
         url: '/workers/2',
-        icon: 'icon-user'
+        // icon: 'icon-user'
       },
       {
         name: 'Stucco',
         url: '/workers/3',
-        icon: 'icon-user'
+        // icon: 'icon-user'
+      }
+    ]
+  },
+  {
+    name: 'Jobs',
+    url: '/jobs',
+    // icon: 'icon-user',
+    children: [
+      {
+        name: 'Drywall',
+        url: '/jobs/1',
+        // icon: 'icon-user'
+      },
+      {
+        name: 'Stone',
+        url: '/jobs/2',
+        // icon: 'icon-user'
+      },
+      {
+        name: 'Stucco',
+        url: '/jobs/3',
+        // icon: 'icon-user'
       }
     ]
   },

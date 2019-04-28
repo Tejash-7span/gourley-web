@@ -27,8 +27,12 @@ export class RestService {
         return headers;
     }
 
-    public getPagedData<T>(path: string, page: number, searchTerm: string = ''): Promise<PagedData<T>> {
-        const url = `${this.apiURL}/${path}?page=${page}&perpage=${PER_PAGE}&searchterm=${searchTerm}`;
+    public getPagedData<T>(path: string, page: number, searchTerm: string = '', queryParams: { [key: string]: string } = null): Promise<PagedData<T>> {
+        let url = `${this.apiURL}/${path}?page=${page}&perpage=${PER_PAGE}&searchterm=${searchTerm}`;
+        const queryString = this.getQueryParams(queryParams);
+        if (queryString) {
+            url = url + '&' + queryString;
+        }
         return new Promise<PagedData<T>>((resolve, reject) => {
             this.httpClient.get<T[]>(url, { headers: this.requestHeaders, observe: 'response' })
                 .toPromise().then(response => {
@@ -97,6 +101,18 @@ export class RestService {
         }
 
         return new RejectedResponse(rejected);
+    }
+
+    private getQueryParams(queryParams: { [key: string]: string } = null): string {
+        if (queryParams) {
+            let queryString = '';
+            const keys = Object.keys(queryParams);
+            for (const key of keys) {
+                queryString += `${key}=${queryParams[key]}&`;
+            }
+            return queryString;
+        }
+        return '';
     }
 }
 

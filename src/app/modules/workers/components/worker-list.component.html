@@ -17,9 +17,19 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
-                    <i class="fa fa-align-justify"></i> List of {{workTypeName | lowercase}} workers
-                    <input type="text" class="form-control search pull-right margin-top-10 full-width"
-                        placeholder="Search Name" [(ngModel)]="searchTerm" (keydown.enter)="getList(null)" />
+                    <div class="row">
+                        <div class="offset-lg-6 col-lg-6 col-sm-12 margin-top-10">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search Description"
+                                    [(ngModel)]="searchTerm" (keydown.enter)="getList(null)" />
+                                <span class="input-group-append">
+                                    <button class="btn btn-primary" type="button" (click)="getList(null)">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -29,7 +39,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-bordered table-striped table-sm">
+                    <table class="table table-bordered table-striped">
                         <thead>
                             <tr>
                                 <th class="width-85">Name</th>
@@ -53,10 +63,12 @@
                             </tr>
                         </tbody>
                     </table>
-                    <pagination class="center" [totalItems]="totalItems" [itemsPerPage]="perPage"
+                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="perPage"
                         [(ngModel)]="currentPage" [maxSize]="maxSize" previousText="&lsaquo;" nextText="&rsaquo;"
-                        [boundaryLinks]="true" (pageChanged)="getList($event)">
+                        firstText="&laquo;" lastText="&raquo;" (pageChanged)="getList($event)">
                     </pagination>
+                    <app-pagination-details [currentPage]="currentPage" [perPage]="perPage" [totalItems]="totalItems">
+                    </app-pagination-details>
                 </div>
             </div>
         </div>

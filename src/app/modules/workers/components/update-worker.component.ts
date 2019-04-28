@@ -1,14 +1,12 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { mustMatch } from '../../../general/helpers/must-match.validator';
 import { WorkerService } from '../services/worker.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
-import { WorkerModel } from '../models/worker.model';
 import { ROUTES } from '../../../general/models/constants';
-import { priceValidator } from '../../../general/helpers/number.validator';
-import { WorkType } from '../../../general/enums/worktype.enum';
 import { GetWorkTypeName, isTypeValid } from '../../../general/helpers/enum.helper';
+import { WorkType } from '../../../general/enums/worktype.enum';
+import { WorkerModel } from '../../../general/models/workers/worker.model';
 
 @Component({
     selector: 'app-update-worker',

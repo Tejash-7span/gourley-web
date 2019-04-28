@@ -1,4 +1,4 @@
-import { UserModel } from '../../modules/users/models/user.model';
+import { UserModel } from './users/user.model';
 
 export class LoginResponse {
     user: UserModel;

@@ -5,7 +5,7 @@ import { UserService } from '../../modules/users/services/user.service';
 import { mustMatch } from '../helpers/must-match.validator';
 import { ROUTES } from '../models/constants';
 import { RejectedResponse } from '../services/rest.service';
-import { UserModel } from '../../modules/users/models/user.model';
+import { UserModel } from '../models/users/user.model';
 
 @Component({
   selector: 'app-dashboard',

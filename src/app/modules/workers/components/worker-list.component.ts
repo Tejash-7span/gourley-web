@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { WorkerService } from '../services/worker.service';
-import { WorkerModel } from '../models/worker.model';
 import { PER_PAGE, PAGINATION_MAX_SIZE, ROUTES } from '../../../general/models/constants';
 import { SelectedPage } from '../../../general/models/paged-data.model';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -8,6 +7,7 @@ import { RejectedResponse } from '../../../general/services/rest.service';
 import { ConfirmModalComponent } from '../../shared/components/confirm-modal.component';
 import { WorkType } from '../../../general/enums/worktype.enum';
 import { GetWorkTypeName, isTypeValid } from '../../../general/helpers/enum.helper';
+import { WorkerModel } from '../../../general/models/workers/worker.model';
 
 @Component({
   templateUrl: 'worker-list.component.html'

@@ -5,6 +5,7 @@ import { ModalModule } from 'ngx-bootstrap/modal/';
 import { ConfirmModalComponent } from './components/confirm-modal.component';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { UserLetterComponent } from './components/user-letter.component';
+import { PaginationDetailsComponent } from './components/pagination-details.component';
 
 // Angular
 
@@ -16,11 +17,13 @@ import { UserLetterComponent } from './components/user-letter.component';
     ],
     declarations: [
         ConfirmModalComponent,
-        UserLetterComponent
+        UserLetterComponent,
+        PaginationDetailsComponent
     ],
     exports: [
         ConfirmModalComponent,
-        UserLetterComponent
+        UserLetterComponent,
+        PaginationDetailsComponent
     ]
 })
 export class SharedModule { }

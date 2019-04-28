@@ -1,13 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewChildren, AfterViewInit, QueryList, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { mustMatch } from '../../../general/helpers/must-match.validator';
 import { PartService } from '../services/part.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
-import { PartModel } from '../models/part.model';
 import { ROUTES } from '../../../general/models/constants';
 import { priceValidator } from '../../../general/helpers/number.validator';
-import { Renderer3 } from '@angular/core/src/render3/interfaces/renderer';
+import { PartModel } from '../../../general/models/parts/part.model';
 
 @Component({
   selector: 'app-create-part',

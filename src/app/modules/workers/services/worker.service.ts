@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { RestService } from '../../../general/services/rest.service';
 import { PagedData } from '../../../general/models/paged-data.model';
-import { WorkerModel } from '../models/worker.model';
 import { WorkType } from '../../../general/enums/worktype.enum';
+import { WorkerModel } from '../../../general/models/workers/worker.model';
 
 @Injectable()
 export class WorkerService {
