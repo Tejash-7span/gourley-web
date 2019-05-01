@@ -49,6 +49,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { SharedModule } from './modules/shared/shared.module';
 import { RegisterComponent } from './general/components/register.component';
 import { UserService } from './modules/users/services/user.service';
+import { JobTypeService } from './general/services/job-type.service';
 
 @NgModule({
   imports: [
@@ -85,7 +86,8 @@ import { UserService } from './modules/users/services/user.service';
     AuthenticationService,
     AuthGuard,
     MessageService,
-    UserService],
+    UserService,
+    JobTypeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

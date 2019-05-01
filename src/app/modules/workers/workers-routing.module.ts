@@ -15,7 +15,15 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'create',
+    path: ':type',
+    component: WorkerListComponent,
+    data: {
+      title: 'Workers'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ':type/create',
     component: CreateWorkerComponent,
     data: {
       title: 'Workers'
@@ -23,7 +31,7 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'update/:id',
+    path: ':type/update/:id',
     component: UpdateWorkerComponent,
     data: {
       title: 'Workers'

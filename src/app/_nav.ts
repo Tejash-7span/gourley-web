@@ -41,29 +41,19 @@ export const navItems: NavData[] = [
     // icon: 'icon-user'
   },
   {
-    name: 'Parts',
-    url: '/parts',
-    // icon: 'icon-wrench'
-  },
-  {
-    name: 'Workers',
-    url: '/workers',
-    // icon: 'icon-user',
+    name: 'Masters',
+    url: '/masters',
+    // icon: 'icon-wrench',
     children: [
       {
-        name: 'Drywall',
-        url: '/workers/1',
-        // icon: 'icon-user'
+        name: 'Parts',
+        url: '/masters/parts',
+        // icon: 'icon-wrench'
       },
       {
-        name: 'Stone',
-        url: '/workers/2',
-        // icon: 'icon-user'
-      },
-      {
-        name: 'Stucco',
-        url: '/workers/3',
-        // icon: 'icon-user'
+        name: 'Workers',
+        url: '/masters/workers',
+        // icon: 'icon-user',
       }
     ]
   },

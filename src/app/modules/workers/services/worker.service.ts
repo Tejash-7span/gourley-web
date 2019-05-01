@@ -11,24 +11,24 @@ export class WorkerService {
 
     }
 
-    public getList(type: WorkType, page: number, searchTerm: string = ''): Promise<PagedData<WorkerModel>> {
-        return this.restService.getPagedData(`workers/${type}`, page, searchTerm);
+    public getList(jobTypeId: number, page: number, searchTerm: string = ''): Promise<PagedData<WorkerModel>> {
+        return this.restService.getPagedData(`workers`, page, searchTerm, { jobTypeId: jobTypeId.toString() });
     }
 
-    public get(type: WorkType, id: number): Promise<WorkerModel> {
-        const path = `workers/${type}/${id}`;
+    public get(id: number): Promise<WorkerModel> {
+        const path = `workers/${id}`;
         return this.restService.get(path);
     }
 
-    public createWorker(type: WorkType, worker: WorkerModel): Promise<void> {
-        return this.restService.post(`workers/${type}`, worker);
+    public createWorker(worker: WorkerModel): Promise<void> {
+        return this.restService.post(`workers`, worker);
     }
 
-    public updateWorker(type: WorkType, worker: WorkerModel): Promise<void> {
-        return this.restService.put(`workers/${type}/${worker.id}`, worker);
+    public updateWorker(worker: WorkerModel): Promise<void> {
+        return this.restService.put(`workers/${worker.id}`, worker);
     }
 
-    public deleteWorker(type: WorkType, id: number): Promise<void> {
-        return this.restService.delete(`workers/${type}/${id}`);
+    public deleteWorker(id: number): Promise<void> {
+        return this.restService.delete(`workers/${id}`);
     }
 }

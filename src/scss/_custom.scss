@@ -17,6 +17,7 @@
 
 h4.page-header{
     margin-bottom: 20px;
+    margin-right:20px;
 }
 .width-5{
     width:5%;
@@ -141,6 +142,11 @@ table tr td button{
         background-color: #20a8d8;
         border-color: #1985ac;
     }
+}
+
+// dropdown
+.dropdown-menu .dropdown-item{
+    cursor: pointer;
 }
 
 @media only screen and (max-width : 480px){

@@ -5,8 +5,8 @@ export const ROUTES = {
     login: '/login',
     dashboard: '/dashboard',
     users: '/users',
-    parts: '/parts',
-    workers: '/workers',
+    parts: '/masters/parts',
+    workers: '/masters/workers',
     jobs: '/jobs',
     notfound: '/404',
 };

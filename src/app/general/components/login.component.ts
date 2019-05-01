@@ -8,6 +8,8 @@ import { UserSessionModel } from '../models/user-session.model';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { ROUTES } from '../models/constants';
+import { JobTypeService } from '../services/job-type.service';
+import { JobType } from '../models/jobtype/job-type.model';
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private auth: AuthenticationService,
     private localStorageService: LocalStorageService,
+    private jobTypeService: JobTypeService,
     private router: Router,
     private formBuilder: FormBuilder) {
 
@@ -49,7 +52,12 @@ export class LoginComponent implements OnInit {
         .then((response: LoginResponse) => {
           this.setUser(response);
           this.errorMessage = null;
-          this.router.navigate([ROUTES.dashboard]);
+          this.jobTypeService.getAll().then((jobTypes: JobType[]) => {
+            this.localStorageService.jobTypes = jobTypes;
+            this.router.navigate([ROUTES.dashboard]);
+          }).catch((jobTypeReject: RejectedResponse) => {
+            this.errorMessage = jobTypeReject.error;
+          });
         })
         .catch((reject: RejectedResponse) => {
           this.errorMessage = reject.error;

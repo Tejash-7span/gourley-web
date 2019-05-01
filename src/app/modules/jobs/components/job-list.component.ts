@@ -50,7 +50,7 @@ export class JobListComponent implements OnInit {
         if (isTypeValid(this.workType)) {
           this.workTypeName = GetWorkTypeName(this.workType);
           this.jobExtraColumns = JobExtraColumnsModel.createInstance(this.workType);
-          this.getList(null);
+          this.getList();
         } else {
           this.router.navigate([ROUTES.notfound]);
         }
@@ -58,7 +58,7 @@ export class JobListComponent implements OnInit {
     });
   }
 
-  getList(event: SelectedPage) {
+  getList(event?: SelectedPage) {
     this.currentPage = event ? event.page : 1;
     this.jobService.getList(this.workType, this.jobFilter).then(response => {
       this.datasource = response.data;

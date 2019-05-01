@@ -17,7 +17,8 @@ export class PaginationDetailsComponent implements OnChanges {
 
     details: string;
     ngOnChanges() {
-        const from = ((this.currentPage - 1) * this.perPage) + 1;
+        let from = ((this.currentPage - 1) * this.perPage) + 1;
+        from = this.totalItems === 0 ? 0 : from;
         let to = from + this.perPage;
         to = to < this.totalItems ? to : this.totalItems;
         this.details = `Showing ${from} to ${to} out of ${this.totalItems}`;

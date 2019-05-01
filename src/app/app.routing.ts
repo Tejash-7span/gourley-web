@@ -60,11 +60,11 @@ export const routes: Routes = [
         loadChildren: './modules/users/users.module#UsersModule'
       },
       {
-        path: 'parts',
+        path: 'masters/parts',
         loadChildren: './modules/parts/parts.module#PartsModule'
       },
       {
-        path: 'workers/:type',
+        path: 'masters/workers',
         loadChildren: './modules/workers/workers.module#WorkersModule'
       },
       {

@@ -27,10 +27,10 @@ export class PartListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getList(null);
+    this.getList();
   }
 
-  getList(event: SelectedPage) {
+  getList(event?: SelectedPage) {
     this.currentPage = event ? event.page : 1;
     this.partService.getList(this.currentPage, this.searchTerm).then(response => {
       this.datasource = response.data;

@@ -7,6 +7,8 @@ import { ROUTES } from '../../../general/models/constants';
 import { WorkType } from '../../../general/enums/worktype.enum';
 import { isTypeValid, GetWorkTypeName } from '../../../general/helpers/enum.helper';
 import { WorkerModel } from '../../../general/models/workers/worker.model';
+import { JobType } from '../../../general/models/jobtype/job-type.model';
+import { LocalStorageService } from '../../../general/services/localstorage.service';
 
 @Component({
   selector: 'app-create-worker',
@@ -19,13 +21,13 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
 
   errorMessage: string;
   workerForm: FormGroup;
-  workType: WorkType;
-  workTypeName: string;
+  jobType: JobType;
   submitted = false;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private workerService: WorkerService,
+    private localStorageService: LocalStorageService,
     private formBuilder: FormBuilder) {
   }
 
@@ -40,13 +42,13 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
 
     this.route.params.subscribe(data => {
       if (data['type']) {
-        const workType = data['type'] as number;
-        this.workType = WorkType[WorkType[workType]];
-        if (isTypeValid(this.workType)) {
-          this.workTypeName = GetWorkTypeName(this.workType);
-        } else {
+        const jobTypeId = +data['type'];
+        this.jobType = this.localStorageService.jobTypes.find(jobType => jobType.id === jobTypeId);
+        if (!this.jobType) {
           this.router.navigate([ROUTES.notfound]);
         }
+      } else {
+        this.router.navigate([ROUTES.notfound]);
       }
     });
   }
@@ -58,7 +60,7 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
   saveWorker() {
     this.submitted = true;
     if (this.workerForm.valid) {
-      this.workerService.createWorker(this.workType, WorkerModel.createInstance(0, this.workerForm))
+      this.workerService.createWorker(WorkerModel.createInstance(0, this.jobType.id, this.workerForm))
         .then(response => {
           this.backToList();
         })
@@ -74,7 +76,7 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
   }
 
   backToList() {
-    this.router.navigate([`${ROUTES.workers}/${this.workType}`]);
+    this.router.navigate([`${ROUTES.workers}/${this.jobType.id}`]);
   }
 }
 

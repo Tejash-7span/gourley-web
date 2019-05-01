@@ -20,9 +20,9 @@
                         <div class="offset-lg-6 col-lg-6 col-sm-12 margin-top-10">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search Description"
-                                    [(ngModel)]="searchTerm" (keydown.enter)="getList(null)" />
+                                    [(ngModel)]="searchTerm" (keydown.enter)="getList()" />
                                 <span class="input-group-append">
-                                    <button class="btn btn-primary" type="button" (click)="getList(null)">
+                                    <button class="btn btn-primary" type="button" (click)="getList()">
                                         <i class="fa fa-search"></i>
                                     </button>
                                 </span>

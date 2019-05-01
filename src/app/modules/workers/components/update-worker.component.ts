@@ -7,6 +7,8 @@ import { ROUTES } from '../../../general/models/constants';
 import { GetWorkTypeName, isTypeValid } from '../../../general/helpers/enum.helper';
 import { WorkType } from '../../../general/enums/worktype.enum';
 import { WorkerModel } from '../../../general/models/workers/worker.model';
+import { LocalStorageService } from '../../../general/services/localstorage.service';
+import { JobType } from '../../../general/models/jobtype/job-type.model';
 
 @Component({
     selector: 'app-update-worker',
@@ -21,13 +23,13 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
     workerForm: FormGroup;
     submitted = false;
     id = 0;
-    workType: WorkType;
-    workTypeName: string;
+    jobType: JobType;
     existing: WorkerModel;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
         private workerService: WorkerService,
+        private localStorageService: LocalStorageService,
         private formBuilder: FormBuilder) {
     }
 
@@ -40,21 +42,27 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
             name: ['', [Validators.required, Validators.maxLength(45)]],
         });
 
+
         this.route.params.subscribe(data => {
             if (data['type']) {
-                const workType = data['type'] as number;
-                this.workType = WorkType[WorkType[workType]];
-                if (isTypeValid(this.workType)) {
-                    this.workTypeName = GetWorkTypeName(this.workType);
+                const jobTypeId = +data['type'];
+                this.jobType = this.localStorageService.jobTypes.find(jobType => jobType.id === jobTypeId);
+                if (this.jobType) {
                     if (data['id']) {
                         this.id = data['id'];
                         if (this.id > 0) {
                             this.loadWorker();
+                        } else {
+                            this.router.navigate([ROUTES.notfound]);
                         }
+                    } else {
+                        this.router.navigate([ROUTES.notfound]);
                     }
                 } else {
                     this.router.navigate([ROUTES.notfound]);
                 }
+            } else {
+                this.router.navigate([ROUTES.notfound]);
             }
         });
     }
@@ -66,7 +74,7 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
     saveWorker() {
         this.submitted = true;
         if (this.workerForm.valid) {
-            this.workerService.updateWorker(this.workType, WorkerModel.createInstance(this.id, this.workerForm))
+            this.workerService.updateWorker(WorkerModel.createInstance(this.id, this.jobType.id, this.workerForm))
                 .then(response => {
                     this.backToList();
                 })
@@ -82,14 +90,14 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
     }
 
     backToList() {
-        this.router.navigate([`${ROUTES.workers}/${this.workType}`]);
+        this.router.navigate([`${ROUTES.workers}/${this.jobType.id}`]);
     }
 
     private loadWorker() {
         if (this.existing) {
             this.workerForm.patchValue(this.existing);
         } else {
-            this.workerService.get(this.workType, this.id)
+            this.workerService.get(this.id)
                 .then((response: WorkerModel) => {
                     this.existing = response;
                     this.workerForm.patchValue(response);
