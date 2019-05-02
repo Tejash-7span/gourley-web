@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ElementRef } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 
 @Component({
@@ -19,6 +19,9 @@ export class ConfirmModalComponent {
     @Output()
     confirm: EventEmitter<any> = new EventEmitter<any>();
 
+    @ViewChild('yesButton')
+    yesButton: ElementRef;
+
     private data: any = null;
 
     @ViewChild('confirmModal')
@@ -29,6 +32,9 @@ export class ConfirmModalComponent {
     show(data: any) {
         this.data = data;
         this.confirmModal.show();
+        setTimeout(() => {
+            this.yesButton.nativeElement.focus();
+        }, 500);
     }
 
     onConfirm() {

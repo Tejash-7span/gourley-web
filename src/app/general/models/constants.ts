@@ -7,6 +7,6 @@ export const ROUTES = {
     users: '/users',
     parts: '/masters/parts',
     workers: '/masters/workers',
-    jobs: '/jobs',
+    status: '/masters/status',
     notfound: '/404',
 };

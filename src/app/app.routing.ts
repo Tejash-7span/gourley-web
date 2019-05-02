@@ -68,6 +68,10 @@ export const routes: Routes = [
         loadChildren: './modules/workers/workers.module#WorkersModule'
       },
       {
+        path: 'masters/status',
+        loadChildren: './modules/status/status.module#StatusModule'
+      },
+      {
         path: 'jobs/:type',
         loadChildren: './modules/jobs/jobs.module#JobsModule'
       },

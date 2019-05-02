@@ -12,7 +12,7 @@
                 <p>{{message}}</p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" (click)="onConfirm()">Yes</button>
+                <button #yesButton type="button" class="btn btn-danger" (click)="onConfirm()">Yes</button>
                 <button type="button" class="btn btn-secondary" (click)="confirmModal.hide()">No</button>
             </div>
         </div>
