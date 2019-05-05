@@ -5,7 +5,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { StatusRoutingModule } from './status-routing.module';
 import { StatusListComponent } from './components/status-list.component';
-import { StatusService } from './services/status.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CommonModule } from '@angular/common';
 import { CreateStatusComponent } from './components/create-status.component';
@@ -31,6 +30,6 @@ import { SharedModule } from '../shared/shared.module';
     CreateStatusComponent,
     UpdateStatusComponent
   ],
-  providers: [StatusService]
+  providers: []
 })
 export class StatusModule { }

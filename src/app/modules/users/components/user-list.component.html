@@ -2,10 +2,10 @@
     message="Are you sure you want to delete this user ?" (confirm)="deleteUser($event)"></app-confirm-modal>
 <div class="animated fadeIn">
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-6 col-sm-6">
             <h4 class="page-header">Users</h4>
         </div>
-        <div class="col-lg-6">
+        <div class="col-lg-6 col-md-6 col-sm-6">
             <button class="btn btn-primary pull-right margin-bottom-10 full-width" type="button"
                 (click)="redirectTo('/users/create')">
                 <i class="fa fa-plus"></i>Add new
@@ -38,7 +38,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-bordered table-striped">
+                    <table class="table table-responsive table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th class="width-30">Username</th>

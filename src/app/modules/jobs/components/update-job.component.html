@@ -1,1 +1,270 @@
-Under Construction
+<app-loader *ngIf="loading">
+</app-loader>
+<div class="animated fadeIn" *ngIf="!!job">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <h4 class="page-header">Update Job</h4>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <button class="btn btn-primary pull-right margin-bottom-10 full-width" type="button" (click)="backToList()">
+                <i class="fa fa-arrow-left"></i>Back to list
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Update existing {{jobType.name | lowercase}} job
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="jobForm">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" *ngIf="errorMessage">
+                                    {{errorMessage}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>Customer Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="customerName">Name</label>
+                                <input #firstControl class="form-control" id="customerName" type="text"
+                                    name="customerName" formControlName="customerName"
+                                    [ngClass]="{'is-invalid': submitted && form.customerName.errors}">
+                                <div *ngIf="submitted && form.customerName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.customerName.errors.required">Name is required</div>
+                                    <div *ngIf="form.customerName.errors.maxlength">Maximum 100 characters are
+                                        allowed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="customerAddress">Address</label>
+                                <input class="form-control" id="customerAddress" type="text" name="customerAddress"
+                                    formControlName="customerAddress"
+                                    [ngClass]="{'is-invalid': submitted && form.customerAddress.errors}" />
+                                <div *ngIf="submitted && form.customerAddress.errors" class="invalid-feedback">
+                                    <div *ngIf="form.customerAddress.errors.maxlength">Maximum 100 characters are
+                                        allowed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="customerPhone">Phone</label>
+                                <input class="form-control" id="customerPhone" type="text" name="customerPhone"
+                                    formControlName="customerPhone"
+                                    [ngClass]="{'is-invalid': submitted && form.customerPhone.errors}">
+                                <div *ngIf="submitted && form.customerPhone.errors" class="invalid-feedback">
+                                    <div *ngIf="form.customerPhone.errors.maxlength">Maximum 100 characters are
+                                        allowed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>{{jobExtraColumns.column1.name}} Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column1StatusId">Status</label>
+                                <select class="form-control" id="column1StatusId" type="text" name="column1StatusId"
+                                    formControlName="column1StatusId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of statusList">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column1WorkerId">Worker</label>
+                                <select class="form-control" id="column1WorkerId" type="text" name="column1WorkerId"
+                                    formControlName="column1WorkerId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of workers">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>{{jobExtraColumns.column2.name}} Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column2StatusId">Status</label>
+                                <select class="form-control" id="column2StatusId" type="text" name="column2StatusId"
+                                    formControlName="column2StatusId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of statusList">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column2WorkerId">Worker</label>
+                                <select class="form-control" id="column2WorkerId" type="text" name="column2WorkerId"
+                                    formControlName="column2WorkerId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of workers">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>{{jobExtraColumns.column3.name}} Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column3StatusId">Status</label>
+                                <select class="form-control" id="column3StatusId" type="text" name="column3StatusId"
+                                    formControlName="column3StatusId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of statusList">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column3WorkerId">Worker</label>
+                                <select class="form-control" id="column3WorkerId" type="text" name="column3WorkerId"
+                                    formControlName="column3WorkerId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of workers">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>{{jobExtraColumns.column4.name}} Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column4StatusId">Status</label>
+                                <select class="form-control" id="column4StatusId" type="text" name="column4StatusId"
+                                    formControlName="column4StatusId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of statusList">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column4WorkerId">Worker</label>
+                                <select class="form-control" id="column4WorkerId" type="text" name="column4WorkerId"
+                                    formControlName="column4WorkerId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of workers">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>Activation Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" id="active" type="checkbox"
+                                        formControlName="active">
+                                    <label class="form-check-label" for="active">
+                                        Active
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group" *ngIf="isActive">
+                                <label class="form-col-form-label" for="bidAcceptedDate">Bid Accepted Date</label>
+                                <my-date-picker id="bidAcceptedDate" name="bidAcceptedDate"
+                                    [options]="myDatePickerOptions" formControlName="bidAcceptedDate">
+                                </my-date-picker>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group" *ngIf="isActive">
+                                <label class="form-col-form-label" for="jobActiveDate">Job Active Date</label>
+                                <my-date-picker id="jobActiveDate" name="jobActiveDate" [options]="myDatePickerOptions"
+                                    formControlName="jobActiveDate">
+                                </my-date-picker>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" id="invoiced" type="checkbox"
+                                        formControlName="invoiced">
+                                    <label class="form-check-label" for="invoiced">
+                                        Invoiced
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group" *ngIf="isInvoiced">
+                                <label class="form-col-form-label" for="jobInvoiceDate">Job Invoiced Date</label>
+                                <my-date-picker id="jobInvoiceDate" name="jobInvoiceDate"
+                                    [options]="myDatePickerOptions" formControlName="jobInvoiceDate">
+                                </my-date-picker>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" id="readyToBill" type="checkbox"
+                                        formControlName="readyToBill">
+                                    <label class="form-check-label" for="readyToBill">
+                                        Ready to bill
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>Extra Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="notes">Notes</label>
+                                <textarea class="form-control" id="notes" type="text" name="notes"
+                                    formControlName="notes" [ngClass]="{'is-invalid': submitted && form.notes.errors}">
+                                            </textarea>
+                                <div *ngIf="submitted && form.notes.errors" class="invalid-feedback">
+                                    <div *ngIf="form.notes.errors.maxlength">Maximum 1000 characters are allowed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <app-job-part-list #jobPartList [datasource]="job.jobParts"></app-job-part-list>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-sm btn-success margin-bottom-10 full-width"
+                        (click)="saveJob()">
+                        <i class="fa fa-dot-circle-o"></i>Submit
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

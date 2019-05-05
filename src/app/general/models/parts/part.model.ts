@@ -20,4 +20,16 @@ export class PartModel {
         part.active = form.value['active'];
         return part;
     }
+
+    public static cloneInstance(existing: PartModel): PartModel {
+        const part = new PartModel();
+        part.id = existing.id;
+        part.description = existing.description;
+        part.averagePrice = existing.averagePrice;
+        part.crewCost = existing.crewCost;
+        part.priceB = existing.priceB;
+        part.priceC = existing.priceC;
+        part.active = existing.active;
+        return part;
+    }
 }

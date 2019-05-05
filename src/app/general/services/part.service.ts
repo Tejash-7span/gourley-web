@@ -1,13 +1,18 @@
 import { Injectable } from '@angular/core';
-import { RestService } from '../../../general/services/rest.service';
-import { PagedData } from '../../../general/models/paged-data.model';
-import { PartModel } from '../../../general/models/parts/part.model';
+import { RestService } from './rest.service';
+import { PartModel } from '../models/parts/part.model';
+import { PagedData } from '../models/paged-data.model';
 
 @Injectable()
 export class PartService {
 
     constructor(private restService: RestService) {
 
+    }
+
+    public getAll(): Promise<PartModel[]> {
+        const path = `parts/all`;
+        return this.restService.get(path);
     }
 
     public getList(page: number, searchTerm: string = ''): Promise<PagedData<PartModel>> {

@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { PartService } from '../services/part.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { ROUTES } from '../../../general/models/constants';
 import { priceValidator } from '../../../general/helpers/number.validator';
 import { PartModel } from '../../../general/models/parts/part.model';
+import { PartService } from '../../../general/services/part.service';
 
 @Component({
     selector: 'app-update-part',

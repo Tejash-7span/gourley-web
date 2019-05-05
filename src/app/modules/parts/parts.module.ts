@@ -5,7 +5,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PartsRoutingModule } from './parts-routing.module';
 import { PartListComponent } from './components/part-list.component';
-import { PartService } from './services/part.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CommonModule } from '@angular/common';
 import { CreatePartComponent } from './components/create-part.component';
@@ -31,6 +30,6 @@ import { SharedModule } from '../shared/shared.module';
     CreatePartComponent,
     UpdatePartComponent
   ],
-  providers: [PartService]
+  providers: []
 })
 export class PartsModule { }

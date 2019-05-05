@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { RestService } from '../../../general/services/rest.service';
-import { PagedData } from '../../../general/models/paged-data.model';
-import { StatusModel } from '../../../general/models/status/status.model';
+import { RestService } from './rest.service';
+import { PagedData } from '../models/paged-data.model';
+import { StatusModel } from '../models/status/status.model';
 
 @Injectable()
 export class StatusService {
@@ -12,6 +12,11 @@ export class StatusService {
 
     public getList(page: number, searchTerm: string = ''): Promise<PagedData<StatusModel>> {
         return this.restService.getPagedData('status', page, searchTerm);
+    }
+
+    public getAll(): Promise<StatusModel[]> {
+        const path = `status`;
+        return this.restService.get(path);
     }
 
     public get(id: number): Promise<StatusModel> {

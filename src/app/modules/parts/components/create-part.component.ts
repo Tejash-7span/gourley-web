@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild, ElementRef, ViewChildren, AfterViewInit, QueryList, Renderer2 } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
-import { PartService } from '../services/part.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { ROUTES } from '../../../general/models/constants';
 import { priceValidator } from '../../../general/helpers/number.validator';
 import { PartModel } from '../../../general/models/parts/part.model';
+import { PartService } from '../../../general/services/part.service';
 
 @Component({
   selector: 'app-create-part',
@@ -22,9 +22,7 @@ export class CreatePartComponent implements OnInit, AfterViewInit {
   submitted = false;
 
   constructor(private router: Router,
-    private route: ActivatedRoute,
     private partService: PartService,
-    private renderer: Renderer2,
     private formBuilder: FormBuilder) {
   }
 

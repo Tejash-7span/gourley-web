@@ -69,25 +69,8 @@ export const navItems: NavData[] = [
   },
   {
     name: 'Jobs',
-    url: '/jobs',
+    url: '/jobs/1',
     // icon: 'icon-user',
-    children: [
-      {
-        name: 'Drywall',
-        url: '/jobs/1',
-        // icon: 'icon-user'
-      },
-      {
-        name: 'Stone',
-        url: '/jobs/2',
-        // icon: 'icon-user'
-      },
-      {
-        name: 'Stucco',
-        url: '/jobs/3',
-        // icon: 'icon-user'
-      }
-    ]
   },
   // {
   //   title: true,

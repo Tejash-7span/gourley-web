@@ -1,12 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { WorkerService } from '../services/worker.service';
+import { WorkerService } from '../../../general/services/worker.service';
 import { PER_PAGE, PAGINATION_MAX_SIZE, ROUTES } from '../../../general/models/constants';
 import { SelectedPage } from '../../../general/models/paged-data.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { ConfirmModalComponent } from '../../shared/components/confirm-modal.component';
-import { WorkType } from '../../../general/enums/worktype.enum';
-import { GetWorkTypeName, isTypeValid } from '../../../general/helpers/enum.helper';
+import { JobTypeEnum } from '../../../general/enums/worktype.enum';
 import { WorkerModel } from '../../../general/models/workers/worker.model';
 import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
@@ -36,13 +35,11 @@ export class WorkerListComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(data => {
       this.jobTypes = this.localStorageService.jobTypes.filter(type => type.workerEnabled);
-      console.log(this.jobTypes);
       const firstJobType = this.jobTypes.find(jobType => jobType.workerEnabled);
       if (!firstJobType) {
         this.errorMessage = 'Job Types not found. Please try again or contact your administrator';
       } else {
         if (data['type']) {
-          console.log('type found');
           const jobTypeId = +data['type'];
           const selectedJobType = this.jobTypes.find(jobType => jobType.id === jobTypeId);
           if (selectedJobType) {
@@ -64,9 +61,7 @@ export class WorkerListComponent implements OnInit {
   }
 
   onJobTypeSelect(jobType: JobType) {
-    this.searchTerm = '';
-    this.selectJobType(jobType);
-    this.getList();
+    this.redirectTo(`${ROUTES.workers}/${jobType.id}`);
   }
 
   getList(event?: SelectedPage) {

@@ -12,6 +12,9 @@ import { TabsModule } from 'ngx-bootstrap/tabs';
 import { SharedModule } from '../shared/shared.module';
 import { UpdateJobComponent } from './components/update-job.component';
 import { BidJobComponent } from './components/bid-job.component';
+import { JobPartListComponent } from './components/job-part-list.component';
+import { AlertModule } from 'ngx-bootstrap/alert';
+import { MyDatePickerModule } from 'mydatepicker';
 
 @NgModule({
   imports: [
@@ -22,14 +25,17 @@ import { BidJobComponent } from './components/bid-job.component';
     ChartsModule,
     BsDropdownModule,
     TabsModule,
+    AlertModule.forRoot(),
     ButtonsModule.forRoot(),
     PaginationModule.forRoot(),
+    MyDatePickerModule,
     SharedModule
   ],
   declarations: [
     JobListComponent,
     UpdateJobComponent,
-    BidJobComponent
+    BidJobComponent,
+    JobPartListComponent
   ],
   providers: [JobService]
 })

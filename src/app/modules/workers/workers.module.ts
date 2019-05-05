@@ -5,7 +5,6 @@ import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { WorkersRoutingModule } from './workers-routing.module';
 import { WorkerListComponent } from './components/worker-list.component';
-import { WorkerService } from './services/worker.service';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { CommonModule } from '@angular/common';
 import { CreateWorkerComponent } from './components/create-worker.component';
@@ -31,6 +30,6 @@ import { SharedModule } from '../shared/shared.module';
     CreateWorkerComponent,
     UpdateWorkerComponent
   ],
-  providers: [WorkerService]
+  providers: []
 })
 export class WorkersModule { }

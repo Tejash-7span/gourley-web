@@ -1,14 +1,13 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, Renderer2 } from '@angular/core';
+import { Router } from '@angular/router';
 import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import { JobService } from '../services/job.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { ROUTES } from '../../../general/models/constants';
-import { GetWorkTypeName, isTypeValid } from '../../../general/helpers/enum.helper';
-import { WorkType } from '../../../general/enums/worktype.enum';
 import { JobModel } from '../../../general/models/jobs/job.model';
 import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
+import { JobPartListComponent } from './job-part-list.component';
 
 @Component({
     selector: 'app-bid-job',
@@ -18,6 +17,10 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     @ViewChild('firstControl')
     firstControl: ElementRef;
 
+    @ViewChild('jobPartList')
+    jobPartList: JobPartListComponent;
+
+
     errorMessage: string;
     jobForm: FormGroup;
     submitted = false;
@@ -26,6 +29,7 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     constructor(private router: Router,
         private jobService: JobService,
         private localStorageService: LocalStorageService,
+        private element: ElementRef,
         private formBuilder: FormBuilder) {
     }
 
@@ -53,23 +57,36 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     saveJob() {
         this.submitted = true;
         if (this.jobForm.valid) {
-            // this.jobService.createJob(JobModel.createInstance(0, this.jobForm))
-            //     .then(response => {
-            //         this.backToList();
-            //     })
-            //     .catch((rejected: RejectedResponse) => {
-            //         this.errorMessage = rejected.error;
-            //     });
+            this.jobService.createJob(JobModel.createBidInstance(this.jobForm, this.jobPartList.getValues()))
+                .then(response => {
+                    this.backToList();
+                })
+                .catch((rejected: RejectedResponse) => {
+                    this.errorMessage = rejected.error;
+                });
+        } else {
+            this.focusFirstError();
         }
     }
 
     resetForm() {
         this.submitted = false;
-        this.jobForm.patchValue(new JobModel());
+        this.jobForm.patchValue({
+            customerName: '',
+            customerAddress: '',
+            customerPhone: '',
+            notes: '',
+            jobTypeId: '',
+        });
     }
 
     backToList() {
         this.router.navigate([ROUTES.jobs]);
+    }
+
+    focusFirstError() {
+        const invalidControls = this.element.nativeElement.querySelectorAll('.is-invalid');
+        (<HTMLInputElement>invalidControls[0]).focus();
     }
 }
 

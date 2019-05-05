@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { RestService } from '../../../general/services/rest.service';
-import { PagedData } from '../../../general/models/paged-data.model';
-import { WorkType } from '../../../general/enums/worktype.enum';
-import { WorkerModel } from '../../../general/models/workers/worker.model';
+import { RestService } from './rest.service';
+import { PagedData } from '../models/paged-data.model';
+import { JobTypeEnum } from '../enums/worktype.enum';
+import { WorkerModel } from '../models/workers/worker.model';
 
 @Injectable()
 export class WorkerService {
@@ -13,6 +13,11 @@ export class WorkerService {
 
     public getList(jobTypeId: number, page: number, searchTerm: string = ''): Promise<PagedData<WorkerModel>> {
         return this.restService.getPagedData(`workers`, page, searchTerm, { jobTypeId: jobTypeId.toString() });
+    }
+
+    public getAll(jobTypeId: number): Promise<WorkerModel[]> {
+        const path = `workers?jobTypeId=${jobTypeId}`;
+        return this.restService.get(path);
     }
 
     public get(jobTypeId: number, id: number): Promise<WorkerModel> {

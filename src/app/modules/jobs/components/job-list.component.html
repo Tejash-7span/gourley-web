@@ -1,7 +1,17 @@
 <div class="animated fadeIn">
     <div class="row">
-        <div class="col-lg-6 col-sm-12">
-            <h4 class="page-header">{{workTypeName}} Jobs</h4>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <h4 class="page-header float-left">Jobs</h4>
+            <div class="btn-group float-left margin-bottom-10 full-width" dropdown>
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                    {{jobType.name}} <span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li role="menuitem" *ngFor="let item of jobTypes">
+                        <a class="dropdown-item" (click)="onJobTypeSelect(item)">{{item.name}}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -9,7 +19,7 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-lg-6 col-sm-12">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
                             <label class="float-left">Active</label>
                             <label for="status" class="float-left switch switch-twoway switch-primary">
                                 <input class="switch-input" id="status" type="checkbox" name="status"
@@ -39,7 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    <table class="table table-bordered table-responsive table-striped">
+                    <table class="table table-responsive table-striped table-bordered">
                         <thead>
                             <tr>
                                 <th class="width-5">Job No.</th>
@@ -59,10 +69,10 @@
                                 <td>{{data.customerName}}</td>
                                 <td>{{data.customerAddress}}</td>
                                 <td>{{data.customerPhone}}</td>
-                                <td>{{data[jobExtraColumns.column1.property]}}</td>
-                                <td>{{data[jobExtraColumns.column2.property]}}</td>
-                                <td>{{data[jobExtraColumns.column3.property]}}</td>
-                                <td>{{data[jobExtraColumns.column4.property]}}</td>
+                                <td>{{data.column1}}</td>
+                                <td>{{data.column2}}</td>
+                                <td>{{data.column3}}</td>
+                                <td>{{data.column4}}</td>
                                 <td class="center">
                                     <button class="btn btn-sm btn-success" type="button"
                                         (click)="redirectToUpdate(data.id)">Update</button>

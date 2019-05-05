@@ -25,12 +25,13 @@ export class JobService {
         return this.restService.get(`jobs/${id}?jobTypeId=${jobTypeId}`);
     }
 
-    public createJob(Job: JobModel): Promise<void> {
-        return this.restService.post(`jobs`, Job);
+    public createJob(job: JobModel): Promise<void> {
+        return this.restService.post(`jobs`, job);
     }
 
-    public updateJob(Job: JobModel): Promise<void> {
-        return this.restService.put(`jobs/${Job.id}`, Job);
+    public updateJob(job: JobModel): Promise<void> {
+        console.log(job);
+        return this.restService.put(`jobs/${job.id}`, job);
     }
 
     public deleteJob(jobTypeId: number, id: number): Promise<void> {

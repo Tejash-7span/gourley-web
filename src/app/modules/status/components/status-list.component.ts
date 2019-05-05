@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { StatusService } from '../services/status.service';
+import { StatusService } from '../../../general/services/status.service';
 import { PER_PAGE, PAGINATION_MAX_SIZE } from '../../../general/models/constants';
 import { SelectedPage } from '../../../general/models/paged-data.model';
 import { Router } from '@angular/router';

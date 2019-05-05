@@ -50,6 +50,10 @@ import { SharedModule } from './modules/shared/shared.module';
 import { RegisterComponent } from './general/components/register.component';
 import { UserService } from './modules/users/services/user.service';
 import { JobTypeService } from './general/services/job-type.service';
+import { PartService } from './general/services/part.service';
+import { WorkerService } from './general/services/worker.service';
+import { StatusService } from './general/services/status.service';
+import { NgDatepickerModule } from 'ng2-datepicker';
 
 @NgModule({
   imports: [
@@ -87,7 +91,10 @@ import { JobTypeService } from './general/services/job-type.service';
     AuthGuard,
     MessageService,
     UserService,
-    JobTypeService],
+    JobTypeService,
+    PartService,
+    WorkerService,
+    StatusService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

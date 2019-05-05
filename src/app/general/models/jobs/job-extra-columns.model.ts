@@ -1,4 +1,4 @@
-import { WorkType } from '../../enums/worktype.enum';
+import { JobTypeEnum } from '../../enums/worktype.enum';
 
 export class JobExtraColumnsModel {
     constructor(column1: Column, column2: Column, column3: Column, column4: Column) {
@@ -12,36 +12,38 @@ export class JobExtraColumnsModel {
     column3: Column;
     column4: Column;
 
-    public static createInstance(type: WorkType): JobExtraColumnsModel {
-        switch (type) {
-            case WorkType.DryWall:
+    public static createInstance(type: number): JobExtraColumnsModel {
+        switch (JobTypeEnum[JobTypeEnum[type]]) {
+            case JobTypeEnum.DryWall:
                 return new JobExtraColumnsModel(
-                    new Column('Stock', 'stock'),
-                    new Column('Hang', 'hang'),
-                    new Column('Finish', 'finish'),
-                    new Column('Spray', 'spray'));
-            case WorkType.Stone:
+                    new Column('Stock', 'stockStatusId', 'stockWorkerId'),
+                    new Column('Hang', 'hangStatusId', 'hangWorkerId'),
+                    new Column('Finish', 'finishStatusId', 'finishWorkerId'),
+                    new Column('Spray', 'sprayStatusId', 'sprayWorkerId'));
+            case JobTypeEnum.Stone:
                 return new JobExtraColumnsModel(
-                    new Column('Stock', 'stock'),
-                    new Column('Measure', 'measure'),
-                    new Column('Order', 'orderActivity'),
-                    new Column('Set', 'setActivity'));
-            case WorkType.Stucco:
+                    new Column('Stock', 'stockStatusId', 'stockWorkerId'),
+                    new Column('Measure', 'measureStatusId', 'measureWorkerId'),
+                    new Column('Order', 'orderStatusId', 'orderWorkerId'),
+                    new Column('Set', 'setStatusId', 'setWorkerId'));
+            case JobTypeEnum.Stucco:
                 return new JobExtraColumnsModel(
-                    new Column('Take Off', 'takeOff'),
-                    new Column('Lathe', 'lathe'),
-                    new Column('Setup', 'setup'),
-                    new Column('Crew'));
+                    new Column('Take Off', 'takeOffStatusId', 'takeOffWorkerId'),
+                    new Column('Lathe', 'latheStatusId', 'latheWorkerId'),
+                    new Column('Setup', 'setupStatusId', 'setupWorkerId'),
+                    new Column('Crew', 'crewStatusId', 'crewWorkerId'));
         }
     }
 }
 
 export class Column {
     name: string;
-    property: string;
+    statusId: string;
+    workerId: string;
 
-    constructor(name: string, property: string = null) {
+    constructor(name: string, statusId: string, workerId: string) {
         this.name = name;
-        this.property = property == null ? name : property;
+        this.statusId = statusId;
+        this.workerId = workerId;
     }
 }

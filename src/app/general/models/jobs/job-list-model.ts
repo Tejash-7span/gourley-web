@@ -7,4 +7,8 @@ export class JobListModel {
     active = false;
     invoiced = false;
     readyToBill = false;
+    column1: string = null;
+    column2: string = null;
+    column3: string = null;
+    column4: string = null;
 }

@@ -7,14 +7,6 @@ import { BidJobComponent } from './components/bid-job.component';
 
 const routes: Routes = [
   {
-    path: '',
-    component: JobListComponent,
-    data: {
-      title: 'Jobs'
-    },
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'bid',
     component: BidJobComponent,
     data: {
@@ -23,7 +15,15 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'update/:id',
+    path: ':type',
+    component: JobListComponent,
+    data: {
+      title: 'Jobs'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ':type/update/:id',
     component: UpdateJobComponent,
     data: {
       title: 'Jobs'

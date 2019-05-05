@@ -1,23 +1,19 @@
 <div class="animated fadeIn">
     <div class="row">
-        <div class="col-lg-6 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-6">
             <h4 class="page-header">Bid</h4>
-        </div>
-        <div class="col-lg-6 col-sm-12">
-            <button class="btn btn-primary pull-right margin-bottom-10 full-width" type="button" (click)="backToList()">
-                <i class="fa fa-arrow-left"></i>Back to list
-            </button>
         </div>
     </div>
     <div class="row">
         <div class="col-lg-12">
 
-            <form [formGroup]="jobForm" (submit)="saveJob()">
-                <div class="card">
-                    <div class="card-header">
-                        <i class="fa fa-align-justify"></i> Bid for new job
-                    </div>
-                    <div class="card-body">
+
+            <div class="card">
+                <div class="card-header">
+                    <i class="fa fa-align-justify"></i> Bid for new job
+                </div>
+                <div class="card-body">
+                    <form [formGroup]="jobForm">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="alert alert-danger" *ngIf="errorMessage">
@@ -31,9 +27,9 @@
                                 <hr>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row margin-bottom-30">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="customerName">Customer Name</label>
+                                <label class="form-col-form-label" for="customerName">Name</label>
                                 <input #firstControl class="form-control" id="customerName" type="text"
                                     name="customerName" formControlName="customerName"
                                     [ngClass]="{'is-invalid': submitted && form.customerName.errors}">
@@ -43,24 +39,19 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="customerAddress">Customer Address</label>
-                                <textarea class="form-control" id="customerAddress" type="text" name="customerAddress"
+                                <label class="form-col-form-label" for="customerAddress">Address</label>
+                                <input class="form-control" id="customerAddress" type="text" name="customerAddress"
                                     formControlName="customerAddress"
-                                    [ngClass]="{'is-invalid': submitted && form.customerAddress.errors}">
-                                    </textarea>
+                                    [ngClass]="{'is-invalid': submitted && form.customerAddress.errors}" />
                                 <div *ngIf="submitted && form.customerAddress.errors" class="invalid-feedback">
                                     <div *ngIf="form.customerAddress.errors.maxlength">Maximum 100 characters are
                                         allowed
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="row margin-bottom-30">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="customerPhone">Customer Phone</label>
+                                <label class="form-col-form-label" for="customerPhone">Phone</label>
                                 <input class="form-control" id="customerPhone" type="text" name="customerPhone"
                                     formControlName="customerPhone"
                                     [ngClass]="{'is-invalid': submitted && form.customerPhone.errors}">
@@ -84,7 +75,7 @@
                                     [ngClass]="{'is-invalid': submitted && form.jobTypeId.errors}">
                                     <option value="">-- Select Type --</option>
                                     <ng-container *ngFor="let item of jobTypes">
-                                        <option value="item.id">{{item.name}}</option>
+                                        <option [value]="item.id">{{item.name}}</option>
                                     </ng-container>
                                 </select>
                                 <div *ngIf="submitted && form.jobTypeId.errors" class="invalid-feedback">
@@ -98,7 +89,7 @@
                                 <hr>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row margin-bottom-30">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
                                 <label class="form-col-form-label" for="notes">Notes</label>
                                 <textarea class="form-control" id="notes" type="text" name="notes"
@@ -110,17 +101,16 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-footer">
-                        <button type="submit" class="btn btn-sm btn-success margin-bottom-10 full-width">
-                            <i class="fa fa-dot-circle-o"></i>Submit
-                        </button>
-                        <button type="button" class="btn btn-sm btn-danger full-width" (click)="resetForm()">
-                            <i class="fa fa-ban"></i>Reset
-                        </button>
-                    </div>
+                    </form>
+                    <app-job-part-list #jobPartList></app-job-part-list>
                 </div>
-            </form>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-sm btn-success margin-bottom-10 full-width"
+                        (click)="saveJob()">
+                        <i class="fa fa-dot-circle-o"></i>Submit
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>
