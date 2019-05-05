@@ -35,7 +35,7 @@ export class UpdatePartComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.partForm = this.formBuilder.group({
             description: ['', [Validators.required, Validators.maxLength(70)]],
-            avgPrice: ['', [Validators.required, priceValidator]],
+            averagePrice: ['', [Validators.required, priceValidator]],
             crewCost: ['', [Validators.required, priceValidator]],
             priceB: ['', [Validators.required, priceValidator]],
             priceC: ['', [Validators.required, priceValidator]],

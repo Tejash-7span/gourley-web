@@ -72,7 +72,7 @@ export const routes: Routes = [
         loadChildren: './modules/status/status.module#StatusModule'
       },
       {
-        path: 'jobs/:type',
+        path: 'jobs',
         loadChildren: './modules/jobs/jobs.module#JobsModule'
       },
       {

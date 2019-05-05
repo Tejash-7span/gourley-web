@@ -1,0 +1,126 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <h4 class="page-header">Bid</h4>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <button class="btn btn-primary pull-right margin-bottom-10 full-width" type="button" (click)="backToList()">
+                <i class="fa fa-arrow-left"></i>Back to list
+            </button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+            <form [formGroup]="jobForm" (submit)="saveJob()">
+                <div class="card">
+                    <div class="card-header">
+                        <i class="fa fa-align-justify"></i> Bid for new job
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="alert alert-danger" *ngIf="errorMessage">
+                                    {{errorMessage}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>Customer Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="customerName">Customer Name</label>
+                                <input #firstControl class="form-control" id="customerName" type="text"
+                                    name="customerName" formControlName="customerName"
+                                    [ngClass]="{'is-invalid': submitted && form.customerName.errors}">
+                                <div *ngIf="submitted && form.customerName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.customerName.errors.required">Name is required</div>
+                                    <div *ngIf="form.customerName.errors.maxlength">Maximum 100 characters are allowed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="customerAddress">Customer Address</label>
+                                <textarea class="form-control" id="customerAddress" type="text" name="customerAddress"
+                                    formControlName="customerAddress"
+                                    [ngClass]="{'is-invalid': submitted && form.customerAddress.errors}">
+                                    </textarea>
+                                <div *ngIf="submitted && form.customerAddress.errors" class="invalid-feedback">
+                                    <div *ngIf="form.customerAddress.errors.maxlength">Maximum 100 characters are
+                                        allowed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="customerPhone">Customer Phone</label>
+                                <input class="form-control" id="customerPhone" type="text" name="customerPhone"
+                                    formControlName="customerPhone"
+                                    [ngClass]="{'is-invalid': submitted && form.customerPhone.errors}">
+                                <div *ngIf="submitted && form.customerPhone.errors" class="invalid-feedback">
+                                    <div *ngIf="form.customerPhone.errors.maxlength">Maximum 100 characters are allowed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>Job Type Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="jobTypeId">Type</label>
+                                <select #firstControl class="form-control" id="jobTypeId" type="text" name="jobTypeId"
+                                    formControlName="jobTypeId"
+                                    [ngClass]="{'is-invalid': submitted && form.jobTypeId.errors}">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of jobTypes">
+                                        <option value="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                                <div *ngIf="submitted && form.jobTypeId.errors" class="invalid-feedback">
+                                    <div *ngIf="form.jobTypeId.errors.required">Type is required</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>Extra Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="notes">Notes</label>
+                                <textarea class="form-control" id="notes" type="text" name="notes"
+                                    formControlName="notes" [ngClass]="{'is-invalid': submitted && form.notes.errors}">
+                                    </textarea>
+                                <div *ngIf="submitted && form.notes.errors" class="invalid-feedback">
+                                    <div *ngIf="form.notes.errors.maxlength">Maximum 1000 characters are allowed
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-success margin-bottom-10 full-width">
+                            <i class="fa fa-dot-circle-o"></i>Submit
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger full-width" (click)="resetForm()">
+                            <i class="fa fa-ban"></i>Reset
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

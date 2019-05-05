@@ -97,7 +97,7 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
         if (this.existing) {
             this.workerForm.patchValue(this.existing);
         } else {
-            this.workerService.get(this.id)
+            this.workerService.get(this.jobType.id, this.id)
                 .then((response: WorkerModel) => {
                     this.existing = response;
                     this.workerForm.patchValue(response);

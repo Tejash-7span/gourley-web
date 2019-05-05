@@ -35,7 +35,7 @@ export class WorkerListComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(data => {
-      this.jobTypes = this.localStorageService.jobTypes;
+      this.jobTypes = this.localStorageService.jobTypes.filter(type => type.workerEnabled);
       console.log(this.jobTypes);
       const firstJobType = this.jobTypes.find(jobType => jobType.workerEnabled);
       if (!firstJobType) {
@@ -82,7 +82,7 @@ export class WorkerListComponent implements OnInit {
   }
 
   deleteWorker(id: number) {
-    this.workerService.deleteWorker(id)
+    this.workerService.deleteWorker(this.jobType.id, id)
       .then(response => {
         if (this.datasource.length === 1) {
           this.getList({ page: this.currentPage - 1, itemsPerPage: PER_PAGE });

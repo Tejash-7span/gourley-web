@@ -3,7 +3,7 @@ import { FormGroup } from '@angular/forms';
 export class PartModel {
     id = 0;
     description = '';
-    avgPrice = 0;
+    averagePrice = 0;
     crewCost = 0;
     priceB = 0;
     priceC = 0;
@@ -13,7 +13,7 @@ export class PartModel {
         const part = new PartModel();
         part.id = id;
         part.description = form.value['description'];
-        part.avgPrice = form.value['avgPrice'];
+        part.averagePrice = form.value['averagePrice'];
         part.crewCost = form.value['crewCost'];
         part.priceB = form.value['priceB'];
         part.priceC = form.value['priceC'];

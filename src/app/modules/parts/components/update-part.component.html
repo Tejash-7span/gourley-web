@@ -4,8 +4,7 @@
             <h4 class="page-header">Parts</h4>
         </div>
         <div class="col-lg-6 col-sm-12">
-            <button class="btn btn-sm btn-primary pull-right margin-bottom-10 full-width" type="button"
-                (click)="backToList()">
+            <button class="btn btn-primary pull-right margin-bottom-10 full-width" type="button" (click)="backToList()">
                 <i class="fa fa-arrow-left"></i>Back to list
             </button>
         </div>
@@ -38,12 +37,13 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="avgPrice">Average Price</label>
-                                <input class="form-control number" id="avgPrice" type="text" name="avgPrice"
-                                    formControlName="avgPrice"
-                                    [ngClass]="{'is-invalid': submitted && form.avgPrice.errors}">
-                                <div *ngIf="submitted && form.avgPrice.errors" class="invalid-feedback">
-                                    <div *ngIf="form.avgPrice.errors.invalidprice">Please enter a valid number in 0.00
+                                <label class="form-col-form-label" for="averagePrice">Average Price</label>
+                                <input class="form-control number" id="averagePrice" type="text" name="averagePrice"
+                                    formControlName="averagePrice"
+                                    [ngClass]="{'is-invalid': submitted && form.averagePrice.errors}">
+                                <div *ngIf="submitted && form.averagePrice.errors" class="invalid-feedback">
+                                    <div *ngIf="form.averagePrice.errors.invalidprice">Please enter a valid number in
+                                        0.00
                                         format.</div>
                                 </div>
                             </div>

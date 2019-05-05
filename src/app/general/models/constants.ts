@@ -8,5 +8,6 @@ export const ROUTES = {
     parts: '/masters/parts',
     workers: '/masters/workers',
     status: '/masters/status',
+    jobs: '/jobs',
     notfound: '/404',
 };

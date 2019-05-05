@@ -1,5 +1,6 @@
 import { FormGroup } from '@angular/forms';
 import { JobPartModel } from '../parts/job-part.model';
+import { JobType } from '../jobtype/job-type.model';
 
 export class JobModel {
     id = 0;
@@ -8,15 +9,35 @@ export class JobModel {
     customerPhone: string = null;
     dateStarted: Date;
     dateFinished: Date;
+    bidAcceptedDate: Date;
+    jobActiveDate: Date;
+    jobInvoiceDate: Date;
     active: boolean;
     invoiced: boolean;
     readyToBill: boolean;
     notes: string;
-    parts: JobPartModel[];
-
-    public static createInstance(id: number, form: FormGroup) {
-        const worker = new JobModel();
-        worker.id = id;
-        return worker;
-    }
+    HangWorkerId: number;
+    HangStatusId: number;
+    FinishWorkerId: number;
+    FinishStatusId: number;
+    SprayWorkerId: number;
+    SprayStatusId: number;
+    StockWorkerId: number;
+    StockStatusId: number;
+    MeasureWorkerId: number;
+    MeasureStatusId: number;
+    OrderWorkerId: number;
+    OrderStatusId: number;
+    SetWorkerId: number;
+    SetStatusId: number;
+    TakeOffWorkerId: number;
+    TakeOffStatusId: number;
+    LatheWorkerId: number;
+    LatheStatusId: number;
+    SetupWorkerId: number;
+    SetupStatusId: number;
+    CrewWorkerId: number;
+    CrewStatusId: number;
+    jobType: JobType;
+    jobParts: JobPartModel[];
 }

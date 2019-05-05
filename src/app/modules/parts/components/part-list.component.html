@@ -6,8 +6,8 @@
             <h4 class="page-header">Parts</h4>
         </div>
         <div class="col-lg-6 col-sm-12">
-            <button class="btn btn-sm btn-primary pull-right margin-bottom-10 full-width" type="button"
-                (click)="redirectTo('/parts/create')">
+            <button class="btn btn-primary pull-right margin-bottom-10 full-width" type="button"
+                (click)="redirectTo('/masters/parts/create')">
                 <i class="fa fa-plus"></i>Add new
             </button>
         </div>
@@ -50,11 +50,11 @@
                         <tbody>
                             <tr *ngFor="let data of datasource">
                                 <td>{{data.description}}</td>
-                                <td class="right">{{data.avgPrice}}</td>
+                                <td class="right">{{data.averagePrice}}</td>
                                 <td class="right">{{data.crewCost}}</td>
                                 <td class="center">
                                     <button class="btn btn-sm btn-success" type="button"
-                                        (click)="redirectTo('/parts/update/'+data.id)">Update</button>
+                                        (click)="redirectTo('/masters/parts/update/'+data.id)">Update</button>
                                 </td>
                                 <td class="center">
                                     <button class="btn btn-sm btn-danger" type="button"

@@ -80,6 +80,13 @@ h4.page-header{
     width:100%;
 }
 
+.margin-bottom-20{
+    margin-bottom: 20px;
+}
+.margin-bottom-30{
+    margin-bottom: 30px;
+}
+
 // button
 button.btn i.fa{
     margin-right:5px;
@@ -104,7 +111,7 @@ table tr td button{
 }
 
 // forms
-.form-control.is-invalid{
+input.form-control.is-invalid,textarea.form-control.is-invalid,select.form-control.is-invalid{
     background:none;
     padding-right:.75em;
 }
@@ -147,6 +154,18 @@ table tr td button{
 // dropdown
 .dropdown-menu .dropdown-item{
     cursor: pointer;
+}
+
+//hr
+hr{
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+    width:100%;
 }
 
 @media only screen and (max-width : 480px){

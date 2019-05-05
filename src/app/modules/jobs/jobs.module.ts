@@ -11,6 +11,7 @@ import { CommonModule } from '@angular/common';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { SharedModule } from '../shared/shared.module';
 import { UpdateJobComponent } from './components/update-job.component';
+import { BidJobComponent } from './components/bid-job.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { UpdateJobComponent } from './components/update-job.component';
   ],
   declarations: [
     JobListComponent,
-    UpdateJobComponent
+    UpdateJobComponent,
+    BidJobComponent
   ],
   providers: [JobService]
 })
