@@ -37,6 +37,7 @@ export class UpdateJobComponent implements OnInit {
     statusList: StatusModel[] = [];
     jobExtraColumns: JobExtraColumnsModel;
     loading = false;
+    returnUrl: string;
     public myDatePickerOptions: IMyDpOptions = {
         dateFormat: 'dd/mm/yyyy',
     };
@@ -85,6 +86,11 @@ export class UpdateJobComponent implements OnInit {
             notes: ['', [Validators.maxLength(1000)]],
         });
 
+        this.route.queryParams.subscribe(params => {
+            if (params['returnUrl']) {
+                this.returnUrl = params['returnUrl'];
+            }
+        });
         this.route.params.subscribe(data => {
             if (data['type']) {
                 const jobTypeId = +data['type'];
@@ -176,9 +182,9 @@ export class UpdateJobComponent implements OnInit {
             column3WorkerId: this.getPatchValue(this.jobExtraColumns.column3.workerId),
             column4StatusId: this.getPatchValue(this.jobExtraColumns.column4.statusId),
             column4WorkerId: this.getPatchValue(this.jobExtraColumns.column4.workerId),
-            bidAcceptedDate: this.getDatePatchValue(new Date(this.job.bidAcceptedDate), true),
-            jobActiveDate: this.getDatePatchValue(new Date(this.job.jobActiveDate)),
-            jobInvoiceDate: this.getDatePatchValue(new Date(this.job.jobInvoiceDate)),
+            bidAcceptedDate: this.getDatePatchValue(this.job.bidAcceptedDate, true),
+            jobActiveDate: this.getDatePatchValue(this.job.jobActiveDate),
+            jobInvoiceDate: this.getDatePatchValue(this.job.jobInvoiceDate),
             notes: this.job.notes,
         });
     }
@@ -191,6 +197,7 @@ export class UpdateJobComponent implements OnInit {
     getDatePatchValue(date?: Date, defaultToday: boolean = false) {
         const newDate = new Date();
         if (date) {
+            date = new Date(date);
             return {
                 date: {
                     year: date.getFullYear(),
@@ -212,7 +219,12 @@ export class UpdateJobComponent implements OnInit {
     }
 
     backToList() {
-        this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}`]);
+        if (this.returnUrl) {
+            this.router.navigate([`${this.returnUrl}/${this.jobType.id}`]);
+        } else {
+            this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}`]);
+        }
+
     }
 
     focusFirstError() {

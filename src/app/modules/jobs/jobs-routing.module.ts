@@ -4,11 +4,20 @@ import { AuthGuard } from '../../general/guards/auth.guard';
 import { JobListComponent } from './components/job-list.component';
 import { UpdateJobComponent } from './components/update-job.component';
 import { BidJobComponent } from './components/bid-job.component';
+import { BidJobListComponent } from './components/bid-job-list.component';
 
 const routes: Routes = [
   {
     path: 'bid',
     component: BidJobComponent,
+    data: {
+      title: 'Jobs'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'editjob/:type',
+    component: BidJobListComponent,
     data: {
       title: 'Jobs'
     },

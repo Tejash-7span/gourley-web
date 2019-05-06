@@ -10,10 +10,10 @@ import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
 
 @Component({
-  selector: 'app-job-list',
-  templateUrl: 'job-list.component.html'
+  selector: 'app-bid-job-list',
+  templateUrl: 'bid-job-list.component.html'
 })
-export class JobListComponent implements OnInit {
+export class BidJobListComponent implements OnInit {
   currentPage = 1;
   totalItems = 0;
   perPage = PER_PAGE;
@@ -24,8 +24,6 @@ export class JobListComponent implements OnInit {
   datasource: any[] = [];
   errorMessage = null;
   searchTerm = '';
-  invoiced = false;
-  jobExtraColumns: JobExtraColumnsModel;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -36,9 +34,9 @@ export class JobListComponent implements OnInit {
 
   get jobFilter(): JobFilterModel {
     const jobFilter = new JobFilterModel();
-    jobFilter.active = this.invoiced === false;
-    jobFilter.invoiced = this.invoiced === true;
-    jobFilter.readyToBill = false;
+    jobFilter.active = null;
+    jobFilter.invoiced = null;
+    jobFilter.readyToBill = null;
     jobFilter.page = this.currentPage;
     jobFilter.searchTerm = this.searchTerm;
     return jobFilter;
@@ -70,11 +68,10 @@ export class JobListComponent implements OnInit {
 
   selectJobType(jobType: JobType) {
     this.jobType = jobType;
-    this.jobExtraColumns = JobExtraColumnsModel.createInstance(this.jobType.id);
   }
 
   onJobTypeSelect(jobType: JobType) {
-    this.redirectTo(`${ROUTES.jobs}/${jobType.id}`);
+    this.redirectTo(`${ROUTES.jobs}/editjob/${jobType.id}`);
   }
 
   redirectTo(path) {
@@ -90,6 +87,6 @@ export class JobListComponent implements OnInit {
   }
 
   redirectToUpdate(id: number) {
-    this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/update/${id}`]);
+    this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/update/${id}`], { queryParams: { returnUrl: `${ROUTES.jobs}/editjob` } });
   }
 }

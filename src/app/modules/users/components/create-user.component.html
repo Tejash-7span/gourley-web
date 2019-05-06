@@ -90,14 +90,15 @@
                                 <input class="form-control" id="workType" type="text" name="workType"
                                     formControlName="workType">
                             </div>
+                        </div>
+                        <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label>Is Admin?</label>
-                                <div class="clearfix"></div>
-                                <label for="admin" class="switch switch-label switch-primary">
-                                    <input class="switch-input" id="admin" type="checkbox" name="admin"
-                                        formControlName="admin">
-                                    <span class="switch-slider" data-checked="Yes" data-unchecked="No"></span>
-                                </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" id="admin" type="checkbox" formControlName="admin">
+                                    <label class="form-check-label" for="admin">
+                                        Is Admin?
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>

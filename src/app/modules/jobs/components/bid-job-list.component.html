@@ -1,7 +1,7 @@
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <h4 class="page-header float-left">Jobs</h4>
+            <h4 class="page-header float-left">Edit Jobs</h4>
             <div class="btn-group float-left margin-bottom-10 full-width" dropdown>
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
                     {{jobType.name}} <span class="caret"></span>
@@ -12,15 +12,6 @@
                     </li>
                 </ul>
             </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-12 margin-bottom-10">
-            <label class="float-right ">Invoiced</label>
-            <label for="invoiced" class="float-right switch-twoway switch switch-pill switch-primary">
-                <input class="switch-input" id="invoiced" type="checkbox" name="invoiced" [(ngModel)]="invoiced"
-                    (change)="getList()">
-                <span class="switch-slider"></span>
-            </label>
-            <label class="float-right">Active</label>
         </div>
     </div>
     <div class="row">
@@ -56,10 +47,9 @@
                                 <th class="width-15">Customer Name</th>
                                 <th class="width-15">Customer Address</th>
                                 <th class="width-15">Customer Phone</th>
-                                <th class="width-10">{{jobExtraColumns.column1.name}}</th>
-                                <th class="width-10">{{jobExtraColumns.column2.name}}</th>
-                                <th class="width-10">{{jobExtraColumns.column3.name}}</th>
-                                <th class="width-10">{{jobExtraColumns.column4.name}}</th>
+                                <th class="width-10">Active</th>
+                                <th class="width-10">Invoiced</th>
+                                <th class="width-10">Bill</th>
                                 <th class="width-10 center">Options</th>
                             </tr>
                         </thead>
@@ -69,17 +59,16 @@
                                 <td>{{data.customerName}}</td>
                                 <td>{{data.customerAddress}}</td>
                                 <td>{{data.customerPhone}}</td>
-                                <td>{{data.column1}}</td>
-                                <td>{{data.column2}}</td>
-                                <td>{{data.column3}}</td>
-                                <td>{{data.column4}}</td>
+                                <td>{{data.active == true ? 'Yes' : 'No'}}</td>
+                                <td>{{data.invoiced == true ? 'Yes' : 'No'}}</td>
+                                <td>{{data.readyToBill == true ? 'Yes' : 'No'}}</td>
                                 <td class="center">
                                     <button class="btn btn-sm btn-success" type="button"
                                         (click)="redirectToUpdate(data.id)">Update</button>
                                 </td>
                             </tr>
                             <tr *ngIf="datasource.length==0">
-                                <td colspan="9">No records found.</td>
+                                <td colspan="8">No records found.</td>
                             </tr>
                         </tbody>
                     </table>

@@ -15,6 +15,7 @@ import { BidJobComponent } from './components/bid-job.component';
 import { JobPartListComponent } from './components/job-part-list.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { MyDatePickerModule } from 'mydatepicker';
+import { BidJobListComponent } from './components/bid-job-list.component';
 
 @NgModule({
   imports: [
@@ -35,7 +36,8 @@ import { MyDatePickerModule } from 'mydatepicker';
     JobListComponent,
     UpdateJobComponent,
     BidJobComponent,
-    JobPartListComponent
+    JobPartListComponent,
+    BidJobListComponent
   ],
   providers: [JobService]
 })

@@ -13,12 +13,19 @@ export class JobService {
     }
 
     public getList(jobTypeId: number, jobFilter: JobFilterModel): Promise<PagedData<JobListModel>> {
-        return this.restService.getPagedData(`jobs`, jobFilter.page, jobFilter.searchTerm, {
+        const options = {
             jobTypeId: jobTypeId.toString(),
-            active: jobFilter.active === true ? 'true' : 'false',
-            invoiced: jobFilter.invoiced === true ? 'true' : 'false',
-            readyToBill: jobFilter.readyToBill === true ? 'true' : 'false',
-        });
+        };
+        if (jobFilter.active) {
+            options['active'] = `${jobFilter.active}`;
+        }
+        if (jobFilter.invoiced) {
+            options['invoiced'] = `${jobFilter.invoiced}`;
+        }
+        if (jobFilter.readyToBill) {
+            options['readyToBill'] = `${jobFilter.readyToBill}`;
+        }
+        return this.restService.getPagedData(`jobs`, jobFilter.page, jobFilter.searchTerm, options);
     }
 
     public get(jobTypeId: number, id: number): Promise<JobModel> {
