@@ -53,7 +53,7 @@ import { JobTypeService } from './general/services/job-type.service';
 import { PartService } from './general/services/part.service';
 import { WorkerService } from './general/services/worker.service';
 import { StatusService } from './general/services/status.service';
-import { NgDatepickerModule } from 'ng2-datepicker';
+// import { NgDatepickerModule } from 'ng2-datepicker';
 
 @NgModule({
   imports: [
