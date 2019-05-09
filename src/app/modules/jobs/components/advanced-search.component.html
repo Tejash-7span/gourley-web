@@ -1,0 +1,59 @@
+<div bsModal #advancedSearchModel="bs-modal" class="modal fade" tabindex="-1" role="dialog"
+    aria-labelledby="advancedSearch" aria-hidden="true">
+    <div class="modal-dialog modal-primary" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Advanced Search</h4>
+                <button type="button" class="close" (click)="advancedSearchModel.hide()" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-10 form-group">
+                        <div class="form-radio">
+                            <input #firstControl class="form-radio-input" name="advanceSearchBy"
+                                id="searchByCustomerName" type="radio" value="1" (change)="searchByCustomerName()"
+                                checked>
+                            <label class="form-radio-label margin-right-10" for="searchByCustomerName">
+                                Customer Name
+                            </label>
+                            <input class="form-radio-input" name="advanceSearchBy" id="searchByDate" type="radio"
+                                value="2" (change)="searchByDate()">
+                            <label class="form-radio-label" for="searchByDate">
+                                Date
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isCustomerName">
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                        <label class="form-col-form-label" for="customerName">Name</label>
+                        <input class="form-control" id="customerName" type="text" name="customerName"
+                            [(ngModel)]="data.customerName">
+                    </div>
+                </div>
+                <div class="row" *ngIf="isDate">
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                        <label class="form-col-form-label" for="searchStartDate">Start Date</label>
+                        <my-date-picker id="searchStartDate" name="searchStartDate" [options]="myDatePickerOptions"
+                            [(ngModel)]="data.startDate">
+                        </my-date-picker>
+                    </div>
+                </div>
+                <div class="row" *ngIf="isDate">
+                    <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                        <label class="form-col-form-label" for="searchEndDate">End Date</label>
+                        <my-date-picker id="searchEndDate" name="searchEndDate" [options]="myDatePickerOptions"
+                            [(ngModel)]="data.endDate">
+                        </my-date-picker>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button #searchButton type="button" class="btn btn-primary" (click)="onSearch()">Search</button>
+                <button type="button" class="btn btn-secondary" (click)="advancedSearchModel.hide()">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>

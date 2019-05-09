@@ -8,6 +8,7 @@ import { JobFilterModel } from '../../../general/models/jobs/job-filter.model';
 import { JobExtraColumnsModel } from '../../../general/models/jobs/job-extra-columns.model';
 import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
+import { IAdvancedSearchParams, AdvancedSearchComponent } from './advanced-search.component';
 
 @Component({
   selector: 'app-job-list',
@@ -26,25 +27,33 @@ export class JobListComponent implements OnInit {
   searchTerm = '';
   invoiced = false;
   jobExtraColumns: JobExtraColumnsModel;
+  jobFilter: JobFilterModel = new JobFilterModel();
+  advancedSearchData: IAdvancedSearchParams;
+  isAdvancedSearch = false;
+
+  @ViewChild('advancedSearch')
+  advancedSearch: AdvancedSearchComponent;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private jobService: JobService,
     private localStorageService: LocalStorageService) {
-
   }
 
-  get jobFilter(): JobFilterModel {
-    const jobFilter = new JobFilterModel();
-    jobFilter.active = this.invoiced === false;
-    jobFilter.invoiced = this.invoiced === true;
-    jobFilter.readyToBill = false;
-    jobFilter.page = this.currentPage;
-    jobFilter.searchTerm = this.searchTerm;
-    return jobFilter;
+
+  resetjobFilter() {
+    this.jobFilter.active = this.invoiced === false;
+    this.jobFilter.invoiced = this.invoiced === true;
+    this.jobFilter.readyToBill = null;
+    this.jobFilter.page = this.currentPage;
+    this.jobFilter.searchTerm = this.searchTerm;
+    this.jobFilter.customerName = this.advancedSearchData.customerName;
+    this.jobFilter.startDate = this.advancedSearchData.startDate ? new Date(this.advancedSearchData.startDate.jsdate) : null;
+    this.jobFilter.endDate = this.advancedSearchData.endDate ? new Date(this.advancedSearchData.endDate.jsdate) : null;
   }
 
   ngOnInit(): void {
+    this.resetAdvancedSearchData();
     this.route.params.subscribe(data => {
       this.jobTypes = this.localStorageService.jobTypes.filter(type => type.workerEnabled);
       const firstJobType = this.jobTypes.find(jobType => jobType.workerEnabled);
@@ -83,6 +92,7 @@ export class JobListComponent implements OnInit {
 
   getList(event?: SelectedPage) {
     this.currentPage = event ? event.page : 1;
+    this.resetjobFilter();
     this.jobService.getList(this.jobType.id, this.jobFilter).then(response => {
       this.datasource = response.data;
       this.totalItems = response.totalRecords;
@@ -91,5 +101,30 @@ export class JobListComponent implements OnInit {
 
   redirectToUpdate(id: number) {
     this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/update/${id}`]);
+  }
+
+  openAdvancedSearch() {
+    this.advancedSearch.show(this.advancedSearchData);
+  }
+
+  clearAdvancedSearch() {
+    this.resetAdvancedSearchData();
+    this.getList();
+    this.isAdvancedSearch = false;
+  }
+
+  resetAdvancedSearchData() {
+    this.advancedSearchData = {
+      customerName: '',
+      startDate: null,
+      endDate: null
+    };
+  }
+
+  applyAdvancedSearch(data: IAdvancedSearchParams) {
+    this.searchTerm = '';
+    this.advancedSearchData = data;
+    this.getList();
+    this.isAdvancedSearch = true;
   }
 }

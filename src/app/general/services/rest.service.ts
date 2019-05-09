@@ -31,7 +31,7 @@ export class RestService {
         let url = `${this.apiURL}/${path}?page=${page}&perpage=${PER_PAGE}&searchterm=${searchTerm}`;
         const queryString = this.getQueryParams(queryParams);
         if (queryString) {
-            url = url + '&' + queryString;
+            url = url + queryString;
         }
         return new Promise<PagedData<T>>((resolve, reject) => {
             this.httpClient.get<T[]>(url, { headers: this.requestHeaders, observe: 'response' })
@@ -108,7 +108,7 @@ export class RestService {
             let queryString = '';
             const keys = Object.keys(queryParams);
             for (const key of keys) {
-                queryString += `${key}=${queryParams[key]}&`;
+                queryString += `&${key}=${queryParams[key]}`;
             }
             return queryString;
         }

@@ -76,7 +76,10 @@
             <td class="right">{{data.part.crewCost}}</td>
             <td class="right">{{data.quantity * data.part.crewCost}}</td>
             <td class="center">
-                <button class="btn btn-sm btn-success" type="button" (click)="setUpdateMode(data)">Update</button>
+                <button class="btn btn-sm btn-success inactive" *ngIf="!data.part.active"
+                    tooltip="Part is not active anymore" placement="auto" type="button">Update</button>
+                <button class="btn btn-sm btn-success" *ngIf="data.part.active" type="button"
+                    (click)="setUpdateMode(data)">Update</button>
             </td>
             <td class="center">
                 <button class="btn btn-sm btn-danger" type="button" (click)="deleteItem(data)">Delete</button>

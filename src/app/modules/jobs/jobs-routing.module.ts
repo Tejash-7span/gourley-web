@@ -24,6 +24,14 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
+    path: '',
+    component: JobListComponent,
+    data: {
+      title: 'Jobs'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
     path: ':type',
     component: JobListComponent,
     data: {

@@ -6,7 +6,6 @@ import { ConfirmModalComponent } from './components/confirm-modal.component';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { UserLetterComponent } from './components/user-letter.component';
 import { PaginationDetailsComponent } from './components/pagination-details.component';
-import { LoaderComponent } from './components/loader.component';
 
 // Angular
 
@@ -19,14 +18,12 @@ import { LoaderComponent } from './components/loader.component';
     declarations: [
         ConfirmModalComponent,
         UserLetterComponent,
-        PaginationDetailsComponent,
-        LoaderComponent,
+        PaginationDetailsComponent
     ],
     exports: [
         ConfirmModalComponent,
         UserLetterComponent,
-        PaginationDetailsComponent,
-        LoaderComponent,
+        PaginationDetailsComponent
     ]
 })
 export class SharedModule { }

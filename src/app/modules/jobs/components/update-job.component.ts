@@ -13,7 +13,7 @@ import { WorkerModel } from '../../../general/models/workers/worker.model';
 import { StatusModel } from '../../../general/models/status/status.model';
 import { WorkerService } from '../../../general/services/worker.service';
 import { StatusService } from '../../../general/services/status.service';
-import { IMyDpOptions, IMyDateModel } from 'mydatepicker';
+import { IMyDpOptions } from 'mydatepicker';
 
 @Component({
     selector: 'app-update-job',
@@ -36,7 +36,6 @@ export class UpdateJobComponent implements OnInit {
     workers: WorkerModel[] = [];
     statusList: StatusModel[] = [];
     jobExtraColumns: JobExtraColumnsModel;
-    loading = false;
     returnUrl: string;
     public myDatePickerOptions: IMyDpOptions = {
         dateFormat: 'dd/mm/yyyy',
@@ -140,7 +139,6 @@ export class UpdateJobComponent implements OnInit {
         if (this.job) {
             this.patchForm();
         } else {
-            this.loading = true;
             this.jobService.get(this.jobType.id, this.id).then(response => {
                 this.workerService.getAll(this.jobType.id).then(workers => {
                     this.statusService.getAll().then(statusList => {
@@ -148,20 +146,15 @@ export class UpdateJobComponent implements OnInit {
                         this.workers = workers;
                         this.statusList = statusList;
                         this.patchForm();
-                        this.loading = false;
                         this.firstControl.nativeElement.focus();
                     }).catch((statusRejected: RejectedResponse) => {
                         this.errorMessage = statusRejected.error;
-                        this.loading = false;
                     });
                 }).catch((workersRejected: RejectedResponse) => {
                     this.errorMessage = workersRejected.error;
-                    this.loading = false;
                 });
-
             }).catch((rejected: RejectedResponse) => {
                 this.errorMessage = rejected.error;
-                this.loading = false;
             });
         }
     }

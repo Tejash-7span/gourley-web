@@ -14,8 +14,11 @@ import { UpdateJobComponent } from './components/update-job.component';
 import { BidJobComponent } from './components/bid-job.component';
 import { JobPartListComponent } from './components/job-part-list.component';
 import { AlertModule } from 'ngx-bootstrap/alert';
-import { MyDatePickerModule } from 'mydatepicker';
 import { BidJobListComponent } from './components/bid-job-list.component';
+import { MyDatePickerModule } from 'mydatepicker';
+import { AdvancedSearchComponent } from './components/advanced-search.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { TooltipModule } from 'ngx-bootstrap/tooltip';
 
 @NgModule({
   imports: [
@@ -26,9 +29,11 @@ import { BidJobListComponent } from './components/bid-job-list.component';
     ChartsModule,
     BsDropdownModule,
     TabsModule,
+    ModalModule.forRoot(),
     AlertModule.forRoot(),
     ButtonsModule.forRoot(),
     PaginationModule.forRoot(),
+    TooltipModule.forRoot(),
     MyDatePickerModule,
     SharedModule
   ],
@@ -37,7 +42,8 @@ import { BidJobListComponent } from './components/bid-job-list.component';
     UpdateJobComponent,
     BidJobComponent,
     JobPartListComponent,
-    BidJobListComponent
+    BidJobListComponent,
+    AdvancedSearchComponent
   ],
   providers: [JobService]
 })

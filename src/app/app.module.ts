@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
@@ -53,7 +53,10 @@ import { JobTypeService } from './general/services/job-type.service';
 import { PartService } from './general/services/part.service';
 import { WorkerService } from './general/services/worker.service';
 import { StatusService } from './general/services/status.service';
-import { NgDatepickerModule } from 'ng2-datepicker';
+import { LoaderInterceptorService } from './general/services/loader-interceptor.service';
+import { LoaderService } from './general/services/loader.service';
+import { LoaderComponent } from './general/components/loader.component';
+import { TooltipModule } from 'ngx-bootstrap/tooltip/';
 
 @NgModule({
   imports: [
@@ -70,6 +73,7 @@ import { NgDatepickerModule } from 'ng2-datepicker';
     PerfectScrollbarModule,
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
+    TooltipModule.forRoot(),
     ModalModule,
     ChartsModule,
     SharedModule
@@ -80,11 +84,18 @@ import { NgDatepickerModule } from 'ng2-datepicker';
     P404Component,
     P500Component,
     LoginComponent,
-    RegisterComponent],
+    RegisterComponent,
+    LoaderComponent],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
   },
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: LoaderInterceptorService,
+    multi: true
+  },
+    LoaderService,
     RestService,
     LocalStorageService,
     AuthenticationService,

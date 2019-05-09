@@ -24,6 +24,7 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     errorMessage: string;
     jobForm: FormGroup;
     submitted = false;
+    selectedJobTypeId = 0;
     jobTypes: JobType[] = [];
 
     constructor(private router: Router,
@@ -57,7 +58,9 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     saveJob() {
         this.submitted = true;
         if (this.jobForm.valid) {
-            this.jobService.createJob(JobModel.createBidInstance(this.jobForm, this.jobPartList.getValues()))
+            const job = JobModel.createBidInstance(this.jobForm, this.jobPartList.getValues());
+            this.selectedJobTypeId = job.jobTypeId;
+            this.jobService.createJob(job)
                 .then(response => {
                     this.backToList();
                 })
@@ -81,7 +84,7 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     }
 
     backToList() {
-        this.router.navigate([ROUTES.jobs]);
+        this.router.navigate([`${ROUTES.jobs}/editjob/${this.selectedJobTypeId}`]);
     }
 
     focusFirstError() {
@@ -89,4 +92,3 @@ export class BidJobComponent implements OnInit, AfterViewInit {
         (<HTMLInputElement>invalidControls[0]).focus();
     }
 }
-

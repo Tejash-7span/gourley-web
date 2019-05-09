@@ -4,4 +4,7 @@ export class JobFilterModel {
     active?: boolean;
     invoiced?: boolean;
     readyToBill?: boolean;
+    customerName: string;
+    startDate?: Date;
+    endDate?: Date;
 }
