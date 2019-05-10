@@ -31,17 +31,14 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="alert alert-danger" *ngIf="errorMessage">
-                                {{errorMessage}}
-                            </div>
-                        </div>
-                    </div>
+
                     <table class="table table-responsive table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th class="width-30">Username</th>
+                                <th class="width-5 center">
+                                    <i class="icon-people"></i>
+                                </th>
+                                <th class="width-25">Username</th>
                                 <th class="width-30">Name</th>
                                 <th class="width-15 center">Is Admin</th>
                                 <th class="width-25 center" colspan="3">Options</th>
@@ -49,6 +46,9 @@
                         </thead>
                         <tbody>
                             <tr *ngFor="let data of datasource">
+                                <td class="center">
+                                    <app-user-image [imageSrc]="data.imageUrl"></app-user-image>
+                                </td>
                                 <td>{{data.userName}}</td>
                                 <td>{{data.firstName}} {{data.lastName}}</td>
                                 <td class="center">{{data.admin==true?'Yes':'No'}}</td>

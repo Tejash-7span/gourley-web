@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { ConfirmModalComponent } from '../../shared/components/confirm-modal.component';
 import { UserModel } from '../../../general/models/users/user.model';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   templateUrl: 'user-list.component.html'
@@ -16,13 +17,14 @@ export class UserListComponent implements OnInit {
   perPage = PER_PAGE;
   maxSize = PAGINATION_MAX_SIZE;
   datasource: UserModel[] = [];
-  errorMessage = null;
   searchTerm = '';
 
   @ViewChild('deleteConfirmModal')
   deleteConfirmModal: ConfirmModalComponent;
 
-  constructor(private router: Router, private userService: UserService) {
+  constructor(private router: Router,
+    private userService: UserService,
+    private toastService: ToastService) {
 
   }
 
@@ -45,6 +47,7 @@ export class UserListComponent implements OnInit {
   deleteUser(id: number) {
     this.userService.deleteUser(id)
       .then(response => {
+        this.toastService.success('User is deleted successfully');
         if (this.datasource.length === 1) {
           this.getList({ page: this.currentPage - 1, itemsPerPage: PER_PAGE });
         } else {
@@ -52,7 +55,7 @@ export class UserListComponent implements OnInit {
         }
       })
       .catch((rejected: RejectedResponse) => {
-        this.errorMessage = rejected.error;
+        this.toastService.error(rejected.error);
       });
   }
 

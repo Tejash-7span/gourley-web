@@ -3,8 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { ModalModule } from 'ngx-bootstrap/modal/';
 import { ConfirmModalComponent } from './components/confirm-modal.component';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
-import { UserLetterComponent } from './components/user-letter.component';
+import { UserImageComponent } from './components/user-image.component';
 import { PaginationDetailsComponent } from './components/pagination-details.component';
 
 // Angular
@@ -17,12 +16,12 @@ import { PaginationDetailsComponent } from './components/pagination-details.comp
     ],
     declarations: [
         ConfirmModalComponent,
-        UserLetterComponent,
+        UserImageComponent,
         PaginationDetailsComponent
     ],
     exports: [
         ConfirmModalComponent,
-        UserLetterComponent,
+        UserImageComponent,
         PaginationDetailsComponent
     ]
 })

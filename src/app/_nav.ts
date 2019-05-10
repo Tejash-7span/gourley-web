@@ -33,49 +33,49 @@ export const navItems: NavData[] = [
   {
     name: 'Dashboard',
     url: '/dashboard',
-    // icon: 'icon-speedometer',
+    icon: 'fa fa-dashboard',
   },
   {
     name: 'Users',
     url: '/users',
-    // icon: 'icon-user'
+    icon: 'fa fa-user-circle-o',
   },
   {
     name: 'Masters',
     url: '/masters',
-    // icon: 'icon-wrench',
+    icon: 'fa fa-book',
     children: [
       {
         name: 'Parts',
         url: '/masters/parts',
-        // icon: 'icon-wrench'
+        icon: 'fa fa-cogs',
       },
       {
         name: 'Workers',
         url: '/masters/workers',
-        // icon: 'icon-user',
+        icon: 'fa fa-users',
       },
       {
         name: 'Status',
         url: '/masters/status',
-        // icon: 'icon-user',
+        icon: 'fa fa-exclamation-circle',
       }
     ]
   },
   {
     name: 'Bid',
     url: '/jobs/bid',
-    // icon: 'icon-user'
+    icon: 'fa fa-gavel',
   },
   {
     name: 'Jobs',
     url: '/jobs/1',
-    // icon: 'icon-user',
+    icon: 'fa fa-tasks',
   },
   {
     name: 'Edit Jobs',
     url: '/jobs/editjob/1',
-    // icon: 'icon-user',
+    icon: 'fa fa-edit',
   },
   // {
   //   title: true,

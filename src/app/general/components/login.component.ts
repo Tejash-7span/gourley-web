@@ -70,7 +70,8 @@ export class LoginComponent implements OnInit {
       response.user.id,
       response.user.firstName,
       response.user.lastName,
-      response.user.userName);
+      response.user.userName,
+      response.user.imageUrl);
     this.localStorageService.token = response.token;
   }
 

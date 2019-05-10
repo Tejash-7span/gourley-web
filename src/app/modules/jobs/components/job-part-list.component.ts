@@ -4,6 +4,7 @@ import { PartModel } from '../../../general/models/parts/part.model';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { quantityValidator } from '../../../general/helpers/number.validator';
 import { PartService } from '../../../general/services/part.service';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   selector: 'app-job-part-list',
@@ -24,10 +25,10 @@ export class JobPartListComponent implements OnInit {
   jobPartForm: FormGroup;
   submitted = false;
   currentPartId = 0;
-  errorMessage = '';
   isUpdate = false;
 
   constructor(private partService: PartService,
+    private toastService: ToastService,
     private formBuilder: FormBuilder) {
 
   }
@@ -146,11 +147,10 @@ export class JobPartListComponent implements OnInit {
       partId: partId,
       quantity: quantity
     });
-    this.errorMessage = '';
     this.firstControl.nativeElement.focus();
   }
 
   private addError(message: string) {
-    this.errorMessage = message;
+    this.toastService.error(message);
   }
 }

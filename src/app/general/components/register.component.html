@@ -9,27 +9,6 @@
               <form [formGroup]="registerationForm" (submit)="registerUser()">
                 <h1>Register</h1>
                 <p class="text-muted">Create first admin account</p>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="alert alert-danger" *ngIf="errorMessage">
-                      {{errorMessage}}
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="alert alert-success" *ngIf="successMessage">
-                      {{successMessage}}
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="alert alert-info" *ngIf="loading">
-                      Validating... Please wait.
-                    </div>
-                  </div>
-                </div>
                 <div *ngIf="!adminExists && !loading">
                   <div class="input-group mb-3">
                     <div class="input-group-prepend">
@@ -66,8 +45,8 @@
                   </div>
                   <button type="submit" class="btn btn-block btn-success">Create Account</button>
                 </div>
-                <button type="button" class="btn btn-block btn-success" *ngIf="adminExists || successMessage"
-                  (click)="backToLogin()">Go to login</button>
+                <button type="button" class="btn btn-block btn-success" *ngIf="adminExists" (click)="backToLogin()">Go
+                  to login</button>
               </form>
             </div>
           </div>

@@ -6,6 +6,7 @@ import { RejectedResponse } from '../../../general/services/rest.service';
 import { ROUTES } from '../../../general/models/constants';
 import { priceValidator } from '../../../general/helpers/number.validator';
 import { StatusModel } from '../../../general/models/status/status.model';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   selector: 'app-create-status',
@@ -17,13 +18,14 @@ export class CreateStatusComponent implements OnInit, AfterViewInit {
   @ViewChild('firstControl')
   firstControl: ElementRef;
 
-  errorMessage: string;
+
   statusForm: FormGroup;
   submitted = false;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
     private statusService: StatusService,
+    private toastService: ToastService,
     private renderer: Renderer2,
     private formBuilder: FormBuilder) {
   }
@@ -49,10 +51,11 @@ export class CreateStatusComponent implements OnInit, AfterViewInit {
     if (this.statusForm.valid) {
       this.statusService.createStatus(StatusModel.createInstance(0, this.statusForm))
         .then(response => {
+          this.toastService.success('Status is created successfully');
           this.backToList();
         })
         .catch((rejected: RejectedResponse) => {
-          this.errorMessage = rejected.error;
+          this.toastService.error(rejected.error);
         });
     }
   }

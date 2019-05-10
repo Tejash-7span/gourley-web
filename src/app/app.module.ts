@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
@@ -57,10 +58,13 @@ import { LoaderInterceptorService } from './general/services/loader-interceptor.
 import { LoaderService } from './general/services/loader.service';
 import { LoaderComponent } from './general/components/loader.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip/';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastService } from './general/services/toast.service';
 
 @NgModule({
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -74,6 +78,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip/';
     BsDropdownModule.forRoot(),
     TabsModule.forRoot(),
     TooltipModule.forRoot(),
+    ToastrModule.forRoot(),
     ModalModule,
     ChartsModule,
     SharedModule
@@ -105,7 +110,8 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip/';
     JobTypeService,
     PartService,
     WorkerService,
-    StatusService],
+    StatusService,
+    ToastService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

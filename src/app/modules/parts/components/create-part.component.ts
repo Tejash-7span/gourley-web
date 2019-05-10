@@ -6,6 +6,7 @@ import { ROUTES } from '../../../general/models/constants';
 import { priceValidator } from '../../../general/helpers/number.validator';
 import { PartModel } from '../../../general/models/parts/part.model';
 import { PartService } from '../../../general/services/part.service';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   selector: 'app-create-part',
@@ -17,12 +18,12 @@ export class CreatePartComponent implements OnInit, AfterViewInit {
   @ViewChild('firstControl')
   firstControl: ElementRef;
 
-  errorMessage: string;
   partForm: FormGroup;
   submitted = false;
 
   constructor(private router: Router,
     private partService: PartService,
+    private toastService: ToastService,
     private formBuilder: FormBuilder) {
   }
 
@@ -52,10 +53,11 @@ export class CreatePartComponent implements OnInit, AfterViewInit {
     if (this.partForm.valid) {
       this.partService.createPart(PartModel.createInstance(0, this.partForm))
         .then(response => {
+          this.toastService.success('Part is created successfully');
           this.backToList();
         })
         .catch((rejected: RejectedResponse) => {
-          this.errorMessage = rejected.error;
+          this.toastService.error(rejected.error);
         });
     }
   }

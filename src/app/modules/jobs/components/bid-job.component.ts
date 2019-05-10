@@ -8,6 +8,7 @@ import { JobModel } from '../../../general/models/jobs/job.model';
 import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
 import { JobPartListComponent } from './job-part-list.component';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
     selector: 'app-bid-job',
@@ -20,8 +21,6 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     @ViewChild('jobPartList')
     jobPartList: JobPartListComponent;
 
-
-    errorMessage: string;
     jobForm: FormGroup;
     submitted = false;
     selectedJobTypeId = 0;
@@ -29,6 +28,7 @@ export class BidJobComponent implements OnInit, AfterViewInit {
 
     constructor(private router: Router,
         private jobService: JobService,
+        private toastService: ToastService,
         private localStorageService: LocalStorageService,
         private element: ElementRef,
         private formBuilder: FormBuilder) {
@@ -63,9 +63,10 @@ export class BidJobComponent implements OnInit, AfterViewInit {
             this.jobService.createJob(job)
                 .then(response => {
                     this.backToList();
+                    this.toastService.success('New bid is created successfully');
                 })
                 .catch((rejected: RejectedResponse) => {
-                    this.errorMessage = rejected.error;
+                    this.toastService.error(rejected.error);
                 });
         } else {
             this.focusFirstError();

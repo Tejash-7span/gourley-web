@@ -15,6 +15,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
   private changes: MutationObserver;
   public element: HTMLElement;
   public name: string;
+  public imageUrl: string;
   public copyRightYear: number = new Date().getFullYear();
   constructor(private localStorageService: LocalStorageService, private messageService: MessageService, @Inject(DOCUMENT) _document?: any) {
 
@@ -30,6 +31,7 @@ export class DefaultLayoutComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.name = this.localStorageService.loggedInUser.userName;
+    this.imageUrl = this.localStorageService.loggedInUser.imageUrl;
   }
 
   ngOnDestroy(): void {

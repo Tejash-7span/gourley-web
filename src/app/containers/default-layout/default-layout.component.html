@@ -7,10 +7,12 @@
     <li class="nav-item dropdown" dropdown placement="bottom right">
       <a class="nav-link" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"
         dropdownToggle (click)="false">
-        <app-user-letter [userName]="name"></app-user-letter>
+        <app-user-image [imageSrc]="imageUrl"></app-user-image>
       </a>
       <div class="dropdown-menu dropdown-menu-right" *dropdownMenu aria-labelledby="simple-dropdown">
         <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+        <a class="dropdown-item" [routerLink]="['/users/changepassword']" routerLinkActive="router-link-active"><i
+            class="fa fa-key"></i> Change Password</a>
         <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-lock"></i> Logout</a>
       </div>
     </li>

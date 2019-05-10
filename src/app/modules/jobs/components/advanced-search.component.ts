@@ -24,7 +24,7 @@ export class AdvancedSearchComponent implements OnInit {
     isDate = false;
 
     public myDatePickerOptions: IMyDpOptions = {
-        dateFormat: 'dd/mm/yyyy',
+        dateFormat: 'mm/dd/yyyy',
         disableUntil: {
             year: 0,
             month: 0,

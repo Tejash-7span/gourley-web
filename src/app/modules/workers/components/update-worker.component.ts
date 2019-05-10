@@ -7,6 +7,7 @@ import { ROUTES } from '../../../general/models/constants';
 import { WorkerModel } from '../../../general/models/workers/worker.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
 import { JobType } from '../../../general/models/jobtype/job-type.model';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
     selector: 'app-update-worker',
@@ -17,7 +18,7 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
     @ViewChild('firstControl')
     firstControl: ElementRef;
 
-    errorMessage: string;
+
     workerForm: FormGroup;
     submitted = false;
     id = 0;
@@ -27,6 +28,7 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
     constructor(private router: Router,
         private route: ActivatedRoute,
         private workerService: WorkerService,
+        private toastService: ToastService,
         private localStorageService: LocalStorageService,
         private formBuilder: FormBuilder) {
     }
@@ -74,10 +76,11 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
         if (this.workerForm.valid) {
             this.workerService.updateWorker(WorkerModel.createInstance(this.id, this.jobType.id, this.workerForm))
                 .then(response => {
+                    this.toastService.success('Worker is updated successfully');
                     this.backToList();
                 })
                 .catch((rejected: RejectedResponse) => {
-                    this.errorMessage = rejected.error;
+                    this.toastService.error(rejected.error);
                 });
         }
     }
@@ -101,7 +104,7 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
                     this.workerForm.patchValue(response);
                 })
                 .catch((rejected: RejectedResponse) => {
-                    this.errorMessage = rejected.error;
+                    this.toastService.error(rejected.error);
 
                 });
         }

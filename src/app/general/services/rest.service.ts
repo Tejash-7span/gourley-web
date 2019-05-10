@@ -42,7 +42,10 @@ export class RestService {
                     }
                     resolve(new PagedData<T>(response.body, page, totalRecords));
                 }).catch(rejected => {
-                    reject(this.handleRejected(rejected));
+                    const rejectedResponse = this.handleRejected(rejected);
+                    if (rejectedResponse) {
+                        reject(rejectedResponse);
+                    }
                 });
         });
     }
@@ -54,7 +57,10 @@ export class RestService {
                 .toPromise().then(response => {
                     resolve(response);
                 }).catch(rejected => {
-                    reject(this.handleRejected(rejected));
+                    const rejectedResponse = this.handleRejected(rejected);
+                    if (rejectedResponse) {
+                        reject(rejectedResponse);
+                    }
                 });
         });
     }
@@ -66,7 +72,10 @@ export class RestService {
                 .toPromise().then(response => {
                     resolve(response);
                 }).catch(rejected => {
-                    reject(this.handleRejected(rejected));
+                    const rejectedResponse = this.handleRejected(rejected);
+                    if (rejectedResponse) {
+                        reject(rejectedResponse);
+                    }
                 });
         });
     }
@@ -78,7 +87,10 @@ export class RestService {
                 .toPromise().then(response => {
                     resolve(response);
                 }).catch(rejected => {
-                    reject(this.handleRejected(rejected));
+                    const rejectedResponse = this.handleRejected(rejected);
+                    if (rejectedResponse) {
+                        reject(rejectedResponse);
+                    }
                 });
         });
     }
@@ -90,7 +102,10 @@ export class RestService {
                 .toPromise().then(response => {
                     resolve(response);
                 }).catch(rejected => {
-                    reject(this.handleRejected(rejected));
+                    const rejectedResponse = this.handleRejected(rejected);
+                    if (rejectedResponse) {
+                        reject(rejectedResponse);
+                    }
                 });
         });
     }
@@ -98,9 +113,10 @@ export class RestService {
     private handleRejected(rejected: any): RejectedResponse {
         if (rejected.status && rejected.status === 401) {
             this.messageService.sendLogoutMessage();
+            return null;
+        } else {
+            return new RejectedResponse(rejected);
         }
-
-        return new RejectedResponse(rejected);
     }
 
     private getQueryParams(queryParams: { [key: string]: string } = null): string {
@@ -122,7 +138,7 @@ export class RejectedResponse {
     status = 0;
 
     constructor(rejected: any) {
-
+        console.log(rejected);
         this.rejected = rejected;
         if (this.rejected && this.rejected.error) {
             if (this.rejected.error.message) {
@@ -135,6 +151,8 @@ export class RejectedResponse {
             if (this.rejected.status) {
                 this.status = this.rejected.status;
             }
+        } else {
+            this.error = 'Something went wrong. Please contact your administrator.';
         }
     }
 }

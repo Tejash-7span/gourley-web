@@ -9,6 +9,7 @@ import { JobTypeEnum } from '../../../general/enums/worktype.enum';
 import { WorkerModel } from '../../../general/models/workers/worker.model';
 import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   templateUrl: 'worker-list.component.html'
@@ -21,14 +22,17 @@ export class WorkerListComponent implements OnInit {
   jobType: JobType;
   jobTypeName: string;
   datasource: WorkerModel[] = [];
-  errorMessage = null;
   searchTerm = '';
   jobTypes: JobType[];
 
   @ViewChild('deleteConfirmModal')
   deleteConfirmModal: ConfirmModalComponent;
 
-  constructor(private router: Router, private localStorageService: LocalStorageService, private route: ActivatedRoute, private workerService: WorkerService) {
+  constructor(private router: Router,
+    private localStorageService: LocalStorageService,
+    private toastService: ToastService,
+    private route: ActivatedRoute,
+    private workerService: WorkerService) {
 
   }
 
@@ -37,7 +41,7 @@ export class WorkerListComponent implements OnInit {
       this.jobTypes = this.localStorageService.jobTypes.filter(type => type.workerEnabled);
       const firstJobType = this.jobTypes.find(jobType => jobType.workerEnabled);
       if (!firstJobType) {
-        this.errorMessage = 'Job Types not found. Please try again or contact your administrator';
+        this.toastService.error('Job Types not found. Please try again or contact your administrator');
       } else {
         if (data['type']) {
           const jobTypeId = +data['type'];
@@ -79,6 +83,7 @@ export class WorkerListComponent implements OnInit {
   deleteWorker(id: number) {
     this.workerService.deleteWorker(this.jobType.id, id)
       .then(response => {
+        this.toastService.success('Worker is deleted successfully');
         if (this.datasource.length === 1) {
           this.getList({ page: this.currentPage - 1, itemsPerPage: PER_PAGE });
         } else {
@@ -86,7 +91,7 @@ export class WorkerListComponent implements OnInit {
         }
       })
       .catch((rejected: RejectedResponse) => {
-        this.errorMessage = rejected.error;
+        this.toastService.error(rejected.error);
       });
   }
 

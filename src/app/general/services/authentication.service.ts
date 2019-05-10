@@ -6,6 +6,7 @@ import { LocalStorageService } from './localstorage.service';
 import { MessageService } from './message.service';
 import { Router } from '@angular/router';
 import { ROUTES } from '../models/constants';
+import { ChangePasswordRequest } from '../models/change-password.request';
 
 
 @Injectable()
@@ -26,6 +27,10 @@ export class AuthenticationService {
 
     public login(loginRequest: LoginRequest): Promise<LoginResponse> {
         return this.restService.post<LoginResponse>('login', loginRequest);
+    }
+
+    public changePassword(changePasswordRequest: ChangePasswordRequest): Promise<void> {
+        return this.restService.put<void>('login/changepassword', changePasswordRequest);
     }
 
     public logout() {

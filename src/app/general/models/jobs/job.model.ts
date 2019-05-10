@@ -104,4 +104,10 @@ export class JobModel {
         }
         return job;
     }
+
+    public static get Empty(): JobModel {
+        const job = new JobModel();
+        job.jobParts = [];
+        return job;
+    }
 }

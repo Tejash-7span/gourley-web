@@ -14,6 +14,7 @@ import { StatusModel } from '../../../general/models/status/status.model';
 import { WorkerService } from '../../../general/services/worker.service';
 import { StatusService } from '../../../general/services/status.service';
 import { IMyDpOptions } from 'mydatepicker';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
     selector: 'app-update-job',
@@ -26,7 +27,6 @@ export class UpdateJobComponent implements OnInit {
     @ViewChild('jobPartList')
     jobPartList: JobPartListComponent;
 
-    errorMessage: string;
     job: JobModel;
     jobForm: FormGroup;
     submitted = false;
@@ -38,7 +38,7 @@ export class UpdateJobComponent implements OnInit {
     jobExtraColumns: JobExtraColumnsModel;
     returnUrl: string;
     public myDatePickerOptions: IMyDpOptions = {
-        dateFormat: 'dd/mm/yyyy',
+        dateFormat: 'mm/dd/yyyy',
     };
 
 
@@ -47,6 +47,7 @@ export class UpdateJobComponent implements OnInit {
         private jobService: JobService,
         private workerService: WorkerService,
         private statusService: StatusService,
+        private toastService: ToastService,
         private localStorageService: LocalStorageService,
         private element: ElementRef,
         private formBuilder: FormBuilder) {
@@ -98,8 +99,8 @@ export class UpdateJobComponent implements OnInit {
                     if (data['id']) {
                         this.id = data['id'];
                         if (this.id > 0) {
-                            this.loadJob();
                             this.jobExtraColumns = JobExtraColumnsModel.createInstance(this.jobType.id);
+                            this.loadJob();
                         } else {
                             this.router.navigate([ROUTES.notfound]);
                         }
@@ -121,9 +122,10 @@ export class UpdateJobComponent implements OnInit {
             this.jobService.updateJob(JobModel.createInstance(this.id, this.jobType.id, this.jobForm, this.jobPartList.getValues()))
                 .then(response => {
                     this.backToList();
+                    this.toastService.success('Job is updated successfully');
                 })
                 .catch((rejected: RejectedResponse) => {
-                    this.errorMessage = rejected.error;
+                    this.toastService.error(rejected.error);
                 });
         } else {
             this.focusFirstError();
@@ -146,15 +148,17 @@ export class UpdateJobComponent implements OnInit {
                         this.workers = workers;
                         this.statusList = statusList;
                         this.patchForm();
-                        this.firstControl.nativeElement.focus();
+                        setTimeout(() => {
+                            this.firstControl.nativeElement.focus();
+                        }, 500);
                     }).catch((statusRejected: RejectedResponse) => {
-                        this.errorMessage = statusRejected.error;
+                        this.toastService.error(statusRejected.error);
                     });
                 }).catch((workersRejected: RejectedResponse) => {
-                    this.errorMessage = workersRejected.error;
+                    this.toastService.error(workersRejected.error);
                 });
             }).catch((rejected: RejectedResponse) => {
-                this.errorMessage = rejected.error;
+                this.toastService.error(rejected.error);
             });
         }
     }

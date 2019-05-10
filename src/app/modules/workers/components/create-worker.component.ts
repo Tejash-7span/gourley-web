@@ -7,6 +7,7 @@ import { ROUTES } from '../../../general/models/constants';
 import { WorkerModel } from '../../../general/models/workers/worker.model';
 import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   selector: 'app-create-worker',
@@ -17,7 +18,7 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
   @ViewChild('firstControl')
   firstControl: ElementRef;
 
-  errorMessage: string;
+
   workerForm: FormGroup;
   jobType: JobType;
   submitted = false;
@@ -26,6 +27,7 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
     private route: ActivatedRoute,
     private workerService: WorkerService,
     private localStorageService: LocalStorageService,
+    private toastService: ToastService,
     private formBuilder: FormBuilder) {
   }
 
@@ -60,10 +62,11 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
     if (this.workerForm.valid) {
       this.workerService.createWorker(WorkerModel.createInstance(0, this.jobType.id, this.workerForm))
         .then(response => {
+          this.toastService.success('Worker is created successfully');
           this.backToList();
         })
         .catch((rejected: RejectedResponse) => {
-          this.errorMessage = rejected.error;
+          this.toastService.error(rejected.error);
         });
     }
   }

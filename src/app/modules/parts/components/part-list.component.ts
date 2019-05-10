@@ -6,6 +6,7 @@ import { RejectedResponse } from '../../../general/services/rest.service';
 import { ConfirmModalComponent } from '../../shared/components/confirm-modal.component';
 import { PartModel } from '../../../general/models/parts/part.model';
 import { PartService } from '../../../general/services/part.service';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   templateUrl: 'part-list.component.html'
@@ -16,13 +17,14 @@ export class PartListComponent implements OnInit {
   perPage = PER_PAGE;
   maxSize = PAGINATION_MAX_SIZE;
   datasource: PartModel[] = [];
-  errorMessage = null;
   searchTerm = '';
 
   @ViewChild('deleteConfirmModal')
   deleteConfirmModal: ConfirmModalComponent;
 
-  constructor(private router: Router, private partService: PartService) {
+  constructor(private router: Router,
+    private partService: PartService,
+    private toastService: ToastService) {
 
   }
 
@@ -45,6 +47,7 @@ export class PartListComponent implements OnInit {
   deletePart(id: number) {
     this.partService.deletePart(id)
       .then(response => {
+        this.toastService.success('Part is deleted successfully');
         if (this.datasource.length === 1) {
           this.getList({ page: this.currentPage - 1, itemsPerPage: PER_PAGE });
         } else {
@@ -52,7 +55,7 @@ export class PartListComponent implements OnInit {
         }
       })
       .catch((rejected: RejectedResponse) => {
-        this.errorMessage = rejected.error;
+        this.toastService.error(rejected.error);
       });
   }
 

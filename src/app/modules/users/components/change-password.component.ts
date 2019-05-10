@@ -7,64 +7,59 @@ import { RejectedResponse } from '../../../general/services/rest.service';
 import { ROUTES } from '../../../general/models/constants';
 import { UserModel } from '../../../general/models/users/user.model';
 import { ToastService } from '../../../general/services/toast.service';
+import { AuthenticationService } from '../../../general/services/authentication.service';
+import { ChangePasswordRequest } from '../../../general/models/change-password.request';
+import { LocalStorageService } from '../../../general/services/localstorage.service';
 
 @Component({
-    selector: 'app-set-password',
-    templateUrl: 'set-password.component.html'
+    selector: 'app-change-password',
+    templateUrl: 'change-password.component.html'
 })
-export class SetPasswordComponent implements OnInit, AfterViewInit {
+export class ChangePasswordComponent implements OnInit, AfterViewInit {
 
     @ViewChild('firstControl')
     firstControl: ElementRef;
 
-
-    userModel: UserModel;
-    userForm: FormGroup;
+    changePasswordModel: UserModel;
+    changePasswordForm: FormGroup;
     submitted = false;
     id = 0;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
-        private userService: UserService,
+        private authenticationService: AuthenticationService,
+        private localStorageService: LocalStorageService,
         private toastService: ToastService,
         private formBuilder: FormBuilder) {
     }
 
     get form() {
-        return this.userForm.controls;
+        return this.changePasswordForm.controls;
     }
 
     ngOnInit(): void {
-        this.userForm = this.formBuilder.group({
-            password: ['', Validators.required],
+        this.changePasswordForm = this.formBuilder.group({
+            oldPassword: ['', Validators.required],
+            newPassword: ['', Validators.required],
             confirmPassword: ['', Validators.required],
         }, {
                 validators: mustMatch('password', 'confirmPassword')
             });
 
         this.resetForm();
-        this.route.params.subscribe(data => {
-            if (data['id']) {
-                this.id = data['id'];
-                this.loadUser();
-            } else {
-                this.router.navigate([ROUTES.users]);
-            }
-        });
     }
 
     ngAfterViewInit() {
         this.firstControl.nativeElement.focus();
     }
 
-    saveUser() {
+    changePassword() {
         this.submitted = true;
-        if (this.userForm.valid) {
-            this.userModel.password = this.userForm.value['password'];
-            this.userService.updateUser(this.userModel)
+        if (this.changePasswordForm.valid) {
+            this.authenticationService.changePassword(ChangePasswordRequest.createIntance(this.localStorageService.loggedInUser.userName, this.changePasswordForm))
                 .then(response => {
-                    this.toastService.success('New password is set successfully');
-                    this.backToList();
+                    this.toastService.success('Current password is changed successfully');
+                    this.resetForm();
                 })
                 .catch((rejected: RejectedResponse) => {
                     this.toastService.error(rejected.error);
@@ -72,23 +67,9 @@ export class SetPasswordComponent implements OnInit, AfterViewInit {
         }
     }
 
-    backToList() {
-        this.router.navigate([ROUTES.users]);
-    }
-
     resetForm() {
         this.submitted = false;
-        this.userForm.patchValue({ password: '', confirmPassword: '' });
-    }
-
-    loadUser() {
-        this.userService.get(this.id)
-            .then((response: UserModel) => {
-                this.userModel = response;
-            })
-            .catch((rejected: RejectedResponse) => {
-                this.toastService.error(rejected.error);
-            });
+        this.changePasswordForm.patchValue({ oldPassword: '', newPassword: '', confirmPassword: '' });
     }
 }
 

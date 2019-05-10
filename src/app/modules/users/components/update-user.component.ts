@@ -5,6 +5,7 @@ import { UserService } from '../services/user.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { ROUTES } from '../../../general/models/constants';
 import { UserModel } from '../../../general/models/users/user.model';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
     selector: 'app-update-user',
@@ -14,7 +15,7 @@ export class UpdateUserComponent implements OnInit, AfterViewInit {
     @ViewChild('firstControl')
     firstControl: ElementRef;
 
-    errorMessage: string;
+
     userForm: FormGroup;
     submitted = false;
     id = 0;
@@ -23,6 +24,7 @@ export class UpdateUserComponent implements OnInit, AfterViewInit {
     constructor(private router: Router,
         private route: ActivatedRoute,
         private userService: UserService,
+        private toastService: ToastService,
         private formBuilder: FormBuilder) {
     }
 
@@ -59,10 +61,11 @@ export class UpdateUserComponent implements OnInit, AfterViewInit {
         if (this.userForm.valid) {
             this.userService.updateUser(UserModel.createInstance(this.id, this.userForm))
                 .then(response => {
+                    this.toastService.success('User is updated successfully');
                     this.backToList();
                 })
                 .catch((rejected: RejectedResponse) => {
-                    this.errorMessage = rejected.error;
+                    this.toastService.error(rejected.error);
                 });
         }
     }
@@ -86,7 +89,7 @@ export class UpdateUserComponent implements OnInit, AfterViewInit {
                     this.userForm.patchValue(response);
                 })
                 .catch((rejected: RejectedResponse) => {
-                    this.errorMessage = rejected.error;
+                    this.toastService.error(rejected.error);
                 });
         }
     }

@@ -6,6 +6,7 @@ import { UserService } from '../services/user.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { ROUTES } from '../../../general/models/constants';
 import { UserModel } from '../../../general/models/users/user.model';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   selector: 'app-create-user',
@@ -16,7 +17,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
   @ViewChild('firstControl')
   firstControl: ElementRef;
 
-  errorMessage: string;
+
   userForm: FormGroup;
   submitted = false;
 
@@ -25,6 +26,7 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
+    private toastService: ToastService,
     private formBuilder: FormBuilder) {
   }
 
@@ -60,9 +62,10 @@ export class CreateUserComponent implements OnInit, AfterViewInit {
       this.userService.createUser(UserModel.createInstance(0, this.userForm))
         .then(response => {
           this.backToList();
+          this.toastService.success('User is created successfully');
         })
         .catch((rejected: RejectedResponse) => {
-          this.errorMessage = rejected.error;
+          this.toastService.error(rejected.error);
         });
     }
   }

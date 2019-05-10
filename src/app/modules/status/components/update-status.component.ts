@@ -6,6 +6,7 @@ import { RejectedResponse } from '../../../general/services/rest.service';
 import { ROUTES } from '../../../general/models/constants';
 import { priceValidator } from '../../../general/helpers/number.validator';
 import { StatusModel } from '../../../general/models/status/status.model';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
     selector: 'app-update-status',
@@ -16,7 +17,7 @@ export class UpdateStatusComponent implements OnInit, AfterViewInit {
     @ViewChild('firstControl')
     firstControl: ElementRef;
 
-    errorMessage: string;
+
     statusForm: FormGroup;
     submitted = false;
     id = 0;
@@ -25,6 +26,7 @@ export class UpdateStatusComponent implements OnInit, AfterViewInit {
     constructor(private router: Router,
         private route: ActivatedRoute,
         private statusService: StatusService,
+        private toastService: ToastService,
         private formBuilder: FormBuilder) {
     }
 
@@ -56,10 +58,11 @@ export class UpdateStatusComponent implements OnInit, AfterViewInit {
         if (this.statusForm.valid) {
             this.statusService.updateStatus(StatusModel.createInstance(this.id, this.statusForm))
                 .then(response => {
+                    this.toastService.success('Status is updated successfully');
                     this.backToList();
                 })
                 .catch((rejected: RejectedResponse) => {
-                    this.errorMessage = rejected.error;
+                    this.toastService.error(rejected.error);
                 });
         }
     }
@@ -83,7 +86,7 @@ export class UpdateStatusComponent implements OnInit, AfterViewInit {
                     this.statusForm.patchValue(response);
                 })
                 .catch((rejected: RejectedResponse) => {
-                    this.errorMessage = rejected.error;
+                    this.toastService.error(rejected.error);
                 });
         }
     }

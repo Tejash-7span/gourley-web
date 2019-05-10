@@ -9,6 +9,7 @@ import { JobExtraColumnsModel } from '../../../general/models/jobs/job-extra-col
 import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
 import { IAdvancedSearchParams, AdvancedSearchComponent } from './advanced-search.component';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   selector: 'app-bid-job-list',
@@ -23,7 +24,6 @@ export class BidJobListComponent implements OnInit {
   jobTypes: JobType[] = [];
   workTypeName: string;
   datasource: any[] = [];
-  errorMessage = null;
   searchTerm = '';
   jobFilter: JobFilterModel = new JobFilterModel();
   advancedSearchData: IAdvancedSearchParams;
@@ -35,6 +35,7 @@ export class BidJobListComponent implements OnInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private jobService: JobService,
+    private toastService: ToastService,
     private localStorageService: LocalStorageService) {
 
   }
@@ -56,7 +57,7 @@ export class BidJobListComponent implements OnInit {
       this.jobTypes = this.localStorageService.jobTypes.filter(type => type.workerEnabled);
       const firstJobType = this.jobTypes.find(jobType => jobType.workerEnabled);
       if (!firstJobType) {
-        this.errorMessage = 'Job Types not found. Please try again or contact your administrator';
+        this.toastService.error('Job Types not found. Please try again or contact your administrator');
       } else {
         if (data['type']) {
           const jobTypeId = +data['type'];

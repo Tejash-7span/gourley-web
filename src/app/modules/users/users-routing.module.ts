@@ -5,6 +5,7 @@ import { UserListComponent } from './components/user-list.component';
 import { CreateUserComponent } from './components/create-user.component';
 import { UpdateUserComponent } from './components/update-user.component';
 import { SetPasswordComponent } from './components/set-password.component';
+import { ChangePasswordComponent } from './components/change-password.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,14 @@ const routes: Routes = [
   {
     path: 'create',
     component: CreateUserComponent,
+    data: {
+      title: 'Users'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'changepassword',
+    component: ChangePasswordComponent,
     data: {
       title: 'Users'
     },

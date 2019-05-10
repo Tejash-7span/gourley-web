@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { RejectedResponse } from '../../../general/services/rest.service';
 import { ConfirmModalComponent } from '../../shared/components/confirm-modal.component';
 import { StatusModel } from '../../../general/models/status/status.model';
+import { ToastService } from '../../../general/services/toast.service';
 
 @Component({
   templateUrl: 'status-list.component.html'
@@ -16,13 +17,14 @@ export class StatusListComponent implements OnInit {
   perPage = PER_PAGE;
   maxSize = PAGINATION_MAX_SIZE;
   datasource: StatusModel[] = [];
-  errorMessage = null;
   searchTerm = '';
 
   @ViewChild('deleteConfirmModal')
   deleteConfirmModal: ConfirmModalComponent;
 
-  constructor(private router: Router, private statusService: StatusService) {
+  constructor(private router: Router,
+    private statusService: StatusService,
+    private toastService: ToastService) {
 
   }
 
@@ -45,6 +47,7 @@ export class StatusListComponent implements OnInit {
   deleteStatus(id: number) {
     this.statusService.deleteStatus(id)
       .then(response => {
+        this.toastService.success('Status is deleted successfully');
         if (this.datasource.length === 1) {
           this.getList({ page: this.currentPage - 1, itemsPerPage: PER_PAGE });
         } else {
@@ -52,7 +55,7 @@ export class StatusListComponent implements OnInit {
         }
       })
       .catch((rejected: RejectedResponse) => {
-        this.errorMessage = rejected.error;
+        this.toastService.error(rejected.error);
       });
   }
 

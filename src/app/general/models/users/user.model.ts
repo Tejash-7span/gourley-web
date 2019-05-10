@@ -9,6 +9,7 @@ export class UserModel {
     admin = false;
     workType = '';
     password = '';
+    imageUrl = '';
 
     public static createInstance(id: number, form: FormGroup) {
         const user = new UserModel();

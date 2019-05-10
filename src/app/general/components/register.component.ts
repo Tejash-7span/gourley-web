@@ -6,6 +6,7 @@ import { mustMatch } from '../helpers/must-match.validator';
 import { ROUTES } from '../models/constants';
 import { RejectedResponse } from '../services/rest.service';
 import { UserModel } from '../models/users/user.model';
+import { ToastService } from '../services/toast.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,8 +17,6 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   @ViewChild('firstControl')
   firstControl: ElementRef;
 
-  errorMessage: string;
-  successMessage: string = null;
   registerationForm: FormGroup;
   submitted = false;
   adminExists = false;
@@ -27,6 +26,7 @@ export class RegisterComponent implements OnInit, AfterViewInit {
   constructor(private router: Router,
     private route: ActivatedRoute,
     private userService: UserService,
+    private toastService: ToastService,
     private formBuilder: FormBuilder) {
   }
 
@@ -40,13 +40,13 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       .then(response => {
         if (response) {
           this.adminExists = true;
-          this.errorMessage = 'An admin user already exists.';
+          this.toastService.error('An admin user already exists.');
         }
         this.loading = false;
       })
       .catch((rejected: RejectedResponse) => {
         if (rejected.status !== 404) {
-          this.errorMessage = rejected.error;
+          this.toastService.error(rejected.error);
         }
         this.loading = false;
       });
@@ -77,13 +77,11 @@ export class RegisterComponent implements OnInit, AfterViewInit {
       user.admin = true;
       this.userService.registerUser(user)
         .then(response => {
-          this.successMessage = 'An admin user is created successfully.';
-          this.errorMessage = null;
+          this.toastService.success('An admin user is created successfully.');
           this.adminExists = true;
         })
         .catch((rejected: RejectedResponse) => {
-          this.errorMessage = rejected.error;
-          this.successMessage = null;
+          this.toastService.error(rejected.error);
         });
     }
   }
