@@ -60,6 +60,8 @@ import { LoaderComponent } from './general/components/loader.component';
 import { TooltipModule } from 'ngx-bootstrap/tooltip/';
 import { ToastrModule } from 'ngx-toastr';
 import { ToastService } from './general/services/toast.service';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
 @NgModule({
   imports: [
@@ -79,6 +81,10 @@ import { ToastService } from './general/services/toast.service';
     TabsModule.forRoot(),
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
+    CalendarModule.forRoot({
+      provide: DateAdapter,
+      useFactory: adapterFactory
+    }),
     ModalModule,
     ChartsModule,
     SharedModule

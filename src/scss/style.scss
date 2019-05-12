@@ -4,6 +4,8 @@
 // Import styles
 @import "~@coreui/coreui/scss/coreui";
 
+@import "../node_modules/angular-calendar/scss/angular-calendar.scss";
+
 // If you want to add something do it here
 @import "custom";
 .btn-danger {
