@@ -16,6 +16,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { ConfirmModalComponent } from '../shared/components/confirm-modal.component';
 import { SharedModule } from '../shared/shared.module';
 import { ChangePasswordComponent } from './components/change-password.component';
+import { UserProfileComponent } from './components/user-profile.component';
 
 @NgModule({
   imports: [
@@ -30,7 +31,7 @@ import { ChangePasswordComponent } from './components/change-password.component'
     PaginationModule.forRoot(),
     SharedModule
   ],
-  declarations: [UserListComponent, CreateUserComponent, UpdateUserComponent, SetPasswordComponent, ChangePasswordComponent],
+  declarations: [UserListComponent, CreateUserComponent, UpdateUserComponent, SetPasswordComponent, ChangePasswordComponent, UserProfileComponent],
   providers: [UserService]
 })
 export class UsersModule { }

@@ -1,0 +1,90 @@
+<app-confirm-modal #clearImageConfirmModal type="danger" title="Clear Profile Image"
+    message="Are you sure you want to clear the profile image ?" (confirm)="clearImage($event)"></app-confirm-modal>
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-6">
+            <h4 class="page-header">My Profile</h4>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="profile-image">
+                    <app-user-image class="profile-image-background" [background]="true" [imageUrl]="imageUrl">
+                    </app-user-image>
+                    <div class="image-holder-wrapper">
+                        <div class="image-holder">
+                            <app-user-image [imageUrl]="imageUrl" class="full">
+                            </app-user-image>
+                            <div class="clearfix"></div>
+                            <input #fileUpload type="file" (change)="uploadImage($event)" style="display:none"
+                                accept="image/*">
+                            <button class="btn btn-primary" (click)="fileUpload.click()"><i
+                                    class="fa fa-upload"></i>Upload</button>
+                            <button class="btn btn-danger" *ngIf="imageUrl" (click)="confirmClearImage()"><i
+                                    class="fa fa-times"></i>Clear</button>
+                            <div class="clearfix"></div>
+                            <div class="custom-progress" *ngIf="progress > 0" style="height:3px;">
+                                <div class="custom-progress-bar" [style.width.%]="progress"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form [formGroup]="userForm" (submit)="saveUser()">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="firstName">First Name</label>
+                                <input #firstControl class="form-control" id="firstName" type="text" name="firstName"
+                                    formControlName="firstName"
+                                    [ngClass]="{'is-invalid': submitted && form.firstName.errors}">
+                                <div *ngIf="submitted && form.firstName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.firstName.errors.required">First Name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="lastName">Last Name</label>
+                                <input class="form-control" id="lastName" type="text" name="lastName"
+                                    formControlName="lastName"
+                                    [ngClass]="{'is-invalid': submitted && form.lastName.errors}">
+                                <div *ngIf="submitted && form.lastName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.lastName.errors.required">Last Name is required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="email">Email</label>
+                                <input class="form-control" id="email" type="text" name="email" formControlName="email"
+                                    [ngClass]="{'is-invalid': submitted && form.email.errors}">
+                                <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+                                    <div *ngIf="form.email.errors.email">Please enter a valid email address</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="userName">Username</label>
+                                <input class="form-control" id="userName" type="text" name="userName"
+                                    formControlName="userName"
+                                    [ngClass]="{'is-invalid': submitted && form.userName.errors}">
+                                <div *ngIf="submitted && form.userName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.userName.errors.required">Username is required</div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="workType">Work Type</label>
+                                <input class="form-control" id="workType" type="text" name="workType"
+                                    formControlName="workType">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-sm btn-success margin-bottom-10 full-width">
+                            <i class="fa fa-dot-circle-o"></i>Submit
+                        </button>
+                        <button type="button" class="btn btn-sm btn-danger full-width" (click)="resetForm()">
+                            <i class="fa fa-ban"></i>Reset
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

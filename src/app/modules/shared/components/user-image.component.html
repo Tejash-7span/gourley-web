@@ -1,4 +1,3 @@
-<img *ngIf="imageSrc" class="img-avatar" [src]="imageSrc">
-<span *ngIf="!imageSrc" class="default-user">
-    <i class="fa fa-user-circle-o"></i>
-</span>
+<ng-container *ngIf="!background">
+    <img class="img-avatar" [class.default]="!imageUrl" [src]="src">
+</ng-container>

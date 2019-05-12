@@ -6,6 +6,7 @@ import { CreateUserComponent } from './components/create-user.component';
 import { UpdateUserComponent } from './components/update-user.component';
 import { SetPasswordComponent } from './components/set-password.component';
 import { ChangePasswordComponent } from './components/change-password.component';
+import { UserProfileComponent } from './components/user-profile.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,14 @@ const routes: Routes = [
   {
     path: 'changepassword',
     component: ChangePasswordComponent,
+    data: {
+      title: 'Users'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: 'myprofile',
+    component: UserProfileComponent,
     data: {
       title: 'Users'
     },

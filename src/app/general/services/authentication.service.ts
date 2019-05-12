@@ -7,11 +7,11 @@ import { MessageService } from './message.service';
 import { Router } from '@angular/router';
 import { ROUTES } from '../models/constants';
 import { ChangePasswordRequest } from '../models/change-password.request';
+import { Subscription } from 'rxjs';
 
 
 @Injectable()
 export class AuthenticationService {
-
     constructor(private restService: RestService,
         private localStorageService: LocalStorageService,
         private router: Router,

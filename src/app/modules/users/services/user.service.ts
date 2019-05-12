@@ -39,4 +39,12 @@ export class UserService {
     public deleteUser(id: number): Promise<void> {
         return this.restService.delete(`users/${id}`);
     }
+
+    public uploadImage(id: number, formData: FormData) {
+        return this.restService.upload(`users/${id}/upload`, formData);
+    }
+
+    public clearImage(id: number): Promise<void> {
+        return this.restService.delete(`users/${id}/image`);
+    }
 }

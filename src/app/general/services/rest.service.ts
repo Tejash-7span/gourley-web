@@ -1,14 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEventType } from '@angular/common/http';
 import { LocalStorageService } from './localstorage.service';
 import { PagedData } from '../models/paged-data.model';
 import { Router } from '@angular/router';
 import { MessageService } from './message.service';
 import { PER_PAGE } from '../models/constants';
+import { environment } from '../../../environments/environment';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
 
 @Injectable()
 export class RestService {
-    private apiURL = 'http://localhost:5000';
+    private apiURL = environment.apiUrl;
 
     constructor(private httpClient: HttpClient,
         private localStorageService: LocalStorageService,
@@ -110,7 +114,19 @@ export class RestService {
         });
     }
 
-    private handleRejected(rejected: any): RejectedResponse {
+    public upload(path: string, formData: FormData) {
+        const url = `${this.apiURL}/${path}`;
+        return this.httpClient.post<string>(url, formData, {
+            headers: {
+                'Accept': 'application/json',
+                Authorization: `bearer ${this.localStorageService.token}`
+            },
+            reportProgress: true,
+            observe: 'events'
+        });
+    }
+
+    private handleRejected(rejected: any) {
         if (rejected.status && rejected.status === 401) {
             this.messageService.sendLogoutMessage();
             return null;
