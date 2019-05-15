@@ -178,7 +178,7 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                            <div class="col-lg-4 col-md-12 col-sm-12 form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" id="active" type="checkbox"
                                         formControlName="active">
@@ -189,19 +189,35 @@
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group" *ngIf="isActive">
                                 <label class="form-col-form-label" for="bidAcceptedDate">Bid Accepted Date</label>
-                                <my-date-picker id="bidAcceptedDate" name="bidAcceptedDate"
-                                    [options]="myDatePickerOptions" formControlName="bidAcceptedDate">
+                                <my-date-picker #bidAcceptedDateControl id="bidAcceptedDate"
+                                    class="form-control my-datepicker" name="bidAcceptedDate"
+                                    [options]="myDatePickerOptions" formControlName="bidAcceptedDate"
+                                    [ngClass]="{'is-invalid': submitted && form.bidAcceptedDate.errors}">
                                 </my-date-picker>
+                                <div class="clearfix"></div>
+                                <div *ngIf="submitted && form.bidAcceptedDate.errors" class="invalid-feedback">
+                                    <div *ngIf="form.bidAcceptedDate.errors.conditionalrequired">Bid Accepted Date is
+                                        required.
+                                    </div>
+                                </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group" *ngIf="isActive">
                                 <label class="form-col-form-label" for="jobActiveDate">Job Active Date</label>
-                                <my-date-picker id="jobActiveDate" name="jobActiveDate" [options]="myDatePickerOptions"
-                                    formControlName="jobActiveDate">
+                                <my-date-picker #jobActiveDateControl id="jobActiveDate"
+                                    class="form-control my-datepicker" name="jobActiveDate"
+                                    [options]="myDatePickerOptions" formControlName="jobActiveDate"
+                                    [ngClass]="{'is-invalid': submitted && form.jobActiveDate.errors}">
                                 </my-date-picker>
+                                <div class="clearfix"></div>
+                                <div *ngIf="submitted && form.jobActiveDate.errors" class="invalid-feedback">
+                                    <div *ngIf="form.jobActiveDate.errors.conditionalrequired">Job Active Date is
+                                        required.
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                            <div class="col-lg-4 col-md-12 col-sm-12 form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" id="invoiced" type="checkbox"
                                         formControlName="invoiced">
@@ -212,7 +228,7 @@
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group" *ngIf="isInvoiced">
                                 <label class="form-col-form-label" for="jobInvoiceDate">Job Invoiced Date</label>
-                                <my-date-picker id="jobInvoiceDate" name="jobInvoiceDate"
+                                <my-date-picker id="jobInvoiceDate" class="my-datepicker" name="jobInvoiceDate"
                                     [options]="myDatePickerOptions" formControlName="jobInvoiceDate">
                                 </my-date-picker>
                             </div>

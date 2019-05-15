@@ -1,125 +1,63 @@
 <div class="animated fadeIn">
   <h4 class="page-header">Dashboard</h4>
-  <div class="row">
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-info">
-        <div class="card-body pb-0">
-          <button type="button" class="btn btn-transparent p-0 float-right">
-            <i class="icon-location-pin"></i>
-          </button>
-          <div class="text-value">9.823</div>
-          <div>Members online</div>
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <canvas baseChart class="chart" [datasets]="lineChart2Data" [labels]="lineChart2Labels"
-            [options]="lineChart2Options" [colors]="lineChart2Colours" [legend]="lineChart2Legend"
-            [chartType]="lineChart2Type"></canvas>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-primary">
-        <div class="card-body pb-0">
-          <div class="btn-group float-right" dropdown>
-            <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
-              <i class="icon-settings"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-          <div class="text-value">9.823</div>
-          <div>Members online</div>
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <canvas baseChart class="chart" [datasets]="lineChart1Data" [labels]="lineChart1Labels"
-            [options]="lineChart1Options" [colors]="lineChart1Colours" [legend]="lineChart1Legend"
-            [chartType]="lineChart1Type"></canvas>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-warning">
-        <div class="card-body pb-0">
-          <div class="btn-group float-right" dropdown>
-            <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
-              <i class="icon-settings"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-          <div class="text-value">9.823</div>
-          <div>Members online</div>
-        </div>
-        <div class="chart-wrapper mt-3" style="height:70px;">
-          <canvas baseChart class="chart" [datasets]="lineChart3Data" [labels]="lineChart3Labels"
-            [options]="lineChart3Options" [colors]="lineChart3Colours" [legend]="lineChart3Legend"
-            [chartType]="lineChart3Type"></canvas>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-    <div class="col-sm-6 col-lg-3">
-      <div class="card text-white bg-danger">
-        <div class="card-body pb-0">
-          <div class="btn-group float-right" dropdown>
-            <button type="button" class="btn btn-transparent dropdown-toggle p-0" dropdownToggle>
-              <i class="icon-settings"></i>
-            </button>
-            <div class="dropdown-menu dropdown-menu-right" *dropdownMenu>
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-          <div class="text-value">9.823</div>
-          <div>Members online</div>
-        </div>
-        <div class="chart-wrapper mt-3 mx-3" style="height:70px;">
-          <canvas baseChart class="chart" [datasets]="barChart1Data" [labels]="barChart1Labels"
-            [options]="barChart1Options" [colors]="barChart1Colours" [legend]="barChart1Legend"
-            [chartType]="barChart1Type"></canvas>
-        </div>
-      </div>
-    </div>
-    <!--/.col-->
-  </div>
   <div class="card">
     <div class="card-body">
       <div class="row text-center">
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-4 col-sm-12 margin-bottom-20">
           <div class="btn-group">
             <div class="btn btn-primary" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate"
-              (viewDateChange)="closeOpenMonthViewDay()">
+              (viewDateChange)="onMonthChange()">
               Previous
             </div>
             <div class="btn btn-outline-secondary" mwlCalendarToday [(viewDate)]="viewDate">
               Today
             </div>
             <div class="btn btn-primary" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate"
-              (viewDateChange)="closeOpenMonthViewDay()">
+              (viewDateChange)="onMonthChange()">
               Next
             </div>
           </div>
         </div>
-        <div class="col-md-4">
+        <div class="col-lg-4 col-md-4 col-sm-12 margin-bottom-20">
           <h3>{{ viewDate | calendarDate:(view + 'ViewTitle'):'en' }}</h3>
         </div>
+        <div class="col-lg-4 col-md-4 col-sm-12 margin-bottom-20">
+          <div class="btn-group">
+            <div class="btn btn-primary" (click)="setView(CalendarView.Month)"
+              [class.active]="view === CalendarView.Month">
+              Month
+            </div>
+            <div class="btn btn-primary" (click)="setView(CalendarView.Week)"
+              [class.active]="view === CalendarView.Week">
+              Week
+            </div>
+            <div class="btn btn-primary" (click)="setView(CalendarView.Day)" [class.active]="view === CalendarView.Day">
+              Day
+            </div>
+          </div>
+        </div>
       </div>
-      <br />
+      <div class="row margin-bottom-20">
+        <div class="col-lg-12 col-md-12 col-sm-12 align-center">
+          <div class="legend" [style.background-color]="'#ad2121'"></div>
+          <span class="legend-label">Drywall</span>
+          <div class="legend" [style.background-color]="'#1e90ff'"></div>
+          <span class="legend-label">Stone</span>
+          <div class="legend" [style.background-color]="'#e3bc08'"></div>
+          <span class="legend-label">Stucco</span>
+        </div>
+      </div>
 
-      <mwl-calendar-month-view [viewDate]="viewDate" [events]="events" [refresh]="refresh"
+      <mwl-calendar-month-view *ngIf="view === CalendarView.Month" [viewDate]="viewDate" [events]="events"
         [activeDayIsOpen]="activeDayIsOpen" (dayClicked)="dayClicked($event.day)"
-        (eventClicked)="handleEvent('Clicked', $event.event)" (eventTimesChanged)="eventTimesChanged($event)">
+        (eventClicked)="handleEvent($event.event)">
       </mwl-calendar-month-view>
+      <mwl-calendar-week-view *ngIf="view === CalendarView.Week" [viewDate]="viewDate" [events]="events"
+        (eventClicked)="handleEvent($event.event)">
+      </mwl-calendar-week-view>
+      <mwl-calendar-day-view *ngIf="view === CalendarView.Day" [viewDate]="viewDate" [events]="events"
+        (eventClicked)="handleEvent($event.event)">
+      </mwl-calendar-day-view>
     </div>
   </div>
 </div>

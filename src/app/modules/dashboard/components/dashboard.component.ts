@@ -19,18 +19,25 @@ import {
   CalendarEventTimesChangedEvent,
   CalendarView
 } from 'angular-calendar';
+import { JobCalendar } from '../../../general/models/jobs/job-calendar.model';
+import { DashboardService } from '../services/dashboard.service';
+import { ToastService } from '../../../general/services/toast.service';
+import { RejectedResponse } from '../../../general/services/rest.service';
+import { LocalStorageService } from '../../../general/services/localstorage.service';
+import { JobType } from '../../../general/models/jobtype/job-type.model';
+import { ROUTES } from '../../../general/models/constants';
 
 
 const colors: any = {
-  red: {
+  drywall: {
     primary: '#ad2121',
     secondary: '#FAE3E3'
   },
-  blue: {
+  stone: {
     primary: '#1e90ff',
     secondary: '#D1E8FF'
   },
-  yellow: {
+  stucco: {
     primary: '#e3bc08',
     secondary: '#FDF1BA'
   }
@@ -43,212 +50,6 @@ export class DashboardComponent implements OnInit {
   @ViewChild('modalContent')
   modalContent: TemplateRef<any>;
 
-  constructor() { }
-
-  radioModel = 'Month';
-
-  // lineChart1
-  public lineChart1Data: Array<any> = [
-    {
-      data: [65, 59, 84, 84, 51, 55, 40],
-      label: 'Series A'
-    }
-  ];
-  public lineChart1Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart1Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent'
-        },
-        ticks: {
-          fontSize: 2,
-          fontColor: 'transparent',
-        }
-
-      }],
-      yAxes: [{
-        display: false,
-        ticks: {
-          display: false,
-          min: 40 - 5,
-          max: 84 + 5,
-        }
-      }],
-    },
-    elements: {
-      line: {
-        borderWidth: 1
-      },
-      point: {
-        radius: 4,
-        hitRadius: 10,
-        hoverRadius: 4,
-      },
-    },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart1Colours: Array<any> = [
-    {
-      backgroundColor: getStyle('--primary'),
-      borderColor: 'rgba(255,255,255,.55)'
-    }
-  ];
-  public lineChart1Legend = false;
-  public lineChart1Type = 'line';
-
-  // lineChart2
-  public lineChart2Data: Array<any> = [
-    {
-      data: [1, 18, 9, 17, 34, 22, 11],
-      label: 'Series A'
-    }
-  ];
-  public lineChart2Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart2Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        gridLines: {
-          color: 'transparent',
-          zeroLineColor: 'transparent'
-        },
-        ticks: {
-          fontSize: 2,
-          fontColor: 'transparent',
-        }
-
-      }],
-      yAxes: [{
-        display: false,
-        ticks: {
-          display: false,
-          min: 1 - 5,
-          max: 34 + 5,
-        }
-      }],
-    },
-    elements: {
-      line: {
-        tension: 0.00001,
-        borderWidth: 1
-      },
-      point: {
-        radius: 4,
-        hitRadius: 10,
-        hoverRadius: 4,
-      },
-    },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart2Colours: Array<any> = [
-    { // grey
-      backgroundColor: getStyle('--info'),
-      borderColor: 'rgba(255,255,255,.55)'
-    }
-  ];
-  public lineChart2Legend = false;
-  public lineChart2Type = 'line';
-
-
-  // lineChart3
-  public lineChart3Data: Array<any> = [
-    {
-      data: [78, 81, 80, 45, 34, 12, 40],
-      label: 'Series A'
-    }
-  ];
-  public lineChart3Labels: Array<any> = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
-  public lineChart3Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false
-      }],
-      yAxes: [{
-        display: false
-      }]
-    },
-    elements: {
-      line: {
-        borderWidth: 2
-      },
-      point: {
-        radius: 0,
-        hitRadius: 10,
-        hoverRadius: 4,
-      },
-    },
-    legend: {
-      display: false
-    }
-  };
-  public lineChart3Colours: Array<any> = [
-    {
-      backgroundColor: 'rgba(255,255,255,.2)',
-      borderColor: 'rgba(255,255,255,.55)',
-    }
-  ];
-  public lineChart3Legend = false;
-  public lineChart3Type = 'line';
-
-
-  // barChart1
-  public barChart1Data: Array<any> = [
-    {
-      data: [78, 81, 80, 45, 34, 12, 40, 78, 81, 80, 45, 34, 12, 40, 12, 40],
-      label: 'Series A'
-    }
-  ];
-  public barChart1Labels: Array<any> = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16'];
-  public barChart1Options: any = {
-    tooltips: {
-      enabled: false,
-      custom: CustomTooltips
-    },
-    maintainAspectRatio: false,
-    scales: {
-      xAxes: [{
-        display: false,
-        barPercentage: 0.6,
-      }],
-      yAxes: [{
-        display: false
-      }]
-    },
-    legend: {
-      display: false
-    }
-  };
-  public barChart1Colours: Array<any> = [
-    {
-      backgroundColor: 'rgba(255,255,255,.3)',
-      borderWidth: 0
-    }
-  ];
-  public barChart1Legend = false;
-  public barChart1Type = 'bar';
-
-
-
   view: CalendarView = CalendarView.Month;
 
   CalendarView = CalendarView;
@@ -260,16 +61,46 @@ export class DashboardComponent implements OnInit {
     event: CalendarEvent;
   };
 
-  actions: CalendarEventAction[] = [];
-
-  refresh: Subject<any> = new Subject();
-
   events: CalendarEvent[] = [];
 
   activeDayIsOpen = false;
+  jobTypes: JobType[] = [];
+
+  constructor(private dashboardService: DashboardService,
+    private toastService: ToastService,
+    private localStorageService: LocalStorageService,
+    private router: Router) { }
 
   ngOnInit(): void {
+    this.jobTypes = this.localStorageService.jobTypes.filter(type => type.workerEnabled);
+    this.loadMonth();
+  }
 
+  loadMonth() {
+    const startDate = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth(), 1);
+    const endDate = new Date(this.viewDate.getFullYear(), this.viewDate.getMonth() + 1, 0, 23, 59, 59);
+    this.dashboardService.getCalendar(startDate, endDate)
+      .then(response => {
+        this.mapToEvents(response);
+      })
+      .catch((rejected: RejectedResponse) => {
+        this.toastService.error(rejected.error);
+      });
+  }
+
+  mapToEvents(data: JobCalendar[]) {
+    const events = [];
+    for (const item of data) {
+      const jobType = this.jobTypes.find(type => type.id === item.jobTypeId);
+      events.push({
+        id: item.id,
+        meta: item.jobTypeId,
+        start: new Date(item.dateStarted),
+        title: `#${item.id} : ${item.customerName}`,
+        color: colors[jobType.name.toLowerCase()]
+      });
+    }
+    this.events = events;
   }
 
   dayClicked({ date, events }: { date: Date; events: CalendarEvent[] }): void {
@@ -286,54 +117,16 @@ export class DashboardComponent implements OnInit {
     }
   }
 
-  eventTimesChanged({
-    event,
-    newStart,
-    newEnd
-  }: CalendarEventTimesChangedEvent): void {
-    this.events = this.events.map(iEvent => {
-      if (iEvent === event) {
-        return {
-          ...event,
-          start: newStart,
-          end: newEnd
-        };
-      }
-      return iEvent;
-    });
-    this.handleEvent('Dropped or resized', event);
-  }
-
-  handleEvent(action: string, event: CalendarEvent): void {
-    this.modalData = { event, action };
-  }
-
-  addEvent(): void {
-    this.events = [
-      ...this.events,
-      {
-        title: 'New event',
-        start: startOfDay(new Date()),
-        end: endOfDay(new Date()),
-        color: colors.red,
-        draggable: true,
-        resizable: {
-          beforeStart: true,
-          afterEnd: true
-        }
-      }
-    ];
-  }
-
-  deleteEvent(eventToDelete: CalendarEvent) {
-    this.events = this.events.filter(event => event !== eventToDelete);
-  }
-
   setView(view: CalendarView) {
     this.view = view;
   }
 
-  closeOpenMonthViewDay() {
+  handleEvent(event: CalendarEvent): void {
+    this.router.navigate([`${ROUTES.jobs}/${event.meta}/update/${event.id}`]);
+  }
+
+  onMonthChange() {
     this.activeDayIsOpen = false;
+    this.loadMonth();
   }
 }

@@ -53,27 +53,33 @@ export const routes: Routes = [
     children: [
       {
         path: 'dashboard',
-        loadChildren: './modules/dashboard/dashboard.module#DashboardModule'
+        loadChildren: './modules/dashboard/dashboard.module#DashboardModule',
+        canActivate: [AuthGuard]
       },
       {
         path: 'users',
-        loadChildren: './modules/users/users.module#UsersModule'
+        loadChildren: './modules/users/users.module#UsersModule',
+        canActivate: [AuthGuard]
       },
       {
         path: 'masters/parts',
-        loadChildren: './modules/parts/parts.module#PartsModule'
+        loadChildren: './modules/parts/parts.module#PartsModule',
+        canActivate: [AuthGuard]
       },
       {
         path: 'masters/workers',
-        loadChildren: './modules/workers/workers.module#WorkersModule'
+        loadChildren: './modules/workers/workers.module#WorkersModule',
+        canActivate: [AuthGuard]
       },
       {
         path: 'masters/status',
-        loadChildren: './modules/status/status.module#StatusModule'
+        loadChildren: './modules/status/status.module#StatusModule',
+        canActivate: [AuthGuard]
       },
       {
         path: 'jobs',
-        loadChildren: './modules/jobs/jobs.module#JobsModule'
+        loadChildren: './modules/jobs/jobs.module#JobsModule',
+        canActivate: [AuthGuard]
       },
       {
         path: 'base',

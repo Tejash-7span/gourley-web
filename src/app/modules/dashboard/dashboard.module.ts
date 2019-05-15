@@ -9,10 +9,13 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { CommonModule } from '@angular/common';
+import { DashboardService } from './services/dashboard.service';
 
 @NgModule({
   imports: [
     FormsModule,
+    CommonModule,
     DashboardRoutingModule,
     ChartsModule,
     BsDropdownModule,
@@ -22,6 +25,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
       useFactory: adapterFactory
     })
   ],
-  declarations: [DashboardComponent]
+  declarations: [DashboardComponent],
+  providers: [DashboardService]
 })
 export class DashboardModule { }

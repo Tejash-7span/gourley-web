@@ -137,6 +137,14 @@ input.form-control.is-invalid,textarea.form-control.is-invalid,select.form-contr
     background:none;
     padding-right:.75em;
 }
+my-date-picker.form-control.is-invalid{
+    background:none;
+    padding-right:0;
+
+    .mydp{
+        border-color:#f86c6b !important;
+    }
+}
 .form-control.is-invalid ~ .invalid-feedback{
     font-size:90%;
 }
@@ -390,4 +398,30 @@ div.profile-image{
 
 table tbody td img.img-avatar{
     margin:0;
+}
+
+// Datepicker
+my-date-picker.form-control{
+    padding:0;
+    border:none;
+}
+
+// Calendar
+.legend{
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 4px;
+}
+.legend-label{
+    margin-right:10px;
+}
+.cal-week-view .cal-event{
+    color:#23282c;
+}
+
+// Alignment
+.align-center{
+    text-align: center;
 }

@@ -13,8 +13,9 @@ import { WorkerModel } from '../../../general/models/workers/worker.model';
 import { StatusModel } from '../../../general/models/status/status.model';
 import { WorkerService } from '../../../general/services/worker.service';
 import { StatusService } from '../../../general/services/status.service';
-import { IMyDpOptions } from 'mydatepicker';
+import { IMyDpOptions, MyDatePicker } from 'mydatepicker';
 import { ToastService } from '../../../general/services/toast.service';
+import { conditionalRequried } from '../../../general/helpers/conditional-required.validator';
 
 @Component({
     selector: 'app-update-job',
@@ -26,6 +27,9 @@ export class UpdateJobComponent implements OnInit {
 
     @ViewChild('jobPartList')
     jobPartList: JobPartListComponent;
+
+    @ViewChild('bidAcceptedDateControl') bidAcceptedDateControl: MyDatePicker;
+    @ViewChild('jobActiveDateControl') jobActiveDateControl: MyDatePicker;
 
     job: JobModel;
     jobForm: FormGroup;
@@ -84,7 +88,9 @@ export class UpdateJobComponent implements OnInit {
             invoiced: [''],
             readyToBill: [''],
             notes: ['', [Validators.maxLength(1000)]],
-        });
+        }, {
+                validators: [conditionalRequried('bidAcceptedDate', 'active'), conditionalRequried('jobActiveDate', 'active')]
+            });
 
         this.route.queryParams.subscribe(params => {
             if (params['returnUrl']) {
@@ -200,7 +206,8 @@ export class UpdateJobComponent implements OnInit {
                     year: date.getFullYear(),
                     month: date.getMonth() + 1,
                     day: date.getDate()
-                }
+                },
+                jsdate: date
             };
         } else if (defaultToday) {
             return {
@@ -208,7 +215,8 @@ export class UpdateJobComponent implements OnInit {
                     year: newDate.getFullYear(),
                     month: newDate.getMonth() + 1,
                     day: newDate.getDate()
-                }
+                },
+                jsdate: newDate
             };
         } else {
             return '';
@@ -226,7 +234,17 @@ export class UpdateJobComponent implements OnInit {
 
     focusFirstError() {
         const invalidControls = this.element.nativeElement.querySelectorAll('.is-invalid');
-        (<HTMLInputElement>invalidControls[0]).focus();
+        if (invalidControls && invalidControls.length > 0) {
+            const invalidControl = invalidControls[0];
+            const nameAttr = invalidControl.getAttribute('name');
+            if (nameAttr && nameAttr === 'bidAcceptedDate') {
+                this.bidAcceptedDateControl.setFocusToInputBox();
+            } else if (nameAttr && nameAttr === 'jobActiveDate') {
+                this.jobActiveDateControl.setFocusToInputBox();
+            } else {
+                (<HTMLInputElement>invalidControl).focus();
+            }
+        }
     }
 }
 
