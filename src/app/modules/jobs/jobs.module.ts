@@ -19,6 +19,11 @@ import { MyDatePickerModule } from 'mydatepicker';
 import { AdvancedSearchComponent } from './components/advanced-search.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
+
+export const maskOptions: Partial<IConfig> | (() => Partial<IConfig>) = {
+
+};
 
 @NgModule({
   imports: [
@@ -34,6 +39,7 @@ import { TooltipModule } from 'ngx-bootstrap/tooltip';
     ButtonsModule.forRoot(),
     PaginationModule.forRoot(),
     TooltipModule.forRoot(),
+    NgxMaskModule.forRoot(maskOptions),
     MyDatePickerModule,
     SharedModule
   ],

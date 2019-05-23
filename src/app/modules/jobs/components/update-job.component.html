@@ -50,10 +50,10 @@
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
                                 <label class="form-col-form-label" for="customerPhone">Phone</label>
                                 <input class="form-control" id="customerPhone" type="text" name="customerPhone"
-                                    formControlName="customerPhone"
+                                    formControlName="customerPhone" mask="(000) 000-0000"
                                     [ngClass]="{'is-invalid': submitted && form.customerPhone.errors}">
                                 <div *ngIf="submitted && form.customerPhone.errors" class="invalid-feedback">
-                                    <div *ngIf="form.customerPhone.errors.maxlength">Maximum 100 characters are
+                                    <div *ngIf="form.customerPhone.errors.maxlength">Maximum 14 characters are
                                         allowed
                                     </div>
                                 </div>

@@ -20,6 +20,7 @@ import { DefaultLayoutComponent } from './containers';
 import { P404Component } from './views/error/404.component';
 import { P500Component } from './views/error/500.component';
 import { LoginComponent } from './general/components/login.component';
+import { NgxMaskModule, IConfig } from 'ngx-mask';
 
 const APP_CONTAINERS = [
   DefaultLayoutComponent
@@ -63,6 +64,10 @@ import { ToastService } from './general/services/toast.service';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
 
+export const maskOptions: Partial<IConfig> | (() => Partial<IConfig>) = {
+
+};
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -81,6 +86,7 @@ import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
     TabsModule.forRoot(),
     TooltipModule.forRoot(),
     ToastrModule.forRoot(),
+    NgxMaskModule.forRoot(maskOptions),
     CalendarModule.forRoot({
       provide: DateAdapter,
       useFactory: adapterFactory

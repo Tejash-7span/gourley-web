@@ -10,7 +10,32 @@
   <title>Gourely Plastering, Inc</title>
 </head>
 
-<body class="app">
+<body>
+  <style>
+    div.loader-wrapper {
+      text-align: center;
+      background: #ffffff;
+      margin: 0;
+      padding: 0;
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+
+    img.loader-img {
+      position: absolute !important;
+      top: 50% !important;
+      margin-top: -32px;
+      margin-left: -32px;
+      width: 64px;
+      height: 64px;
+    }
+  </style>
+  <div class="loader-wrapper">
+    <img src="assets/img/loader/app-loader.gif" class="loader-img">
+  </div>
 </body>
 
 </html>

@@ -72,7 +72,7 @@ export class UpdateJobComponent implements OnInit {
         this.jobForm = this.formBuilder.group({
             customerName: ['', [Validators.required, Validators.maxLength(100)]],
             customerAddress: ['', [Validators.maxLength(100)]],
-            customerPhone: ['', [Validators.maxLength(100)]],
+            customerPhone: ['', [Validators.maxLength(14)]],
             bidAcceptedDate: [''],
             jobActiveDate: [''],
             jobInvoiceDate: [''],

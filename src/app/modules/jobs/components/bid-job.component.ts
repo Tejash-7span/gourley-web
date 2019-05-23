@@ -43,7 +43,7 @@ export class BidJobComponent implements OnInit, AfterViewInit {
         this.jobForm = this.formBuilder.group({
             customerName: ['', [Validators.required, Validators.maxLength(100)]],
             customerAddress: ['', [Validators.maxLength(100)]],
-            customerPhone: ['', [Validators.maxLength(100)]],
+            customerPhone: ['', [Validators.maxLength(14)]],
             notes: ['', [Validators.maxLength(1000)]],
             jobTypeId: ['', [Validators.required]]
         });

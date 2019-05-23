@@ -65,7 +65,7 @@
                                 <td>{{data.id}}</td>
                                 <td>{{data.customerName}}</td>
                                 <td>{{data.customerAddress}}</td>
-                                <td>{{data.customerPhone}}</td>
+                                <td>{{data.customerPhone| mask: '(000) 000-0000'}}</td>
                                 <td>{{data.active == true ? 'Yes' : 'No'}}</td>
                                 <td>{{data.invoiced == true ? 'Yes' : 'No'}}</td>
                                 <td>{{data.readyToBill == true ? 'Yes' : 'No'}}</td>
