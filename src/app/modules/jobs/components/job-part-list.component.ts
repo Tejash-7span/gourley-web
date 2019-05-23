@@ -32,7 +32,7 @@ export class JobPartListComponent implements OnInit {
     private formBuilder: FormBuilder) {
 
   }
-  private get form() {
+  public get form() {
     return this.jobPartForm.controls;
   }
 
@@ -92,7 +92,7 @@ export class JobPartListComponent implements OnInit {
     this.resetForm();
   }
 
-  private saveJobPart() {
+  public saveJobPart() {
     this.submitted = true;
     if (this.jobPartForm.valid) {
       if (this.currentPartId === 0) {

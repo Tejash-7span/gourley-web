@@ -34,11 +34,20 @@ export const navItems: NavData[] = [
     name: 'Dashboard',
     url: '/dashboard',
     icon: 'fa fa-dashboard',
+  },{
+    name: 'Bid',
+    url: '/jobs/bid',
+    icon: 'fa fa-gavel',
   },
   {
-    name: 'Users',
-    url: '/users',
-    icon: 'fa fa-user-circle-o',
+    name: 'Edit Jobs',
+    url: '/jobs/editjob/1',
+    icon: 'fa fa-edit',
+  },
+  {
+    name: 'Search Jobs',
+    url: '/jobs/1',
+    icon: 'fa fa-tasks',
   },
   {
     name: 'Masters',
@@ -63,20 +72,11 @@ export const navItems: NavData[] = [
     ]
   },
   {
-    name: 'Bid',
-    url: '/jobs/bid',
-    icon: 'fa fa-gavel',
-  },
-  {
-    name: 'Jobs',
-    url: '/jobs/1',
-    icon: 'fa fa-tasks',
-  },
-  {
-    name: 'Edit Jobs',
-    url: '/jobs/editjob/1',
-    icon: 'fa fa-edit',
-  },
+    name: 'Users',
+    url: '/users',
+    icon: 'fa fa-user-circle-o',
+  }
+  
   // {
   //   title: true,
   //   name: 'Theme'
