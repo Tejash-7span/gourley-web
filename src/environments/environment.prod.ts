@@ -1,4 +1,5 @@
+let config = require('../assets/config.json');
 export const environment = {
   production: true,
-  apiUrl: 'http://71.2.57.13:5001'
+  apiUrl: config.apiUrl//'http://webapp.gourleyplastering.com:5001'
 };
