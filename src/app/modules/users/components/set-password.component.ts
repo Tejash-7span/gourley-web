@@ -25,6 +25,7 @@ export class SetPasswordComponent implements OnInit, AfterViewInit {
 
     constructor(private router: Router,
         private route: ActivatedRoute,
+        private element: ElementRef,
         private userService: UserService,
         private toastService: ToastService,
         private formBuilder: FormBuilder) {
@@ -69,6 +70,8 @@ export class SetPasswordComponent implements OnInit, AfterViewInit {
                 .catch((rejected: RejectedResponse) => {
                     this.toastService.error(rejected.error);
                 });
+        } else {
+            this.focusFirstError();
         }
     }
 
@@ -89,6 +92,10 @@ export class SetPasswordComponent implements OnInit, AfterViewInit {
             .catch((rejected: RejectedResponse) => {
                 this.toastService.error(rejected.error);
             });
+    }
+    focusFirstError() {
+        const invalidControls = this.element.nativeElement.querySelectorAll('.form-control.ng-invalid');
+        (<HTMLInputElement>invalidControls[0]).focus();
     }
 }
 

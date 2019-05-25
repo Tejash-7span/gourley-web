@@ -30,6 +30,7 @@ export class UpdateJobComponent implements OnInit {
 
     @ViewChild('bidAcceptedDateControl') bidAcceptedDateControl: MyDatePicker;
     @ViewChild('jobActiveDateControl') jobActiveDateControl: MyDatePicker;
+    @ViewChild('jobInvoiceDateControl') jobInvoiceDateControl: MyDatePicker;
 
     job: JobModel;
     jobForm: FormGroup;
@@ -89,7 +90,10 @@ export class UpdateJobComponent implements OnInit {
             readyToBill: [''],
             notes: ['', [Validators.maxLength(1000)]],
         }, {
-                validators: [conditionalRequried('bidAcceptedDate', 'active'), conditionalRequried('jobActiveDate', 'active')]
+                validators: [
+                    conditionalRequried('bidAcceptedDate', 'active'),
+                    conditionalRequried('jobActiveDate', 'active'),
+                    conditionalRequried('jobInvoiceDate', 'invoiced')]
             });
 
         this.route.queryParams.subscribe(params => {
@@ -233,16 +237,25 @@ export class UpdateJobComponent implements OnInit {
     }
 
     focusFirstError() {
-        const invalidControls = this.element.nativeElement.querySelectorAll('.is-invalid');
+        const invalidControls = this.element.nativeElement.querySelectorAll('#jobFormId .form-control.ng-invalid');
+        console.log(invalidControls);
         if (invalidControls && invalidControls.length > 0) {
             const invalidControl = invalidControls[0];
             const nameAttr = invalidControl.getAttribute('name');
+            console.log(nameAttr);
+            console.log(1);
             if (nameAttr && nameAttr === 'bidAcceptedDate') {
                 this.bidAcceptedDateControl.setFocusToInputBox();
+                console.log(2);
             } else if (nameAttr && nameAttr === 'jobActiveDate') {
                 this.jobActiveDateControl.setFocusToInputBox();
+                console.log(3);
+            } else if (nameAttr && nameAttr === 'jobInvoiceDate') {
+                this.jobInvoiceDateControl.setFocusToInputBox();
+                console.log(4);
             } else {
                 (<HTMLInputElement>invalidControl).focus();
+                console.log(5);
             }
         }
     }

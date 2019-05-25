@@ -27,6 +27,7 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
 
     constructor(private router: Router,
         private route: ActivatedRoute,
+        private element: ElementRef,
         private workerService: WorkerService,
         private toastService: ToastService,
         private localStorageService: LocalStorageService,
@@ -82,6 +83,8 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
                 .catch((rejected: RejectedResponse) => {
                     this.toastService.error(rejected.error);
                 });
+        } else {
+            this.focusFirstError();
         }
     }
 
@@ -108,6 +111,10 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
 
                 });
         }
+    }
+    focusFirstError() {
+        const invalidControls = this.element.nativeElement.querySelectorAll('.form-control.ng-invalid');
+        (<HTMLInputElement>invalidControls[0]).focus();
     }
 }
 

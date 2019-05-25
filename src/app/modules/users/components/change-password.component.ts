@@ -27,6 +27,7 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
 
     constructor(private router: Router,
         private route: ActivatedRoute,
+        private element: ElementRef,
         private authenticationService: AuthenticationService,
         private localStorageService: LocalStorageService,
         private toastService: ToastService,
@@ -64,12 +65,18 @@ export class ChangePasswordComponent implements OnInit, AfterViewInit {
                 .catch((rejected: RejectedResponse) => {
                     this.toastService.error(rejected.error);
                 });
+        } else {
+            this.focusFirstError();
         }
     }
 
     resetForm() {
         this.submitted = false;
         this.changePasswordForm.patchValue({ oldPassword: '', newPassword: '', confirmPassword: '' });
+    }
+    focusFirstError() {
+        const invalidControls = this.element.nativeElement.querySelectorAll('.form-control.ng-invalid');
+        (<HTMLInputElement>invalidControls[0]).focus();
     }
 }
 

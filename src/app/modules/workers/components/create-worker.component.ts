@@ -25,6 +25,7 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
+    private element: ElementRef,
     private workerService: WorkerService,
     private localStorageService: LocalStorageService,
     private toastService: ToastService,
@@ -68,6 +69,8 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
         .catch((rejected: RejectedResponse) => {
           this.toastService.error(rejected.error);
         });
+    } else {
+      this.focusFirstError();
     }
   }
 
@@ -78,6 +81,10 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
 
   backToList() {
     this.router.navigate([`${ROUTES.workers}/${this.jobType.id}`]);
+  }
+  focusFirstError() {
+    const invalidControls = this.element.nativeElement.querySelectorAll('.form-control.ng-invalid');
+    (<HTMLInputElement>invalidControls[0]).focus();
   }
 }
 

@@ -413,6 +413,19 @@ my-date-picker.form-control{
     border:none;
 }
 
+my-date-picker.form-control input:focus{
+    color: #5c6873;
+    background-color: #fff;
+    border-color: #8ad4ee;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(32, 168, 216, 0.25);
+}
+
+my-date-picker.form-control.ng-invalid input:focus{
+    border-color: #f86c6b;
+    box-shadow: 0 0 0 0.2rem rgba(248, 108, 107, 0.25);
+}
+
 // Calendar
 .legend{
     width: 10px;
@@ -424,8 +437,11 @@ my-date-picker.form-control{
 .legend-label{
     margin-right:10px;
 }
-.cal-week-view .cal-event{
+.cal-week-view .cal-event,.cal-day-view .cal-event{
     color:#23282c;
+}
+.cal-month-view .cal-day-badge{
+    background-color:#2f353a;
 }
 
 // Alignment

@@ -33,7 +33,7 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
     progress = 0;
 
     constructor(private router: Router,
-        private route: ActivatedRoute,
+        private element: ElementRef,
         private userService: UserService,
         private toastService: ToastService,
         private messageService: MessageService,
@@ -122,6 +122,8 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
                 .catch((rejected: RejectedResponse) => {
                     this.toastService.error(rejected.error);
                 });
+        } else {
+            this.focusFirstError();
         }
     }
 
@@ -145,6 +147,10 @@ export class UserProfileComponent implements OnInit, AfterViewInit {
                     this.toastService.error(rejected.error);
                 });
         }
+    }
+    focusFirstError() {
+        const invalidControls = this.element.nativeElement.querySelectorAll('.form-control.ng-invalid');
+        (<HTMLInputElement>invalidControls[0]).focus();
     }
 }
 

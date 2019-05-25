@@ -32,6 +32,12 @@ export class JobExtraColumnsModel {
                     new Column('Lathe', 'latheStatusId', 'latheWorkerId'),
                     new Column('Setup', 'setupStatusId', 'setupWorkerId'),
                     new Column('Crew', 'crewStatusId', 'crewWorkerId'));
+            case JobTypeEnum.MetalFraming:
+                return new JobExtraColumnsModel(
+                    new Column('Take Off', 'takeOffStatusId', 'takeOffWorkerId'),
+                    new Column('Stock', 'stockStatusId', 'stockWorkerId'),
+                    new Column('Order', 'orderStatusId', 'orderWorkerId'),
+                    new Column('Set', 'setStatusId', 'setWorkerId'));
         }
     }
 }

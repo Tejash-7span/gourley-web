@@ -11,6 +11,8 @@ export function conditionalRequried(controlName: string, conditionalControlName:
                 } else {
                     control.setErrors(null);
                 }
+            } else {
+                control.setErrors(null);
             }
         }
     };

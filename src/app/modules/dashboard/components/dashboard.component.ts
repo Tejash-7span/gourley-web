@@ -29,17 +29,22 @@ import { ROUTES } from '../../../general/models/constants';
 
 
 const colors: any = {
-  drywall: {
+  'drywall': {
     primary: '#ad2121',
     secondary: '#FAE3E3'
   },
-  stone: {
+  'stone': {
     primary: '#1e90ff',
     secondary: '#D1E8FF'
   },
-  stucco: {
+  'stucco': {
     primary: '#e3bc08',
     secondary: '#FDF1BA'
+  }
+  ,
+  'metal framing': {
+    primary: '#2C7A7E',
+    secondary: '#9ae0e2'
   }
 };
 
@@ -84,6 +89,7 @@ export class DashboardComponent implements OnInit {
         this.mapToEvents(response);
       })
       .catch((rejected: RejectedResponse) => {
+        console.log(rejected);
         this.toastService.error(rejected.error);
       });
   }
@@ -96,7 +102,7 @@ export class DashboardComponent implements OnInit {
         id: item.id,
         meta: item.jobTypeId,
         start: new Date(item.dateStarted),
-        title: `#${item.id} : ${item.customerName}`,
+        title: this.getTitle(item),
         color: colors[jobType.name.toLowerCase()]
       });
     }
@@ -128,5 +134,33 @@ export class DashboardComponent implements OnInit {
   onMonthChange() {
     this.activeDayIsOpen = false;
     this.loadMonth();
+  }
+
+  private getTitle(item: JobCalendar): string {
+    let title = `#${item.id} : ${item.customerName}`;
+    if (item.readyToBill) {
+      title = title + ` (Ready to Bill)`;
+    }
+    if (item.invoiced) {
+      title = title + ` (Invoiced : ${this.formatDate(item.jobInvoiceDate)})`;
+    }
+    console.log(title);
+    return title;
+  }
+
+  private formatDate(date: Date) {
+    if (date) {
+      date = new Date(date);
+      return this.getMonth(date) + '/' + this.getDate(date) + '/' + date.getFullYear();
+    }
+    return '';
+  }
+  private getDate(date: Date) {
+    const dateNumber = date.getDate();
+    return dateNumber < 10 ? `0${dateNumber}` : dateNumber;
+  }
+  private getMonth(date: Date) {
+    const month = date.getMonth() + 1;
+    return month < 10 ? `0${month}` : month;
   }
 }

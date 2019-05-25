@@ -22,6 +22,7 @@ export class CreatePartComponent implements OnInit, AfterViewInit {
   submitted = false;
 
   constructor(private router: Router,
+    private element: ElementRef,
     private partService: PartService,
     private toastService: ToastService,
     private formBuilder: FormBuilder) {
@@ -59,6 +60,8 @@ export class CreatePartComponent implements OnInit, AfterViewInit {
         .catch((rejected: RejectedResponse) => {
           this.toastService.error(rejected.error);
         });
+    } else {
+      this.focusFirstError();
     }
   }
 
@@ -69,6 +72,11 @@ export class CreatePartComponent implements OnInit, AfterViewInit {
 
   backToList() {
     this.router.navigate([ROUTES.parts]);
+  }
+
+  focusFirstError() {
+    const invalidControls = this.element.nativeElement.querySelectorAll('.form-control.ng-invalid');
+    (<HTMLInputElement>invalidControls[0]).focus();
   }
 }
 

@@ -23,6 +23,7 @@ export class UpdatePartComponent implements OnInit, AfterViewInit {
     existing: PartModel;
 
     constructor(private router: Router,
+        private element: ElementRef,
         private route: ActivatedRoute,
         private partService: PartService,
         private toastService: ToastService,
@@ -68,6 +69,8 @@ export class UpdatePartComponent implements OnInit, AfterViewInit {
                 .catch((rejected: RejectedResponse) => {
                     this.toastService.error(rejected.error);
                 });
+        } else {
+            this.focusFirstError();
         }
     }
 
@@ -93,6 +96,11 @@ export class UpdatePartComponent implements OnInit, AfterViewInit {
                     this.toastService.error(rejected.error);
                 });
         }
+    }
+
+    focusFirstError() {
+        const invalidControls = this.element.nativeElement.querySelectorAll('.form-control.ng-invalid');
+        (<HTMLInputElement>invalidControls[0]).focus();
     }
 }
 

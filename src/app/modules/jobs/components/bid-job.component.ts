@@ -89,7 +89,7 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     }
 
     focusFirstError() {
-        const invalidControls = this.element.nativeElement.querySelectorAll('.is-invalid');
+        const invalidControls = this.element.nativeElement.querySelectorAll('#jobFormId .form-control.ng-invalid');
         (<HTMLInputElement>invalidControls[0]).focus();
     }
 }

@@ -2,7 +2,7 @@
 </app-advanced-search>
 <div class="animated fadeIn">
     <div class="row">
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-5 col-md-5 col-sm-12">
             <h4 class="page-header float-left">Jobs</h4>
             <div class="btn-group float-left margin-bottom-10 full-width" dropdown>
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
@@ -15,14 +15,29 @@
                 </ul>
             </div>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-6 margin-bottom-10">
-            <label class="float-right ">Invoiced</label>
-            <label for="invoiced" class="float-right switch-twoway switch switch-pill switch-primary">
-                <input class="switch-input" id="invoiced" type="checkbox" name="invoiced" [(ngModel)]="invoiced"
-                    (change)="getList()">
-                <span class="switch-slider"></span>
-            </label>
-            <label class="float-right">Active</label>
+        <div class="col-lg-7 col-md-7 col-sm-12 margin-bottom-10">
+            <div class="col-form-label float-right">
+                <div class="form-check form-check-inline mr-2">
+                    <input class="form-check-input" id="openJobs" name="job-filter" [(ngModel)]="jobFilterOption"
+                        type="radio" value="1" (change)="getList()">
+                    <label class="form-check-label" for="openJobs">Open</label>
+                </div>
+                <div class="form-check form-check-inline mr-2">
+                    <input class="form-check-input" id="activeJobs" name="job-filter" [(ngModel)]="jobFilterOption"
+                        type="radio" value="2" (change)="getList()">
+                    <label class="form-check-label" for="activeJobs">Active</label>
+                </div>
+                <div class="form-check form-check-inline mr-2">
+                    <input class="form-check-input" id="readyToBillJobs" name="job-filter" [(ngModel)]="jobFilterOption"
+                        type="radio" value="3" (change)="getList()">
+                    <label class="form-check-label" for="readyToBillJobs">Ready to Bill</label>
+                </div>
+                <div class="form-check form-check-inline mr-2">
+                    <input class="form-check-input" id="invoicedJobs" name="job-filter" [(ngModel)]="jobFilterOption"
+                        type="radio" value="4" (change)="getList()">
+                    <label class="form-check-label" for="invoicedJobs">Invoiced</label>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row">

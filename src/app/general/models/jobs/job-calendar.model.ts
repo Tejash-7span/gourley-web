@@ -3,4 +3,9 @@ export class JobCalendar {
     jobTypeId = 0;
     customerName: string = null;
     dateStarted: Date;
+    readyToBill = false;
+    invoiced = false;
+    jobInvoiceDate: Date;
+
+    
 }

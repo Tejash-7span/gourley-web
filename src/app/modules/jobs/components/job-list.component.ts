@@ -25,7 +25,7 @@ export class JobListComponent implements OnInit {
   workTypeName: string;
   datasource: any[] = [];
   searchTerm = '';
-  invoiced = false;
+  jobFilterOption = '1';
   jobExtraColumns: JobExtraColumnsModel;
   jobFilter: JobFilterModel = new JobFilterModel();
   advancedSearchData: IAdvancedSearchParams;
@@ -33,6 +33,8 @@ export class JobListComponent implements OnInit {
 
   @ViewChild('advancedSearch')
   advancedSearch: AdvancedSearchComponent;
+
+  JobTypeEnum = JobTypeEnum;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -43,9 +45,10 @@ export class JobListComponent implements OnInit {
 
 
   resetjobFilter() {
-    this.jobFilter.active = this.invoiced === false;
-    this.jobFilter.invoiced = this.invoiced === true;
-    this.jobFilter.readyToBill = null;
+    this.jobFilter.active = +this.jobFilterOption === 2;
+    this.jobFilter.readyToBill = +this.jobFilterOption === 3;
+    this.jobFilter.invoiced = +this.jobFilterOption === 4;
+    console.log(this.jobFilter.active, this.jobFilter.readyToBill, this.jobFilter.invoiced);
     this.jobFilter.page = this.currentPage;
     this.jobFilter.searchTerm = this.searchTerm;
     this.jobFilter.customerName = this.advancedSearchData.customerName;

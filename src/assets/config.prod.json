@@ -1,0 +1,6 @@
+{
+    "apiUrl": "http://webapp.gourleyplastering.com:5001",
+    "apiUrl_dev": "http://webapp.gourleyplastering.com:5001",
+    "apiUrl_prod": "http://webapp.gourleyplastering.com:5001",
+    "apiUrl_server_local": "http://10.1.1.3:5001"
+}

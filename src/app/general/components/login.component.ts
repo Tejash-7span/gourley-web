@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef } from '@angular/core';
 import { AuthenticationService } from '../services/authentication.service';
 import { LoginRequest } from '../models/login.request';
 import { RejectedResponse } from '../services/rest.service';
@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
 
-  constructor(private auth: AuthenticationService,
+  constructor(private element: ElementRef,
+    private auth: AuthenticationService,
     private localStorageService: LocalStorageService,
     private jobTypeService: JobTypeService,
     private router: Router,
@@ -62,6 +63,8 @@ export class LoginComponent implements OnInit {
         .catch((reject: RejectedResponse) => {
           this.errorMessage = reject.error;
         });
+    } else {
+      this.focusFirstError();
     }
   }
 
@@ -77,6 +80,12 @@ export class LoginComponent implements OnInit {
 
   register() {
     this.router.navigate([ROUTES.register]);
+
+  }
+
+  focusFirstError() {
+    const invalidControls = this.element.nativeElement.querySelectorAll('.form-control.ng-invalid');
+    (<HTMLInputElement>invalidControls[0]).focus();
   }
 }
 

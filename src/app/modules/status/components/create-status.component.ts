@@ -24,6 +24,7 @@ export class CreateStatusComponent implements OnInit, AfterViewInit {
 
   constructor(private router: Router,
     private route: ActivatedRoute,
+    private element: ElementRef,
     private statusService: StatusService,
     private toastService: ToastService,
     private renderer: Renderer2,
@@ -57,6 +58,9 @@ export class CreateStatusComponent implements OnInit, AfterViewInit {
         .catch((rejected: RejectedResponse) => {
           this.toastService.error(rejected.error);
         });
+
+    } else {
+      this.focusFirstError();
     }
   }
 
@@ -67,6 +71,11 @@ export class CreateStatusComponent implements OnInit, AfterViewInit {
 
   backToList() {
     this.router.navigate([ROUTES.status]);
+  }
+
+  focusFirstError() {
+    const invalidControls = this.element.nativeElement.querySelectorAll('.form-control.ng-invalid');
+    (<HTMLInputElement>invalidControls[0]).focus();
   }
 }
 

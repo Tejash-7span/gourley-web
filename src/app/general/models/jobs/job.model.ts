@@ -101,6 +101,16 @@ export class JobModel {
                 job.crewStatusId = form.value['column4StatusId'];
                 job.crewWorkerId = form.value['column4WorkerId'];
                 break;
+            case JobTypeEnum.MetalFraming:
+                job.takeOffStatusId = form.value['column1StatusId'];
+                job.takeOffWorkerId = form.value['column1WorkerId'];
+                job.stockStatusId = form.value['column2StatusId'];
+                job.stockWorkerId = form.value['column2WorkerId'];
+                job.orderStatusId = form.value['column3StatusId'];
+                job.orderWorkerId = form.value['column3WorkerId'];
+                job.setStatusId = form.value['column4StatusId'];
+                job.setWorkerId = form.value['column4WorkerId'];
+                break;
         }
         return job;
     }

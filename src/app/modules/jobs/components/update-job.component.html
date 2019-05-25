@@ -16,7 +16,7 @@
                     <i class="fa fa-align-justify"></i> Update existing {{jobType.name | lowercase}} job
                 </div>
                 <div class="card-body">
-                    <form [formGroup]="jobForm">
+                    <form [formGroup]="jobForm" id="jobFormId">
                         <div class="row">
                             <div class="col-lg-12">
                                 <h6>Customer Information</h6>
@@ -217,6 +217,17 @@
                             </div>
                         </div>
                         <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" id="readyToBill" type="checkbox"
+                                        formControlName="readyToBill">
+                                    <label class="form-check-label" for="readyToBill">
+                                        Ready to Bill
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
                             <div class="col-lg-4 col-md-12 col-sm-12 form-group">
                                 <div class="form-check">
                                     <input class="form-check-input" id="invoiced" type="checkbox"
@@ -227,20 +238,17 @@
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group" *ngIf="isInvoiced">
-                                <label class="form-col-form-label" for="jobInvoiceDate">Job Invoiced Date</label>
-                                <my-date-picker id="jobInvoiceDate" class="my-datepicker" name="jobInvoiceDate"
-                                    [options]="myDatePickerOptions" formControlName="jobInvoiceDate">
+                                <label class="form-col-form-label" for="jobInvoiceDate">Job Invoice Date</label>
+                                <my-date-picker #jobInvoiceDateControl id="jobInvoiceDate"
+                                    class="form-control my-datepicker" name="jobInvoiceDate"
+                                    [options]="myDatePickerOptions" formControlName="jobInvoiceDate"
+                                    [ngClass]="{'is-invalid': submitted && form.jobInvoiceDate.errors}">
                                 </my-date-picker>
-                            </div>
-                        </div>
-                        <div class="row margin-bottom-30">
-                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <div class="form-check">
-                                    <input class="form-check-input" id="readyToBill" type="checkbox"
-                                        formControlName="readyToBill">
-                                    <label class="form-check-label" for="readyToBill">
-                                        Ready to bill
-                                    </label>
+                                <div class="clearfix"></div>
+                                <div *ngIf="submitted && form.jobInvoiceDate.errors" class="invalid-feedback">
+                                    <div *ngIf="form.jobInvoiceDate.errors.conditionalrequired">Job Invoice Date is
+                                        required.
+                                    </div>
                                 </div>
                             </div>
                         </div>
