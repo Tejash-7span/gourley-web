@@ -45,10 +45,9 @@ export class JobListComponent implements OnInit {
 
 
   resetjobFilter() {
-    this.jobFilter.active = +this.jobFilterOption === 2;
-    this.jobFilter.readyToBill = +this.jobFilterOption === 3;
-    this.jobFilter.invoiced = +this.jobFilterOption === 4;
-    console.log(this.jobFilter.active, this.jobFilter.readyToBill, this.jobFilter.invoiced);
+    this.jobFilter.active = +this.jobFilterOption === 1;
+    this.jobFilter.readyToBill = +this.jobFilterOption === 2;
+    this.jobFilter.invoiced = +this.jobFilterOption === 3;
     this.jobFilter.page = this.currentPage;
     this.jobFilter.searchTerm = this.searchTerm;
     this.jobFilter.customerName = this.advancedSearchData.customerName;

@@ -19,7 +19,6 @@ export class UserImageComponent implements OnChanges {
     constructor(private element: ElementRef, private renderer: Renderer2) { }
 
     ngOnChanges() {
-        console.log('changed');
         this.src = null;
         if (this.background) {
             if (this.imageUrl) {

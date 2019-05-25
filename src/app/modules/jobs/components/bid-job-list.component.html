@@ -55,8 +55,8 @@
                                 <th class="width-15">Customer Address</th>
                                 <th class="width-15">Customer Phone</th>
                                 <th class="width-10">Active</th>
+                                <th class="width-10">Ready to Bill</th>
                                 <th class="width-10">Invoiced</th>
-                                <th class="width-10">Bill</th>
                                 <th class="width-10 center">Options</th>
                             </tr>
                         </thead>
@@ -67,8 +67,8 @@
                                 <td>{{data.customerAddress}}</td>
                                 <td>{{data.customerPhone| mask: '(000) 000-0000'}}</td>
                                 <td>{{data.active == true ? 'Yes' : 'No'}}</td>
-                                <td>{{data.invoiced == true ? 'Yes' : 'No'}}</td>
                                 <td>{{data.readyToBill == true ? 'Yes' : 'No'}}</td>
+                                <td>{{data.invoiced == true ? 'Yes' : 'No'}}</td>
                                 <td class="center">
                                     <button class="btn btn-sm btn-success" type="button"
                                         (click)="redirectToUpdate(data.id)">Update</button>

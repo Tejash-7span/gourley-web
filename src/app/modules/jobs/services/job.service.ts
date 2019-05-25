@@ -46,7 +46,6 @@ export class JobService {
     }
 
     public updateJob(job: JobModel): Promise<void> {
-        console.log(job);
         return this.restService.put(`jobs/${job.id}`, job);
     }
 

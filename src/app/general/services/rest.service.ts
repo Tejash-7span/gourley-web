@@ -154,7 +154,6 @@ export class RejectedResponse {
     status = 0;
 
     constructor(rejected: any) {
-        console.log(rejected);
         this.rejected = rejected;
         if (this.rejected && this.rejected.error) {
             if (this.rejected.error.message) {

@@ -238,24 +238,17 @@ export class UpdateJobComponent implements OnInit {
 
     focusFirstError() {
         const invalidControls = this.element.nativeElement.querySelectorAll('#jobFormId .form-control.ng-invalid');
-        console.log(invalidControls);
         if (invalidControls && invalidControls.length > 0) {
             const invalidControl = invalidControls[0];
             const nameAttr = invalidControl.getAttribute('name');
-            console.log(nameAttr);
-            console.log(1);
             if (nameAttr && nameAttr === 'bidAcceptedDate') {
                 this.bidAcceptedDateControl.setFocusToInputBox();
-                console.log(2);
             } else if (nameAttr && nameAttr === 'jobActiveDate') {
                 this.jobActiveDateControl.setFocusToInputBox();
-                console.log(3);
             } else if (nameAttr && nameAttr === 'jobInvoiceDate') {
                 this.jobInvoiceDateControl.setFocusToInputBox();
-                console.log(4);
             } else {
                 (<HTMLInputElement>invalidControl).focus();
-                console.log(5);
             }
         }
     }

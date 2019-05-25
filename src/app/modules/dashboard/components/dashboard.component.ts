@@ -89,7 +89,6 @@ export class DashboardComponent implements OnInit {
         this.mapToEvents(response);
       })
       .catch((rejected: RejectedResponse) => {
-        console.log(rejected);
         this.toastService.error(rejected.error);
       });
   }
@@ -144,7 +143,6 @@ export class DashboardComponent implements OnInit {
     if (item.invoiced) {
       title = title + ` (Invoiced : ${this.formatDate(item.jobInvoiceDate)})`;
     }
-    console.log(title);
     return title;
   }
 

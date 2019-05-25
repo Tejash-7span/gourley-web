@@ -18,24 +18,24 @@
         <div class="col-lg-7 col-md-7 col-sm-12 margin-bottom-10">
             <div class="col-form-label float-right">
                 <div class="form-check form-check-inline mr-2">
-                    <input class="form-check-input" id="openJobs" name="job-filter" [(ngModel)]="jobFilterOption"
-                        type="radio" value="1" (change)="getList()">
-                    <label class="form-check-label" for="openJobs">Open</label>
-                </div>
-                <div class="form-check form-check-inline mr-2">
                     <input class="form-check-input" id="activeJobs" name="job-filter" [(ngModel)]="jobFilterOption"
-                        type="radio" value="2" (change)="getList()">
+                        type="radio" value="1" (change)="getList()">
                     <label class="form-check-label" for="activeJobs">Active</label>
                 </div>
                 <div class="form-check form-check-inline mr-2">
                     <input class="form-check-input" id="readyToBillJobs" name="job-filter" [(ngModel)]="jobFilterOption"
-                        type="radio" value="3" (change)="getList()">
+                        type="radio" value="2" (change)="getList()">
                     <label class="form-check-label" for="readyToBillJobs">Ready to Bill</label>
                 </div>
                 <div class="form-check form-check-inline mr-2">
                     <input class="form-check-input" id="invoicedJobs" name="job-filter" [(ngModel)]="jobFilterOption"
-                        type="radio" value="4" (change)="getList()">
+                        type="radio" value="3" (change)="getList()">
                     <label class="form-check-label" for="invoicedJobs">Invoiced</label>
+                </div>
+                <div class="form-check form-check-inline mr-2">
+                    <input class="form-check-input" id="openJobs" name="job-filter" [(ngModel)]="jobFilterOption"
+                        type="radio" value="4" (change)="getList()">
+                    <label class="form-check-label" for="openJobs">Open</label>
                 </div>
             </div>
         </div>
