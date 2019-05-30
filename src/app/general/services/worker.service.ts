@@ -16,7 +16,7 @@ export class WorkerService {
     }
 
     public getAll(jobTypeId: number): Promise<WorkerModel[]> {
-        const path = `workers?jobTypeId=${jobTypeId}`;
+        const path = `workers/all?jobTypeId=${jobTypeId}`;
         return this.restService.get(path);
     }
 

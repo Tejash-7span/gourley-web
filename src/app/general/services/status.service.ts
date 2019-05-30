@@ -15,7 +15,7 @@ export class StatusService {
     }
 
     public getAll(): Promise<StatusModel[]> {
-        const path = `status`;
+        const path = `status/all`;
         return this.restService.get(path);
     }
 
