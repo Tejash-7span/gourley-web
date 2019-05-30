@@ -20,6 +20,7 @@ import { AdvancedSearchComponent } from './components/advanced-search.component'
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { NgxMaskModule, IConfig } from 'ngx-mask';
+import { ViewJobComponent } from './components/view-job.component';
 
 export const maskOptions: Partial<IConfig> | (() => Partial<IConfig>) = {
 
@@ -49,6 +50,7 @@ export const maskOptions: Partial<IConfig> | (() => Partial<IConfig>) = {
     BidJobComponent,
     JobPartListComponent,
     BidJobListComponent,
+    ViewJobComponent,
     AdvancedSearchComponent
   ],
   providers: [JobService]

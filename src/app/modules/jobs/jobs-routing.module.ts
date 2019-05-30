@@ -5,6 +5,7 @@ import { JobListComponent } from './components/job-list.component';
 import { UpdateJobComponent } from './components/update-job.component';
 import { BidJobComponent } from './components/bid-job.component';
 import { BidJobListComponent } from './components/bid-job-list.component';
+import { ViewJobComponent } from './components/view-job.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,14 @@ const routes: Routes = [
   {
     path: 'editjob/:type',
     component: BidJobListComponent,
+    data: {
+      title: 'Jobs'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ':type/view/:id',
+    component: ViewJobComponent,
     data: {
       title: 'Jobs'
     },

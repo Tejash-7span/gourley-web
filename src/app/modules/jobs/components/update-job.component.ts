@@ -236,6 +236,10 @@ export class UpdateJobComponent implements OnInit {
 
     }
 
+    redirectToView() {
+        this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/view/${this.id}`]);
+    }
+
     focusFirstError() {
         const invalidControls = this.element.nativeElement.querySelectorAll('#jobFormId .form-control.ng-invalid');
         if (invalidControls && invalidControls.length > 0) {

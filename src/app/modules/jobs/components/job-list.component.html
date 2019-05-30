@@ -56,7 +56,8 @@
                                 <i class="fa fa-times"></i>
                                 Clear Search
                             </button>
-                            <button class="btn btn-success" type="button" onclick="window.print();">Print</button>
+                            <button class="btn btn-success" type="button" onclick="window.print();"><i
+                                    class="fa fa-print"></i>Print</button>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 margin-top-10">
                             <div class="input-group">
@@ -74,20 +75,20 @@
                 <div class="card-body">
                     <h3 class="d-none d-print-block">
                         <span *ngIf="jobFilterOption == '1'">
-                                Active
+                            Active
                         </span>
                         <span *ngIf="jobFilterOption == '2'">
-                                Ready to Bill
-                            </span>
-                            <span *ngIf="jobFilterOption == '3'">
-                                    Invoiced
-                                </span>
-                                <span *ngIf="jobFilterOption == '4'">
-                                        Open
-                                    </span>
-                         - {{jobType.name}} Jobs
+                            Ready to Bill
+                        </span>
+                        <span *ngIf="jobFilterOption == '3'">
+                            Invoiced
+                        </span>
+                        <span *ngIf="jobFilterOption == '4'">
+                            Open
+                        </span>
+                        - {{jobType.name}} Jobs
                     </h3>
-                    <table class="table table-responsive table-striped table-bordered">
+                    <table class="table table-responsive table-striped table-bordered table-hover">
                         <thead>
                             <tr>
                                 <th class="width-5">Job No.</th>
@@ -102,20 +103,23 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr *ngFor="let data of datasource">
-                                <td>{{data.id}}</td>
-                                <td>{{data.customerName}}</td>
-                                <td>{{data.customerAddress}}</td>
-                                <td>{{data.customerPhone| mask: '(000) 000-0000'}}</td>
-                                <td>{{data.column1}}</td>
-                                <td>{{data.column2}}</td>
-                                <td>{{data.column3}}</td>
-                                <td>{{data.column4}}</td>
-                                <td class="center d-print-none">
-                                    <button class="btn btn-sm btn-success" type="button"
-                                        (click)="redirectToUpdate(data.id)">Update</button>
-                                </td>
-                            </tr>
+                            <ng-container *ngFor="let data of datasource">
+                                <tr class="cursor-pointer" (click)="redirectToView(data.id)">
+                                    <td>{{data.id}}</td>
+                                    <td>{{data.customerName}}</td>
+                                    <td>{{data.customerAddress}}</td>
+                                    <td>{{data.customerPhone| mask: '(000) 000-0000'}}</td>
+                                    <td>{{data.column1}}</td>
+                                    <td>{{data.column2}}</td>
+                                    <td>{{data.column3}}</td>
+                                    <td>{{data.column4}}</td>
+
+                                    <td class="center d-print-none">
+                                        <button class="btn btn-sm btn-success" type="button"
+                                            (click)="redirectToUpdate($event, data.id)">Update</button>
+                                    </td>
+                                </tr>
+                            </ng-container>
                             <tr *ngIf="datasource.length==0">
                                 <td colspan="9">No records found.</td>
                             </tr>
@@ -125,7 +129,8 @@
                         [(ngModel)]="currentPage" [maxSize]="maxSize" previousText="&lsaquo;" nextText="&rsaquo;"
                         firstText="&laquo;" lastText="&raquo;" (pageChanged)="getList($event)" class="d-print-none">
                     </pagination>
-                    <app-pagination-details [currentPage]="currentPage" [perPage]="perPage" [totalItems]="totalItems" class="d-print-none">
+                    <app-pagination-details [currentPage]="currentPage" [perPage]="perPage" [totalItems]="totalItems"
+                        class="d-print-none">
                     </app-pagination-details>
                 </div>
             </div>

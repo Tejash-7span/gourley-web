@@ -102,9 +102,18 @@ export class JobListComponent implements OnInit {
     });
   }
 
-  redirectToUpdate(id: number) {
+  redirectToUpdate(event: Event, id: number) {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/update/${id}`]);
   }
+
+  redirectToView(id: number) {
+    this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/view/${id}`]);
+  }
+
 
   openAdvancedSearch() {
     this.advancedSearch.show(this.advancedSearchData);
