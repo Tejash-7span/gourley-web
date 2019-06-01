@@ -88,38 +88,48 @@
                         </span>
                         - {{jobType.name}} Jobs
                     </h3>
-                    <table class="table table-responsive table-striped table-bordered table-hover">
+                    <table class="table table-responsive custom-strips table-bordered">
                         <thead>
                             <tr>
                                 <th class="width-5">Job No.</th>
-                                <th class="width-15">Job Name</th>
-                                <th class="width-15">Customer Address</th>
-                                <th class="width-15">Customer Phone</th>
+                                <th class="width-10">Job Name</th>
+                                <th class="width-15">Address</th>
+                                <th class="width-15">Phone</th>
                                 <th class="width-10">{{jobExtraColumns.column1.name}}</th>
                                 <th class="width-10">{{jobExtraColumns.column2.name}}</th>
                                 <th class="width-10">{{jobExtraColumns.column3.name}}</th>
                                 <th class="width-10">{{jobExtraColumns.column4.name}}</th>
                                 <th class="width-10">{{jobExtraColumns.column5.name}}</th>
-                                <th class="width-10 center d-print-none">Options</th>
+                                <th class="width-5 center d-print-none">Options</th>
                             </tr>
                         </thead>
                         <tbody>
                             <ng-container *ngFor="let data of datasource">
-                                <tr class="cursor-pointer" (click)="redirectToView(data.id)">
-                                    <td>{{data.id}}</td>
-                                    <td>{{data.name}}</td>
-                                    <td>{{data.customerAddress}}</td>
-                                    <td>{{data.customerPhone| mask: '(000) 000-0000'}}</td>
-                                    <td>{{data.column1}}</td>
-                                    <td>{{data.column2}}</td>
-                                    <td>{{data.column3}}</td>
-                                    <td>{{data.column4}}</td>
-                                    <td>{{data.column5}}</td>
-
-                                    <td class="center d-print-none">
+                                <tr>
+                                    <td rowspan="2">{{data.id}}</td>
+                                    <td rowspan="2">
+                                        <a class="text-primary cursor-pointer d-print-none"
+                                            (click)="redirectToView(data.id)">{{data.name}}</a>
+                                        <span class="d-none d-print-block">{{data.name}}</span>
+                                    </td>
+                                    <td rowspan="2">{{data.customerAddress}}</td>
+                                    <td rowspan="2">{{data.customerPhone| mask: '(000) 000-0000'}}</td>
+                                    <td>{{data.column1Status}}</td>
+                                    <td>{{data.column2Status}}</td>
+                                    <td>{{data.column3Status}}</td>
+                                    <td>{{data.column4Status}}</td>
+                                    <td>{{data.column5Status}}</td>
+                                    <td rowspan="2" class="center d-print-none">
                                         <button class="btn btn-sm btn-success" type="button"
                                             (click)="redirectToUpdate($event, data.id)">Update</button>
                                     </td>
+                                </tr>
+                                <tr>
+                                    <td>{{data.column1Worker}}</td>
+                                    <td>{{data.column2Worker}}</td>
+                                    <td>{{data.column3Worker}}</td>
+                                    <td>{{data.column4Worker}}</td>
+                                    <td>{{data.column5Worker}}</td>
                                 </tr>
                             </ng-container>
                             <tr *ngIf="datasource.length==0">

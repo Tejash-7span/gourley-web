@@ -132,6 +132,9 @@ table tr td button{
 table.table-bordered{
     border:none;
 }
+table.custom-strips tr:nth-child(4n-1), table.custom-strips tr:nth-child(4n)  {
+    background-color: rgba(0, 0, 0, 0.05)
+}
 
 // forms
 .form-control{
