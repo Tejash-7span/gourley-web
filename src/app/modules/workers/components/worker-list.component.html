@@ -47,12 +47,14 @@
                         <thead>
                             <tr>
                                 <th class="width-85">Name</th>
+                                <th class="width-15">Is Active</th>
                                 <th class="width-15 center" colspan="2">Options</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let data of datasource">
                                 <td>{{data.name}}</td>
+                                <td>{{data.active === true ? 'Yes' : 'No'}}</td>
                                 <td class="center">
                                     <button class="btn btn-sm btn-success" type="button"
                                         (click)="redirectToUpdate(data.id)">Update</button>
@@ -63,7 +65,7 @@
                                 </td>
                             </tr>
                             <tr *ngIf="datasource.length==0">
-                                <td colspan="6">No records found.</td>
+                                <td colspan="3">No records found.</td>
                             </tr>
                         </tbody>
                     </table>

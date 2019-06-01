@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { PER_PAGE, PAGINATION_MAX_SIZE } from '../../../general/models/constants';
+import { PER_PAGE, PAGINATION_MAX_SIZE, PRICE_FORMAT } from '../../../general/models/constants';
 import { SelectedPage } from '../../../general/models/paged-data.model';
 import { Router } from '@angular/router';
 import { RejectedResponse } from '../../../general/services/rest.service';
@@ -18,6 +18,7 @@ export class PartListComponent implements OnInit {
   maxSize = PAGINATION_MAX_SIZE;
   datasource: PartModel[] = [];
   searchTerm = '';
+  priceFormat = PRICE_FORMAT;
 
   @ViewChild('deleteConfirmModal')
   deleteConfirmModal: ConfirmModalComponent;

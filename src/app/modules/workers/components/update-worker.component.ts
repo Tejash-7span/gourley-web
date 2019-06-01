@@ -41,6 +41,7 @@ export class UpdateWorkerComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.workerForm = this.formBuilder.group({
             name: ['', [Validators.required, Validators.maxLength(45)]],
+            active: ['']
         });
 
 

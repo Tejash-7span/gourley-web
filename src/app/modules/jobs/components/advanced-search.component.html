@@ -12,11 +12,10 @@
                 <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 margin-bottom-10 form-group">
                         <div class="form-radio">
-                            <input #firstControl class="form-radio-input" name="advanceSearchBy"
-                                id="searchByCustomerName" type="radio" value="1" (change)="searchByCustomerName()"
-                                checked>
-                            <label class="form-radio-label margin-right-10" for="searchByCustomerName">
-                                Customer Name
+                            <input #firstControl class="form-radio-input" name="advanceSearchBy" id="searchByName"
+                                type="radio" value="1" (change)="searchByName()" checked>
+                            <label class="form-radio-label margin-right-10" for="searchByName">
+                                Job Name
                             </label>
                             <input class="form-radio-input" name="advanceSearchBy" id="searchByDate" type="radio"
                                 value="2" (change)="searchByDate()">
@@ -26,11 +25,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="row" *ngIf="isCustomerName">
+                <div class="row" *ngIf="isName">
                     <div class="col-lg-12 col-md-12 col-sm-12 form-group">
-                        <label class="form-col-form-label" for="customerName">Name</label>
-                        <input class="form-control" id="customerName" type="text" name="customerName"
-                            [(ngModel)]="data.customerName">
+                        <label class="form-col-form-label" for="name">Name</label>
+                        <input class="form-control" id="name" type="text" name="name" [(ngModel)]="data.name">
                     </div>
                 </div>
                 <div class="row" *ngIf="isDate">

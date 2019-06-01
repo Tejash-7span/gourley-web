@@ -46,7 +46,7 @@ export class BidJobListComponent implements OnInit {
     this.jobFilter.readyToBill = null;
     this.jobFilter.page = this.currentPage;
     this.jobFilter.searchTerm = this.searchTerm;
-    this.jobFilter.customerName = this.advancedSearchData.customerName;
+    this.jobFilter.name = this.advancedSearchData.name;
     this.jobFilter.startDate = this.advancedSearchData.startDate ? new Date(this.advancedSearchData.startDate.jsdate) : null;
     this.jobFilter.endDate = this.advancedSearchData.endDate ? new Date(this.advancedSearchData.endDate.jsdate) : null;
   }
@@ -113,7 +113,7 @@ export class BidJobListComponent implements OnInit {
 
   resetAdvancedSearchData() {
     this.advancedSearchData = {
-      customerName: '',
+      name: '',
       startDate: null,
       endDate: null
     };

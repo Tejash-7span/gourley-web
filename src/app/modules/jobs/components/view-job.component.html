@@ -22,14 +22,18 @@
             <div class="card">
                 <div class="card-body">
                     <div class="form-group row">
-                        <h6 class="col-md-3 col-form-label">Customer Name :</h6>
-                        <label class="col-md-9 col-form-label">{{job.customerName}}</label>
+                        <h6 class="col-md-3 col-form-label">Job Name :</h6>
+                        <label class="col-md-9 col-form-label">{{job.name ? job.name : '-'}}</label>
                     </div>
                     <div class="form-group row">
                         <h6 class="col-md-3 col-form-label">Customer Address :</h6>
                         <label class="col-md-9 col-form-label">
                             {{job.customerAddress ? job.customerAddress : '-'}}
                         </label>
+                    </div>
+                    <div class="form-group row">
+                        <h6 class="col-md-3 col-form-label">Contact Name :</h6>
+                        <label class="col-md-9 col-form-label">{{job.contactName ? job.contactName : '-'}}</label>
                     </div>
                     <div class="form-group row">
                         <h6 class="col-md-3 col-form-label">Customer Phone :</h6>
@@ -75,6 +79,15 @@
                     </div>
                     <hr>
                     <div class="form-group row">
+                        <h6 class="col-md-3 col-form-label">{{jobExtraColumns.column5.name}} Status :</h6>
+                        <label class="col-md-9 col-form-label">{{getStatusName(jobExtraColumns.column5)}}</label>
+                    </div>
+                    <div class="form-group row">
+                        <h6 class="col-md-3 col-form-label">{{jobExtraColumns.column5.name}} Worker :</h6>
+                        <label class="col-md-9 col-form-label">{{getWorkerName(jobExtraColumns.column5)}}</label>
+                    </div>
+                    <hr>
+                    <div class="form-group row">
                         <h6 class="col-md-3 col-form-label">Active :</h6>
                         <label class="col-md-9 col-form-label">{{job.active === true ? 'Yes' : 'No'}}</label>
                     </div>
@@ -111,25 +124,29 @@
                     <table class="table table-responsive table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th class="width-30">Part</th>
+                                <th class="width-15">Part</th>
                                 <th class="width-10 right">Quantity</th>
                                 <th class="width-10 right">Price</th>
                                 <th class="width-10 right">Total Price</th>
                                 <th class="width-10 right">Crew Cost</th>
                                 <th class="width-15 right">Total Crew Cost</th>
+                                <th class="width-15 right">Total Cost</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr *ngFor="let data of job.jobParts">
                                 <td>{{data.part.description}}</td>
-                                <td class="right">{{data.quantity}}</td>
-                                <td class="right">{{data.part.averagePrice}}</td>
-                                <td class="right">{{data.quantity * data.part.averagePrice}}</td>
-                                <td class="right">{{data.part.crewCost}}</td>
-                                <td class="right">{{data.quantity * data.part.crewCost}}</td>
+                                <td class="right">{{data.quantity | number:quantityFormat}}</td>
+                                <td class="right">{{data.part.averagePrice | number:priceFormat}}</td>
+                                <td class="right">{{data.quantity * data.part.averagePrice | number:priceFormat}}</td>
+                                <td class="right">{{data.part.crewCost | number:priceFormat}}</td>
+                                <td class="right">{{data.quantity * data.part.crewCost | number:priceFormat}}</td>
+                                <td class="right">
+                                    {{(data.quantity * data.part.averagePrice) + (data.quantity * data.part.crewCost) | number:priceFormat}}
+                                </td>
                             </tr>
                             <tr *ngIf="job.jobParts && job.jobParts.length==0">
-                                <td colspan="7">No records added.</td>
+                                <td colspan="8">No records added.</td>
                             </tr>
                         </tbody>
                     </table>

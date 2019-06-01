@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { JobService } from '../services/job.service';
 import { RejectedResponse } from '../../../general/services/rest.service';
-import { ROUTES } from '../../../general/models/constants';
+import { ROUTES, QUANTITY_FORMAT, PRICE_FORMAT } from '../../../general/models/constants';
 import { JobModel } from '../../../general/models/jobs/job.model';
 import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
@@ -25,6 +25,9 @@ export class ViewJobComponent implements OnInit {
     workers: WorkerModel[] = [];
     statusList: StatusModel[] = [];
     jobExtraColumns: JobExtraColumnsModel;
+    jobFilterOption = null;
+    quantityFormat = QUANTITY_FORMAT;
+    priceFormat = PRICE_FORMAT;
 
     constructor(private router: Router,
         private route: ActivatedRoute,
@@ -36,6 +39,12 @@ export class ViewJobComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.route.queryParams.subscribe(data => {
+            if (data['status'] && !isNaN(data['status'])) {
+                const status = +data['status'];
+                this.jobFilterOption = status >= 1 && status <= 4 ? status.toString() : '1';
+            }
+        });
         this.route.params.subscribe(data => {
             if (data['type']) {
                 const jobTypeId = +data['type'];
@@ -80,7 +89,11 @@ export class ViewJobComponent implements OnInit {
     }
 
     backToList() {
-        this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}`]);
+        if (this.jobFilterOption) {
+            this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}`], { queryParams: { status: this.jobFilterOption } });
+        } else {
+            this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}`]);
+        }
     }
 
     getStatusName(column: Column) {
@@ -96,6 +109,10 @@ export class ViewJobComponent implements OnInit {
     }
 
     redirectToUpdate() {
-        this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/update/${this.id}`]);
+        if (this.jobFilterOption) {
+            this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/update/${this.id}`], { queryParams: { status: this.jobFilterOption } });
+        } else {
+            this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/update/${this.id}`]);
+        }
     }
 }

@@ -27,21 +27,20 @@
                                 <hr>
                             </div>
                         </div>
-                        <div class="row margin-bottom-30">
+                        <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="customerName">Name</label>
-                                <input #firstControl class="form-control" id="customerName" type="text"
-                                    name="customerName" formControlName="customerName"
-                                    [ngClass]="{'is-invalid': submitted && form.customerName.errors}">
-                                <div *ngIf="submitted && form.customerName.errors" class="invalid-feedback">
-                                    <div *ngIf="form.customerName.errors.required">Name is required</div>
-                                    <div *ngIf="form.customerName.errors.maxlength">Maximum 100 characters are
+                                <label class="form-col-form-label" for="name">Job Name</label>
+                                <input #firstControl class="form-control" id="name" type="text" name="name"
+                                    formControlName="name" [ngClass]="{'is-invalid': submitted && form.name.errors}">
+                                <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+                                    <div *ngIf="form.name.errors.required">Name is required</div>
+                                    <div *ngIf="form.name.errors.maxlength">Maximum 100 characters are
                                         allowed
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="customerAddress">Address</label>
+                                <label class="form-col-form-label" for="customerAddress">Customer Address</label>
                                 <input class="form-control" id="customerAddress" type="text" name="customerAddress"
                                     formControlName="customerAddress"
                                     [ngClass]="{'is-invalid': submitted && form.customerAddress.errors}" />
@@ -51,8 +50,22 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row margin-bottom-30">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="customerPhone">Phone</label>
+                                <label class="form-col-form-label" for="contactName">Contact Name</label>
+                                <input #firstControl class="form-control" id="contactName" type="text"
+                                    name="contactName" formControlName="contactName"
+                                    [ngClass]="{'is-invalid': submitted && form.contactName.errors}">
+                                <div *ngIf="submitted && form.contactName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.contactName.errors.required">Name is required</div>
+                                    <div *ngIf="form.contactName.errors.maxlength">Maximum 100 characters are
+                                        allowed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="customerPhone">Customer Phone</label>
                                 <input class="form-control" id="customerPhone" type="text" name="customerPhone"
                                     formControlName="customerPhone" mask="(000) 000-0000"
                                     [ngClass]="{'is-invalid': submitted && form.customerPhone.errors}">
@@ -168,6 +181,34 @@
                                 <label class="form-col-form-label" for="column4WorkerId">Worker</label>
                                 <select class="form-control" id="column4WorkerId" type="text" name="column4WorkerId"
                                     formControlName="column4WorkerId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of workers">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <h6>{{jobExtraColumns.column5.name}} Information</h6>
+                                <hr>
+                            </div>
+                        </div>
+                        <div class="row margin-bottom-30">
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column5StatusId">Status</label>
+                                <select class="form-control" id="column5StatusId" type="text" name="column5StatusId"
+                                    formControlName="column5StatusId">
+                                    <option value="">-- Select Type --</option>
+                                    <ng-container *ngFor="let item of statusList">
+                                        <option [value]="item.id">{{item.name}}</option>
+                                    </ng-container>
+                                </select>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="column5WorkerId">Worker</label>
+                                <select class="form-control" id="column5WorkerId" type="text" name="column5WorkerId"
+                                    formControlName="column5WorkerId">
                                     <option value="">-- Select Type --</option>
                                     <ng-container *ngFor="let item of workers">
                                         <option [value]="item.id">{{item.name}}</option>

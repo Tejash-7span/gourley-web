@@ -136,7 +136,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private getTitle(item: JobCalendar): string {
-    let title = `#${item.id} : ${item.customerName}`;
+    let title = `#${item.id} : ${item.name}`;
     if (item.readyToBill) {
       title = title + ` (Ready to Bill)`;
     }

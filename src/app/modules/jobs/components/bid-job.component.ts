@@ -41,7 +41,8 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         this.jobTypes = this.localStorageService.jobTypes.filter(type => type.jobEnabled);
         this.jobForm = this.formBuilder.group({
-            customerName: ['', [Validators.required, Validators.maxLength(100)]],
+            contactName: ['', [Validators.maxLength(100)]],
+            name: ['', [Validators.required, Validators.maxLength(100)]],
             customerAddress: ['', [Validators.maxLength(100)]],
             customerPhone: ['', [Validators.maxLength(14)]],
             notes: ['', [Validators.maxLength(1000)]],
@@ -76,7 +77,8 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     resetForm() {
         this.submitted = false;
         this.jobForm.patchValue({
-            customerName: '',
+            contactName: '',
+            name: '',
             customerAddress: '',
             customerPhone: '',
             notes: '',

@@ -20,7 +20,7 @@ export class AdvancedSearchComponent implements OnInit {
 
     data: IAdvancedSearchParams;
 
-    isCustomerName = true;
+    isName = true;
     isDate = false;
 
     public myDatePickerOptions: IMyDpOptions = {
@@ -36,23 +36,23 @@ export class AdvancedSearchComponent implements OnInit {
 
     ngOnInit(): void {
         this.data = {
-            customerName: '',
+            name: '',
             startDate: '',
             endDate: ''
         };
     }
 
-    searchByCustomerName() {
-        this.isCustomerName = true;
+    searchByName() {
+        this.isName = true;
         this.isDate = false;
         this.data.startDate = '';
         this.data.endDate = '';
     }
 
     searchByDate() {
-        this.isCustomerName = false;
+        this.isName = false;
         this.isDate = true;
-        this.data.customerName = '';
+        this.data.name = '';
     }
 
     show(data: IAdvancedSearchParams) {
@@ -70,7 +70,7 @@ export class AdvancedSearchComponent implements OnInit {
 }
 
 export interface IAdvancedSearchParams {
-    customerName: string;
+    name: string;
     startDate?: any;
     endDate?: any;
 }

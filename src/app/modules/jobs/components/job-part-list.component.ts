@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { quantityValidator } from '../../../general/helpers/number.validator';
 import { PartService } from '../../../general/services/part.service';
 import { ToastService } from '../../../general/services/toast.service';
+import { QUANTITY_FORMAT, PRICE_FORMAT } from '../../../general/models/constants';
 
 @Component({
   selector: 'app-job-part-list',
@@ -26,6 +27,8 @@ export class JobPartListComponent implements OnInit {
   submitted = false;
   currentPartId = 0;
   isUpdate = false;
+  quantityFormat = QUANTITY_FORMAT;
+  priceFormat = PRICE_FORMAT;
 
   constructor(private partService: PartService,
     private toastService: ToastService,

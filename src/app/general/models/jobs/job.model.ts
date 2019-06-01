@@ -6,7 +6,8 @@ import { JobTypeEnum } from '../../enums/worktype.enum';
 export class JobModel {
     id = 0;
     jobTypeId = 0;
-    customerName: string = null;
+    contactName: string = null;
+    name: string = null;
     customerAddress: string = null;
     customerPhone: string = null;
     dateStarted: Date = null;
@@ -40,12 +41,15 @@ export class JobModel {
     setupStatusId: number = null;
     crewWorkerId: number = null;
     crewStatusId: number = null;
+    inspectionWorkerId: number = null;
+    inspectionStatusId: number = null;
     jobType: JobType = null;
     jobParts: JobPartModel[] = null;
 
     public static createBidInstance(form: FormGroup, jobParts: JobPartModel[]) {
         const job = new JobModel();
-        job.customerName = form.value['customerName'];
+        job.contactName = form.value['contactName'];
+        job.name = form.value['name'];
         job.customerAddress = form.value['customerAddress'];
         job.customerPhone = form.value['customerPhone'];
         job.jobTypeId = form.value['jobTypeId'];
@@ -57,7 +61,8 @@ export class JobModel {
         const job = new JobModel();
         job.id = id;
         job.jobTypeId = jobTypeId;
-        job.customerName = form.value['customerName'];
+        job.contactName = form.value['contactName'];
+        job.name = form.value['name'];
         job.customerAddress = form.value['customerAddress'];
         job.customerPhone = form.value['customerPhone'];
         job.jobTypeId = form.value['jobTypeId'];
@@ -80,6 +85,8 @@ export class JobModel {
                 job.finishWorkerId = form.value['column3WorkerId'];
                 job.sprayStatusId = form.value['column4StatusId'];
                 job.sprayWorkerId = form.value['column4WorkerId'];
+                job.inspectionStatusId = form.value['column5StatusId'];
+                job.inspectionWorkerId = form.value['column5WorkerId'];
                 break;
             case JobTypeEnum.Stone:
                 job.stockStatusId = form.value['column1StatusId'];
@@ -90,6 +97,8 @@ export class JobModel {
                 job.orderWorkerId = form.value['column3WorkerId'];
                 job.setStatusId = form.value['column4StatusId'];
                 job.setWorkerId = form.value['column4WorkerId'];
+                job.inspectionStatusId = form.value['column5StatusId'];
+                job.inspectionWorkerId = form.value['column5WorkerId'];
                 break;
             case JobTypeEnum.Stucco:
                 job.takeOffStatusId = form.value['column1StatusId'];
@@ -100,6 +109,8 @@ export class JobModel {
                 job.setupWorkerId = form.value['column3WorkerId'];
                 job.crewStatusId = form.value['column4StatusId'];
                 job.crewWorkerId = form.value['column4WorkerId'];
+                job.inspectionStatusId = form.value['column5StatusId'];
+                job.inspectionWorkerId = form.value['column5WorkerId'];
                 break;
             case JobTypeEnum.MetalFraming:
                 job.takeOffStatusId = form.value['column1StatusId'];
@@ -110,6 +121,8 @@ export class JobModel {
                 job.orderWorkerId = form.value['column3WorkerId'];
                 job.setStatusId = form.value['column4StatusId'];
                 job.setWorkerId = form.value['column4WorkerId'];
+                job.inspectionStatusId = form.value['column5StatusId'];
+                job.inspectionWorkerId = form.value['column5WorkerId'];
                 break;
         }
         return job;

@@ -50,13 +50,20 @@ export class JobListComponent implements OnInit {
     this.jobFilter.invoiced = +this.jobFilterOption === 3;
     this.jobFilter.page = this.currentPage;
     this.jobFilter.searchTerm = this.searchTerm;
-    this.jobFilter.customerName = this.advancedSearchData.customerName;
+    this.jobFilter.name = this.advancedSearchData.name;
     this.jobFilter.startDate = this.advancedSearchData.startDate ? new Date(this.advancedSearchData.startDate.jsdate) : null;
     this.jobFilter.endDate = this.advancedSearchData.endDate ? new Date(this.advancedSearchData.endDate.jsdate) : null;
   }
 
   ngOnInit(): void {
     this.resetAdvancedSearchData();
+    this.route.queryParams.subscribe(data => {
+      if (data['status'] && !isNaN(data['status'])) {
+        const status = +data['status'];
+        this.jobFilterOption = status >= 1 && status <= 4 ? status.toString() : '1';
+      }
+    });
+
     this.route.params.subscribe(data => {
       this.jobTypes = this.localStorageService.jobTypes.filter(type => type.workerEnabled);
       const firstJobType = this.jobTypes.find(jobType => jobType.workerEnabled);
@@ -107,11 +114,11 @@ export class JobListComponent implements OnInit {
       event.preventDefault();
       event.stopPropagation();
     }
-    this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/update/${id}`]);
+    this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/update/${id}`], { queryParams: { status: this.jobFilterOption } });
   }
 
   redirectToView(id: number) {
-    this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/view/${id}`]);
+    this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/view/${id}`], { queryParams: { status: this.jobFilterOption } });
   }
 
 
@@ -127,7 +134,7 @@ export class JobListComponent implements OnInit {
 
   resetAdvancedSearchData() {
     this.advancedSearchData = {
-      customerName: '',
+      name: '',
       startDate: null,
       endDate: null
     };

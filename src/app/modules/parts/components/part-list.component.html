@@ -43,8 +43,8 @@
                         <tbody>
                             <tr *ngFor="let data of datasource">
                                 <td>{{data.description}}</td>
-                                <td class="right">{{data.averagePrice}}</td>
-                                <td class="right">{{data.crewCost}}</td>
+                                <td class="right">{{data.averagePrice | number:priceFormat}}</td>
+                                <td class="right">{{data.crewCost | number:priceFormat}}</td>
                                 <td class="center">
                                     <button class="btn btn-sm btn-success" type="button"
                                         (click)="redirectTo('/masters/parts/update/'+data.id)">Update</button>

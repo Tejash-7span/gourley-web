@@ -20,20 +20,19 @@
                                 <hr>
                             </div>
                         </div>
-                        <div class="row margin-bottom-30">
+                        <div class="row">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="customerName">Name</label>
-                                <input #firstControl class="form-control" id="customerName" type="text"
-                                    name="customerName" formControlName="customerName"
-                                    [ngClass]="{'is-invalid': submitted && form.customerName.errors}">
-                                <div *ngIf="submitted && form.customerName.errors" class="invalid-feedback">
-                                    <div *ngIf="form.customerName.errors.required">Name is required</div>
-                                    <div *ngIf="form.customerName.errors.maxlength">Maximum 100 characters are allowed
+                                <label class="form-col-form-label" for="name">Job Name</label>
+                                <input #firstControl class="form-control" id="name" type="text" name="name"
+                                    formControlName="name" [ngClass]="{'is-invalid': submitted && form.name.errors}">
+                                <div *ngIf="submitted && form.name.errors" class="invalid-feedback">
+                                    <div *ngIf="form.name.errors.required">Name is required</div>
+                                    <div *ngIf="form.name.errors.maxlength">Maximum 100 characters are allowed
                                     </div>
                                 </div>
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="customerAddress">Address</label>
+                                <label class="form-col-form-label" for="customerAddress">Customer Address</label>
                                 <input class="form-control" id="customerAddress" type="text" name="customerAddress"
                                     formControlName="customerAddress"
                                     [ngClass]="{'is-invalid': submitted && form.customerAddress.errors}" />
@@ -43,8 +42,20 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                        <div class="row margin-bottom-30">
                             <div class="col-lg-4 col-md-6 col-sm-12 form-group">
-                                <label class="form-col-form-label" for="customerPhone">Phone</label>
+                                <label class="form-col-form-label" for="contactName">Contact Name</label>
+                                <input #firstControl class="form-control" id="contactName" type="text"
+                                    name="contactName" formControlName="contactName"
+                                    [ngClass]="{'is-invalid': submitted && form.contactName.errors}">
+                                <div *ngIf="submitted && form.contactName.errors" class="invalid-feedback">
+                                    <div *ngIf="form.contactName.errors.maxlength">Maximum 100 characters are allowed
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 form-group">
+                                <label class="form-col-form-label" for="customerPhone">Customer Phone</label>
                                 <input class="form-control" id="customerPhone" type="text" name="customerPhone"
                                     formControlName="customerPhone" mask="(000) 000-0000"
                                     [ngClass]="{'is-invalid': submitted && form.customerPhone.errors}">

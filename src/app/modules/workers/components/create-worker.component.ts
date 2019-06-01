@@ -39,6 +39,7 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.workerForm = this.formBuilder.group({
       name: ['', [Validators.required, Validators.maxLength(45)]],
+      active: ['']
     });
 
     this.route.params.subscribe(data => {
@@ -47,6 +48,8 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
         this.jobType = this.localStorageService.jobTypes.find(jobType => jobType.id === jobTypeId);
         if (!this.jobType) {
           this.router.navigate([ROUTES.notfound]);
+        } else {
+          this.resetForm();
         }
       } else {
         this.router.navigate([ROUTES.notfound]);
@@ -76,6 +79,7 @@ export class CreateWorkerComponent implements OnInit, AfterViewInit {
 
   resetForm() {
     this.submitted = false;
+    console.log(new WorkerModel());
     this.workerForm.patchValue(new WorkerModel());
   }
 

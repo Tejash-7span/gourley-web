@@ -25,8 +25,8 @@ export class JobService {
         if (jobFilter.readyToBill) {
             options['readyToBill'] = `${jobFilter.readyToBill}`;
         }
-        if (jobFilter.customerName) {
-            options['customerName'] = `${jobFilter.customerName}`;
+        if (jobFilter.name) {
+            options['name'] = `${jobFilter.name}`;
         }
         if (jobFilter.startDate) {
             options['startDate'] = jobFilter.startDate.toISOString();

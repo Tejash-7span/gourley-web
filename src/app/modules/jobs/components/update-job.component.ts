@@ -42,6 +42,7 @@ export class UpdateJobComponent implements OnInit {
     statusList: StatusModel[] = [];
     jobExtraColumns: JobExtraColumnsModel;
     returnUrl: string;
+    jobFilterOption = null;
     public myDatePickerOptions: IMyDpOptions = {
         dateFormat: 'mm/dd/yyyy',
     };
@@ -71,7 +72,8 @@ export class UpdateJobComponent implements OnInit {
     ngOnInit(): void {
         this.jobTypes = this.localStorageService.jobTypes.filter(type => type.jobEnabled);
         this.jobForm = this.formBuilder.group({
-            customerName: ['', [Validators.required, Validators.maxLength(100)]],
+            contactName: ['', [Validators.maxLength(100)]],
+            name: ['', [Validators.required, Validators.maxLength(100)]],
             customerAddress: ['', [Validators.maxLength(100)]],
             customerPhone: ['', [Validators.maxLength(14)]],
             bidAcceptedDate: [''],
@@ -85,6 +87,8 @@ export class UpdateJobComponent implements OnInit {
             column3WorkerId: [''],
             column4StatusId: [''],
             column4WorkerId: [''],
+            column5StatusId: [''],
+            column5WorkerId: [''],
             active: [''],
             invoiced: [''],
             readyToBill: [''],
@@ -96,9 +100,13 @@ export class UpdateJobComponent implements OnInit {
                     conditionalRequried('jobInvoiceDate', 'invoiced')]
             });
 
-        this.route.queryParams.subscribe(params => {
-            if (params['returnUrl']) {
-                this.returnUrl = params['returnUrl'];
+        this.route.queryParams.subscribe(data => {
+            if (data['returnUrl']) {
+                this.returnUrl = data['returnUrl'];
+            }
+            if (data['status'] && !isNaN(data['status'])) {
+                const status = +data['status'];
+                this.jobFilterOption = status >= 1 && status <= 4 ? status.toString() : '1';
             }
         });
         this.route.params.subscribe(data => {
@@ -175,7 +183,8 @@ export class UpdateJobComponent implements OnInit {
 
     patchForm() {
         this.jobForm.patchValue({
-            customerName: this.job.customerName,
+            contactName: this.job.contactName,
+            name: this.job.name,
             customerAddress: this.job.customerAddress,
             customerPhone: this.job.customerPhone,
             active: this.job.active,
@@ -189,6 +198,8 @@ export class UpdateJobComponent implements OnInit {
             column3WorkerId: this.getPatchValue(this.jobExtraColumns.column3.workerId),
             column4StatusId: this.getPatchValue(this.jobExtraColumns.column4.statusId),
             column4WorkerId: this.getPatchValue(this.jobExtraColumns.column4.workerId),
+            column5StatusId: this.getPatchValue(this.jobExtraColumns.column5.statusId),
+            column5WorkerId: this.getPatchValue(this.jobExtraColumns.column5.workerId),
             bidAcceptedDate: this.getDatePatchValue(this.job.bidAcceptedDate, true),
             jobActiveDate: this.getDatePatchValue(this.job.jobActiveDate),
             jobInvoiceDate: this.getDatePatchValue(this.job.jobInvoiceDate),
@@ -228,16 +239,26 @@ export class UpdateJobComponent implements OnInit {
     }
 
     backToList() {
+        let url;
         if (this.returnUrl) {
-            this.router.navigate([`${this.returnUrl}/${this.jobType.id}`]);
+            url = `${this.returnUrl}/${this.jobType.id}`;
         } else {
-            this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}`]);
+            url = `${ROUTES.jobs}/${this.jobType.id}`;
         }
 
+        if (this.jobFilterOption) {
+            this.router.navigate([url], { queryParams: { status: this.jobFilterOption } });
+        } else {
+            this.router.navigate([url]);
+        }
     }
 
     redirectToView() {
-        this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/view/${this.id}`]);
+        if (this.jobFilterOption) {
+            this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/view/${this.id}`], { queryParams: { status: this.jobFilterOption } });
+        } else {
+            this.router.navigate([`${ROUTES.jobs}/${this.jobType.id}/view/${this.id}`]);
+        }
     }
 
     focusFirstError() {
