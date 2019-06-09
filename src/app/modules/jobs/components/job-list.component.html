@@ -46,20 +46,21 @@
                 <div class="card-header d-print-none">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-12 margin-top-10 margin-bottom-10">
-                            <button class="btn btn-primary margin-bottom-10 full-width" type="button"
-                                (click)="openAdvancedSearch()">
+                            <button *ngIf="!isFullList" class="btn btn-primary margin-bottom-10 full-width"
+                                type="button" (click)="openAdvancedSearch()">
                                 <i class="fa fa-search"></i>
                                 Advanced Search
                             </button>
-                            <button *ngIf="isAdvancedSearch" class="btn btn-danger margin-bottom-10 full-width"
-                                type="button" (click)="clearAdvancedSearch()">
+                            <button *ngIf="isAdvancedSearch && !isFullList"
+                                class="btn btn-danger margin-bottom-10 full-width" type="button"
+                                (click)="clearAdvancedSearch()">
                                 <i class="fa fa-times"></i>
                                 Clear Search
                             </button>
                             <button class="btn btn-success" type="button" onclick="window.print();"><i
                                     class="fa fa-print"></i>Print</button>
                         </div>
-                        <div class="col-lg-6 col-md-6 col-sm-12 margin-top-10">
+                        <div *ngIf="!isFullList" class="col-lg-6 col-md-6 col-sm-12 margin-top-10">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search Job No."
                                     [(ngModel)]="searchTerm" (keydown.enter)="getList()" />
@@ -114,22 +115,22 @@
                                     </td>
                                     <td rowspan="2">{{data.customerAddress}}</td>
                                     <td rowspan="2">{{data.customerPhone| mask: '(000) 000-0000'}}</td>
-                                    <td>{{data.column1Status}}</td>
-                                    <td>{{data.column2Status}}</td>
-                                    <td>{{data.column3Status}}</td>
-                                    <td>{{data.column4Status}}</td>
-                                    <td>{{data.column5Status}}</td>
+                                    <td>{{data.column1Status ? data.column1Status : '-'}}</td>
+                                    <td>{{data.column2Status ? data.column2Status : '-'}}</td>
+                                    <td>{{data.column3Status ? data.column3Status : '-'}}</td>
+                                    <td>{{data.column4Status ? data.column4Status : '-'}}</td>
+                                    <td>{{data.column5Status ? data.column5Status : '-'}}</td>
                                     <td rowspan="2" class="center d-print-none">
                                         <button class="btn btn-sm btn-success" type="button"
                                             (click)="redirectToUpdate($event, data.id)">Update</button>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>{{data.column1Worker}}</td>
-                                    <td>{{data.column2Worker}}</td>
-                                    <td>{{data.column3Worker}}</td>
-                                    <td>{{data.column4Worker}}</td>
-                                    <td>{{data.column5Worker}}</td>
+                                    <td>{{data.column1Worker ? data.column1Worker : '-'}}</td>
+                                    <td>{{data.column2Worker ? data.column2Worker : '-'}}</td>
+                                    <td>{{data.column3Worker ? data.column3Worker : '-'}}</td>
+                                    <td>{{data.column4Worker ? data.column4Worker : '-'}}</td>
+                                    <td>{{data.column5Worker ? data.column5Worker : '-'}}</td>
                                 </tr>
                             </ng-container>
                             <tr *ngIf="datasource.length==0">
@@ -137,12 +138,13 @@
                             </tr>
                         </tbody>
                     </table>
-                    <pagination [boundaryLinks]="true" [totalItems]="totalItems" [itemsPerPage]="perPage"
-                        [(ngModel)]="currentPage" [maxSize]="maxSize" previousText="&lsaquo;" nextText="&rsaquo;"
-                        firstText="&laquo;" lastText="&raquo;" (pageChanged)="getList($event)" class="d-print-none">
-                    </pagination>
-                    <app-pagination-details [currentPage]="currentPage" [perPage]="perPage" [totalItems]="totalItems"
+                    <pagination *ngIf="!isFullList" [boundaryLinks]="true" [totalItems]="totalItems"
+                        [itemsPerPage]="perPage" [(ngModel)]="currentPage" [maxSize]="maxSize" previousText="&lsaquo;"
+                        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" (pageChanged)="getList($event)"
                         class="d-print-none">
+                    </pagination>
+                    <app-pagination-details *ngIf="!isFullList" [currentPage]="currentPage" [perPage]="perPage"
+                        [totalItems]="totalItems" class="d-print-none">
                     </app-pagination-details>
                 </div>
             </div>

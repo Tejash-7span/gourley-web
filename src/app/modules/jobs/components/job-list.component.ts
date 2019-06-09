@@ -10,6 +10,7 @@ import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
 import { IAdvancedSearchParams, AdvancedSearchComponent } from './advanced-search.component';
 import { ToastService } from '../../../general/services/toast.service';
+import { JobListModel } from '../../../general/models/jobs/job-list-model';
 
 @Component({
   selector: 'app-job-list',
@@ -23,7 +24,8 @@ export class JobListComponent implements OnInit {
   jobType: JobType;
   jobTypes: JobType[] = [];
   workTypeName: string;
-  datasource: any[] = [];
+  datasource: JobListModel[] = [];
+  tempDatasource: JobListModel[] = [];
   searchTerm = '';
   jobFilterOption = '1';
   jobExtraColumns: JobExtraColumnsModel;
@@ -53,6 +55,10 @@ export class JobListComponent implements OnInit {
     this.jobFilter.name = this.advancedSearchData.name;
     this.jobFilter.startDate = this.advancedSearchData.startDate ? new Date(this.advancedSearchData.startDate.jsdate) : null;
     this.jobFilter.endDate = this.advancedSearchData.endDate ? new Date(this.advancedSearchData.endDate.jsdate) : null;
+  }
+
+  get isFullList(): boolean {
+    return this.jobFilter.active === true || this.jobFilter.readyToBill === true;
   }
 
   ngOnInit(): void {
@@ -103,9 +109,30 @@ export class JobListComponent implements OnInit {
   getList(event?: SelectedPage) {
     this.currentPage = event ? event.page : 1;
     this.resetjobFilter();
-    this.jobService.getList(this.jobType.id, this.jobFilter).then(response => {
-      this.datasource = response.data;
-      this.totalItems = response.totalRecords;
+    if (this.isFullList) {
+      const filter: JobFilterModel = new JobFilterModel();
+      filter.active = this.jobFilter.active;
+      filter.readyToBill = this.jobFilter.readyToBill;
+      filter.page = 1;
+      this.getFullList(filter);
+    } else {
+      this.jobService.getList(this.jobType.id, this.jobFilter).then(response => {
+        this.datasource = response.data;
+        this.totalItems = response.totalRecords;
+      });
+    }
+  }
+
+  getFullList(filter: JobFilterModel) {
+    this.jobService.getList(this.jobType.id, filter).then(response => {
+      this.tempDatasource = [...this.tempDatasource, ...response.data];
+      if (this.tempDatasource.length === response.totalRecords) {
+        this.datasource = this.tempDatasource;
+        this.tempDatasource = [];
+      } else {
+        filter.page = filter.page + 1;
+        this.getFullList(filter);
+      }
     });
   }
 
