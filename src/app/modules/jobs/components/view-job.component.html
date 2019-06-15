@@ -24,117 +24,109 @@
                     <table class="no-border">
                         <tr>
                             <td class="label">Job Name</td>
-                            <td class="colon">:</td>
-                            <td>{{job.name ? job.name : '-'}}</td>
+                            <td class="value">{{job.name ? job.name : '-'}}</td>
                             <td class="label">Customer Address</td>
-                            <td class="colon">:</td>
-                            <td>{{job.customerAddress ? job.customerAddress : '-'}}</td>
+                            <td class="value">{{job.customerAddress ? job.customerAddress : '-'}}</td>
                         </tr>
                         <tr>
                             <td class="label">Contact Name</td>
-                            <td class="colon">:</td>
-                            <td>{{job.contactName ? job.contactName : '-'}}</td>
+                            <td class="value">{{job.contactName ? job.contactName : '-'}}</td>
                             <td class="label">Customer Phone</td>
-                            <td class="colon">:</td>
-                            <td>
+                            <td class="value">
                                 <span *ngIf="job.customerPhone">{{job.customerPhone | mask: '(000) 000-0000'}}</span>
                                 <span *ngIf="!job.customerPhone">-</span>
                             </td>
                         </tr>
                         <tr>
-                            <td class="separator" colspan="6">
+                            <td class="separator" colspan="4">
                                 <div></div>
                             </td>
                         </tr>
                         <tr>
                             <td class="label">{{jobExtraColumns.column1.name}} Status</td>
-                            <td class="colon">:</td>
-                            <td>{{getStatusName(jobExtraColumns.column1)}}</td>
+                            <td class="value">{{getStatusName(jobExtraColumns.column1)}}</td>
                             <td class="label">{{jobExtraColumns.column1.name}} Worker</td>
-                            <td class="colon">:</td>
-                            <td>{{getWorkerName(jobExtraColumns.column1)}}</td>
+                            <td class="value">{{getWorkerName(jobExtraColumns.column1)}}</td>
                         </tr>
                         <tr>
                             <td class="label">{{jobExtraColumns.column2.name}} Status</td>
-                            <td class="colon">:</td>
-                            <td>{{getStatusName(jobExtraColumns.column2)}}</td>
+                            <td class="value">{{getStatusName(jobExtraColumns.column2)}}</td>
                             <td class="label">{{jobExtraColumns.column2.name}} Worker</td>
-                            <td class="colon">:</td>
-                            <td>{{getWorkerName(jobExtraColumns.column2)}}</td>
+                            <td class="value">{{getWorkerName(jobExtraColumns.column2)}}</td>
                         </tr>
                         <tr>
                             <td class="label">{{jobExtraColumns.column3.name}} Status</td>
-                            <td class="colon">:</td>
-                            <td>{{getStatusName(jobExtraColumns.column3)}}</td>
+                            <td class="value">{{getStatusName(jobExtraColumns.column3)}}</td>
                             <td class="label">{{jobExtraColumns.column3.name}} Worker</td>
-                            <td class="colon">:</td>
-                            <td>{{getWorkerName(jobExtraColumns.column3)}}</td>
+                            <td class="value">{{getWorkerName(jobExtraColumns.column3)}}</td>
                         </tr>
                         <tr>
                             <td class="label">{{jobExtraColumns.column4.name}} Status</td>
-                            <td class="colon">:</td>
-                            <td>{{getStatusName(jobExtraColumns.column4)}}</td>
+                            <td class="value">{{getStatusName(jobExtraColumns.column4)}}</td>
                             <td class="label">{{jobExtraColumns.column4.name}} Worker</td>
-                            <td class="colon">:</td>
-                            <td>{{getWorkerName(jobExtraColumns.column4)}}</td>
+                            <td class="value">{{getWorkerName(jobExtraColumns.column4)}}</td>
                         </tr>
                         <tr>
                             <td class="label">{{jobExtraColumns.column5.name}} Status</td>
-                            <td class="colon">:</td>
-                            <td>{{getStatusName(jobExtraColumns.column5)}}</td>
+                            <td class="value">{{getStatusName(jobExtraColumns.column5)}}</td>
                             <td class="label">{{jobExtraColumns.column5.name}} Worker</td>
-                            <td class="colon">:</td>
-                            <td>{{getWorkerName(jobExtraColumns.column5)}}</td>
+                            <td class="value">{{getWorkerName(jobExtraColumns.column5)}}</td>
                         </tr>
                         <tr>
-                            <td class="separator" colspan="6">
+                            <td class="separator" colspan="4">
                                 <div></div>
                             </td>
                         </tr>
                         <tr>
-                            <td class="label" rowspan="2">Active</td>
-                            <td class="colon" rowspan="2">:</td>
-                            <td rowspan="2">{{job.active === true ? 'Yes' : 'No'}}</td>
-                            <td class="label">Bid Accepted Date</td>
-                            <td class="colon">:</td>
-                            <td>
-                                <span *ngIf="job.active">{{job.bidAcceptedDate | date: 'MM/dd/yyyy'}}</span>
-                                <span *ngIf="!job.active">-</span>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="label">Job Active Date</td>
-                            <td class="colon">:</td>
-                            <td>
-                                <span *ngIf="job.active">{{job.jobActiveDate | date: 'MM/dd/yyyy'}}</span>
-                                <span *ngIf="!job.active">-</span>
+                            <td class="label">Active</td>
+                            <td colspan="3" style="width: 85% !important;">
+                                <table>
+                                    <tr>
+                                        <td class="value">{{job.active === true ? 'Yes' : 'No'}}</td>
+                                        <td class="label">Bid Accepted Date</td>
+                                        <td class="value" *ngIf="job.active">
+                                            {{job.bidAcceptedDate | date: 'MM/dd/yyyy'}}
+                                        </td>
+                                        <td class="value" *ngIf="!job.active">-</td>
+                                        <td class="label">Job Active Date</td>
+                                        <td class="value" *ngIf="job.active">
+                                            {{job.jobActiveDate | date: 'MM/dd/yyyy'}}
+                                        </td>
+                                        <td class="value" *ngIf="!job.active">-</td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                         <tr>
                             <td class="label">Ready to Bill</td>
-                            <td class="colon">:</td>
-                            <td>{{job.readyToBill === true ? 'Yes' : 'No'}}</td>
+                            <td class="value">{{job.readyToBill === true ? 'Yes' : 'No'}}</td>
                         </tr>
                         <tr>
                             <td class="label">Invoiced</td>
-                            <td class="colon">:</td>
-                            <td>{{job.invoiced === true ? 'Yes' : 'No'}}</td>
-                            <td class="label">Job Invoice Date</td>
-                            <td class="colon">:</td>
-                            <td>
-                                <span *ngIf="job.invoiced">{{job.jobInvoiceDate | date: 'MM/dd/yyyy'}}</span>
-                                <span *ngIf="!job.invoiced">-</span>
+                            <td colspan="3" style="width: 85% !important;">
+                                <table>
+                                    <tr>
+                                        <td class="value">{{job.invoiced === true ? 'Yes' : 'No'}}</td>
+                                        <td class="label" style="position: relative; left:2px;">Job Invoice Date</td>
+                                        <td class="value" *ngIf="job.invoiced" style="position: relative; left:2px;">
+                                            {{job.jobInvoiceDate | date: 'MM/dd/yyyy'}}
+                                        </td>
+                                        <td class="value" *ngIf="!job.invoiced" style="position: relative; left:2px;">-
+                                        </td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                         <tr>
-                            <td class="separator" colspan="6">
+                            <td class="separator" colspan="4">
                                 <div></div>
                             </td>
                         </tr>
                         <tr>
                             <td class="label">Notes</td>
-                            <td class="colon">:</td>
-                            <td colspan="4">
+                            <td class="value" colspan="3">
                                 {{job.notes ? job.notes : '-'}}
                             </td>
                         </tr>

@@ -488,10 +488,27 @@ my-date-picker.form-control.ng-invalid input:focus{
         }
         .label{
             font-weight: 500 !important;
-            min-width:150px !important;
+            width:15% !important;
         }
-        .colon{
-            font-weight: 500 !important;
+        .value{
+            width:35% !important;
+            position: relative;
+        }
+        .value::before{
+            content: ':';
+            position: absolute;
+            left: -10px;
+            font-weight: 500;
+        }
+
+        table{
+            width:100% !important;
+            td{
+                padding: 0 !important;
+            }
+            .label, .value{
+                width:20% !important;
+            }
         }
     }
 }
