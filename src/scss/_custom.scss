@@ -459,3 +459,60 @@ my-date-picker.form-control.ng-invalid input:focus{
 .cursor-pointer{
     cursor: pointer;
 }
+
+
+
+// Print Layout
+
+.print-layout{ 
+    table.no-border{
+        width:100%;
+        border:none !important;
+        margin-bottom:20px;
+
+        td{
+            padding:5px 5px 5px 0 !important;
+            vertical-align: top;
+        }
+        td.separator{
+            padding: 10px 5px 5px 0 !important;
+
+            div {
+                border-bottom: 1px solid #c8ced3;
+            }
+        }
+        .label{
+            font-weight: 500 !important;
+            min-width:150px !important;
+        }
+        .colon{
+            font-weight: 500 !important;
+        }
+    }
+}
+
+@media print{
+    .print-layout{ 
+        * {
+            color:#23282c !important;
+            border-color: #23282c !important;
+            font-size: 12px !important;
+        }
+        table th, table td{
+            color:#23282c !important;
+            border-color: #23282c !important;
+            font-size: 12px !important;
+        }
+        .card{
+            border: none;
+        
+            .card-body{
+                padding: 0 !important;
+                
+            }
+        }
+        table{
+            display: table;
+        }
+    }
+}
