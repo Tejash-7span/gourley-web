@@ -163,10 +163,21 @@
                                     {{(data.quantity * data.part.averagePrice) + (data.quantity * data.part.crewCost) | number:priceFormat}}
                                 </td>
                             </tr>
-                            <tr *ngIf="job.jobParts && job.jobParts.length==0">
+                            <tr *ngIf="!job.jobParts || job.jobParts.length === 0">
                                 <td colspan="8">No records added.</td>
                             </tr>
                         </tbody>
+                        <tfoot *ngIf="job.jobParts && job.jobParts.length !== 0">
+                            <tr>
+                                <td>Total</td>
+                                <td class="right">{{grandQuantity}}</td>
+                                <td class="right"></td>
+                                <td class="right">{{grandTotalPrice | number:priceFormat}}</td>
+                                <td class="right"></td>
+                                <td class="right">{{grandTotalCrewCost | number:priceFormat}}</td>
+                                <td class="right">{{grandTotalCost | number:priceFormat}}</td>
+                            </tr>
+                        </tfoot>
                     </table>
                 </div>
             </div>

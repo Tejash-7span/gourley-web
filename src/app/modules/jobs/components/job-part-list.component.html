@@ -78,8 +78,20 @@
                 <button class="btn btn-sm btn-danger" type="button" (click)="deleteItem(data)">Delete</button>
             </td>
         </tr>
-        <tr *ngIf="datasource.length==0">
+        <tr *ngIf="datasource.length === 0">
             <td colspan="8">No records added.</td>
         </tr>
     </tbody>
+    <tfoot *ngIf="datasource.length !== 0">
+        <tr>
+            <td>Total</td>
+            <td class="right">{{grandQuantity}}</td>
+            <td class="right"></td>
+            <td class="right">{{grandTotalPrice | number:priceFormat}}</td>
+            <td class="right"></td>
+            <td class="right">{{grandTotalCrewCost | number:priceFormat}}</td>
+            <td class="right">{{grandTotalCost | number:priceFormat}}</td>
+            <td colspan="2"></td>
+        </tr>
+    </tfoot>
 </table>

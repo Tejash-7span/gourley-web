@@ -47,6 +47,27 @@ export class JobPartListComponent implements OnInit {
     return +this.jobPartForm.value['quantity'];
   }
 
+  get grandQuantity(): number {
+    let value = 0;
+    this.datasource.forEach(item => value = value + item.quantity);
+    return value;
+  }
+  get grandTotalPrice(): number {
+    let value = 0;
+    this.datasource.forEach(item => value = value + (item.quantity * item.part.averagePrice));
+    return value;
+  }
+  get grandTotalCrewCost(): number {
+    let value = 0;
+    this.datasource.forEach(item => value = value + (item.quantity * item.part.crewCost));
+    return value;
+  }
+  get grandTotalCost(): number {
+    let value = 0;
+    this.datasource.forEach(item => value = value + ((item.quantity * item.part.averagePrice) + (item.quantity * item.part.crewCost)));
+    return value;
+  }
+
   ngOnInit(): void {
     this.backupDatasource();
     this.getParts();

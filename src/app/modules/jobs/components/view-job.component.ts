@@ -38,6 +38,27 @@ export class ViewJobComponent implements OnInit {
         private localStorageService: LocalStorageService) {
     }
 
+    get grandQuantity(): number {
+        let value = 0;
+        this.job.jobParts.forEach(item => value = value + item.quantity);
+        return value;
+    }
+    get grandTotalPrice(): number {
+        let value = 0;
+        this.job.jobParts.forEach(item => value = value + (item.quantity * item.part.averagePrice));
+        return value;
+    }
+    get grandTotalCrewCost(): number {
+        let value = 0;
+        this.job.jobParts.forEach(item => value = value + (item.quantity * item.part.crewCost));
+        return value;
+    }
+    get grandTotalCost(): number {
+        let value = 0;
+        this.job.jobParts.forEach(item => value = value + ((item.quantity * item.part.averagePrice) + (item.quantity * item.part.crewCost)));
+        return value;
+    }
+
     ngOnInit(): void {
         this.route.queryParams.subscribe(data => {
             if (data['status'] && !isNaN(data['status'])) {
