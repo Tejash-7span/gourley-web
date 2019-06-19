@@ -29,6 +29,7 @@ export class JobPartListComponent implements OnInit {
   isUpdate = false;
   quantityFormat = QUANTITY_FORMAT;
   priceFormat = PRICE_FORMAT;
+  currentUpdateIndex = null;
 
   constructor(private partService: PartService,
     private toastService: ToastService,
@@ -47,11 +48,6 @@ export class JobPartListComponent implements OnInit {
     return +this.jobPartForm.value['quantity'];
   }
 
-  get grandQuantity(): number {
-    let value = 0;
-    this.datasource.forEach(item => value = value + item.quantity);
-    return value;
-  }
   get grandTotalPrice(): number {
     let value = 0;
     this.datasource.forEach(item => value = value + (item.quantity * item.part.averagePrice));
@@ -60,11 +56,6 @@ export class JobPartListComponent implements OnInit {
   get grandTotalCrewCost(): number {
     let value = 0;
     this.datasource.forEach(item => value = value + (item.quantity * item.part.crewCost));
-    return value;
-  }
-  get grandTotalCost(): number {
-    let value = 0;
-    this.datasource.forEach(item => value = value + ((item.quantity * item.part.averagePrice) + (item.quantity * item.part.crewCost)));
     return value;
   }
 
@@ -105,7 +96,8 @@ export class JobPartListComponent implements OnInit {
     });
   }
 
-  private setUpdateMode(jobPart: JobPartModel) {
+  private setUpdateMode(index: number, jobPart: JobPartModel) {
+    this.currentUpdateIndex = index;
     this.currentPartId = jobPart.partId;
     this.resetForm(jobPart.partId, jobPart.quantity);
     this.isUpdate = true;
@@ -128,32 +120,26 @@ export class JobPartListComponent implements OnInit {
   }
 
   private addItem() {
-    if (this.isExist()) {
-      this.addError('Part is already added to the list');
-    } else {
-      const jobPart = JobPartModel.createInstance(this.partId, this.quantity);
-      const part = this.parts.find(item => item.id === this.partId);
-      jobPart.part = PartModel.cloneInstance(part);
-      this.datasource.push(jobPart);
-      this.isUpdate = false;
-      this.currentPartId = 0;
-      this.resetForm();
-    }
+    const jobPart = JobPartModel.createInstance(this.partId, this.quantity);
+    const part = this.parts.find(item => item.id === this.partId);
+    jobPart.part = PartModel.cloneInstance(part);
+    this.datasource.push(jobPart);
+    this.isUpdate = false;
+    this.currentPartId = 0;
+    this.currentUpdateIndex = null;
+    this.resetForm();
   }
 
   private updateItem() {
-    if (this.currentPartId !== this.partId && this.isExist()) {
-      this.addError('Part is already added to the list');
-    } else {
-      const part = this.parts.find(item => item.id === this.partId);
-      const jobPart = this.datasource.find(item => item.partId === this.currentPartId);
-      jobPart.partId = this.partId;
-      jobPart.quantity = this.quantity;
-      jobPart.part = PartModel.cloneInstance(part);
-      this.isUpdate = false;
-      this.currentPartId = 0;
-      this.resetForm();
-    }
+    const part = this.parts.find(item => item.id === this.partId);
+    const jobPart = this.datasource[this.currentUpdateIndex];
+    jobPart.partId = this.partId;
+    jobPart.quantity = this.quantity;
+    jobPart.part = PartModel.cloneInstance(part);
+    this.isUpdate = false;
+    this.currentPartId = 0;
+    this.currentUpdateIndex = null;
+    this.resetForm();
   }
 
   private deleteItem(jobPart: JobPartModel) {

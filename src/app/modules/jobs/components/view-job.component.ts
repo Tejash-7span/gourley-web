@@ -28,6 +28,7 @@ export class ViewJobComponent implements OnInit {
     jobFilterOption = null;
     quantityFormat = QUANTITY_FORMAT;
     priceFormat = PRICE_FORMAT;
+    printDate = new Date();
 
     constructor(private router: Router,
         private route: ActivatedRoute,

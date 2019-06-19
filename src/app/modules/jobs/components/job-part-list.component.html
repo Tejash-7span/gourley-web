@@ -47,50 +47,45 @@
 <table class="table table-responsive table-striped table-bordered">
     <thead>
         <tr>
-            <th class="width-15">Part</th>
+            <th class="width-30">Part</th>
             <th class="width-10 right">Quantity</th>
             <th class="width-10 right">Price</th>
             <th class="width-10 right">Total Price</th>
             <th class="width-10 right">Crew Cost</th>
             <th class="width-15 right">Total Crew Cost</th>
-            <th class="width-15 right">Total Cost</th>
             <th class="width-15 center" colspan="2">Options</th>
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let data of datasource">
+        <tr *ngFor="let data of datasource; let i = index;">
             <td>{{data.part.description}}</td>
             <td class="right">{{data.quantity | number:quantityFormat}}</td>
             <td class="right">{{data.part.averagePrice | number:priceFormat}}</td>
             <td class="right">{{data.quantity * data.part.averagePrice | number:priceFormat}}</td>
             <td class="right">{{data.part.crewCost | number:priceFormat}}</td>
             <td class="right">{{data.quantity * data.part.crewCost | number:priceFormat}}</td>
-            <td class="right">
-                {{(data.quantity * data.part.averagePrice) + (data.quantity * data.part.crewCost) | number:priceFormat}}
-            </td>
             <td class="center">
                 <button class="btn btn-sm btn-success inactive" *ngIf="!data.part.active"
                     tooltip="Part is not active anymore" placement="auto" type="button">Update</button>
                 <button class="btn btn-sm btn-success" *ngIf="data.part.active" type="button"
-                    (click)="setUpdateMode(data)">Update</button>
+                    (click)="setUpdateMode(i, data)">Update</button>
             </td>
             <td class="center">
                 <button class="btn btn-sm btn-danger" type="button" (click)="deleteItem(data)">Delete</button>
             </td>
         </tr>
         <tr *ngIf="datasource.length === 0">
-            <td colspan="8">No records added.</td>
+            <td colspan="7">No records added.</td>
         </tr>
     </tbody>
     <tfoot *ngIf="datasource.length !== 0">
         <tr>
             <td>Total</td>
-            <td class="right">{{grandQuantity}}</td>
+            <td class="right"></td>
             <td class="right"></td>
             <td class="right">{{grandTotalPrice | number:priceFormat}}</td>
             <td class="right"></td>
             <td class="right">{{grandTotalCrewCost | number:priceFormat}}</td>
-            <td class="right">{{grandTotalCost | number:priceFormat}}</td>
             <td colspan="2"></td>
         </tr>
     </tfoot>
