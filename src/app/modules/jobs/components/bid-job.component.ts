@@ -9,6 +9,7 @@ import { JobType } from '../../../general/models/jobtype/job-type.model';
 import { LocalStorageService } from '../../../general/services/localstorage.service';
 import { JobPartListComponent } from './job-part-list.component';
 import { ToastService } from '../../../general/services/toast.service';
+import { JobTypeEnum } from '../../../general/enums/worktype.enum';
 
 @Component({
     selector: 'app-bid-job',
@@ -39,7 +40,7 @@ export class BidJobComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.jobTypes = this.localStorageService.jobTypes.filter(type => type.jobEnabled);
+        this.jobTypes = this.localStorageService.jobTypes.filter(type => type.jobEnabled && type.id !== JobTypeEnum[JobTypeEnum[JobTypeEnum.All]]);
         this.jobForm = this.formBuilder.group({
             contactName: ['', [Validators.maxLength(100)]],
             name: ['', [Validators.required, Validators.maxLength(100)]],

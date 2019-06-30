@@ -16,6 +16,7 @@ import { StatusService } from '../../../general/services/status.service';
 import { IMyDpOptions, MyDatePicker } from 'mydatepicker';
 import { ToastService } from '../../../general/services/toast.service';
 import { conditionalRequried } from '../../../general/helpers/conditional-required.validator';
+import { JobTypeEnum } from '../../../general/enums/worktype.enum';
 
 @Component({
     selector: 'app-update-job',
@@ -70,7 +71,7 @@ export class UpdateJobComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.jobTypes = this.localStorageService.jobTypes.filter(type => type.jobEnabled);
+        this.jobTypes = this.localStorageService.jobTypes.filter(type => type.jobEnabled && type.id !== JobTypeEnum[JobTypeEnum[JobTypeEnum.All]]);
         this.jobForm = this.formBuilder.group({
             contactName: ['', [Validators.maxLength(100)]],
             name: ['', [Validators.required, Validators.maxLength(100)]],

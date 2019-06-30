@@ -8,6 +8,7 @@ export class PartModel {
     priceB = 0;
     priceC = 0;
     active = true;
+    jobTypeId = 0;
 
     public static createInstance(id: number, form: FormGroup) {
         const part = new PartModel();
@@ -18,6 +19,7 @@ export class PartModel {
         part.priceB = form.value['priceB'];
         part.priceC = form.value['priceC'];
         part.active = form.value['active'];
+        part.jobTypeId = form.value['jobTypeId'];
         return part;
     }
 
@@ -30,6 +32,7 @@ export class PartModel {
         part.priceB = existing.priceB;
         part.priceC = existing.priceC;
         part.active = existing.active;
+        part.jobTypeId = existing.jobTypeId;
         return part;
     }
 }

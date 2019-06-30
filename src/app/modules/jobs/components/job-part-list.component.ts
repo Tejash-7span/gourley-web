@@ -6,6 +6,8 @@ import { quantityValidator } from '../../../general/helpers/number.validator';
 import { PartService } from '../../../general/services/part.service';
 import { ToastService } from '../../../general/services/toast.service';
 import { QUANTITY_FORMAT, PRICE_FORMAT } from '../../../general/models/constants';
+import { LocalStorageService } from '../../../general/services/localstorage.service';
+import { JobType } from '../../../general/models/jobtype/job-type.model';
 
 @Component({
   selector: 'app-job-part-list',
@@ -18,6 +20,11 @@ export class JobPartListComponent implements OnInit {
 
   @Input()
   datasource: JobPartModel[] = [];
+
+  @Input()
+  jobTypeId: number = null;
+
+  jobType: JobType;
 
   datasourceBackup: JobPartModel[];
 
@@ -33,6 +40,7 @@ export class JobPartListComponent implements OnInit {
 
   constructor(private partService: PartService,
     private toastService: ToastService,
+    private localStorageService: LocalStorageService,
     private formBuilder: FormBuilder) {
 
   }
@@ -62,6 +70,7 @@ export class JobPartListComponent implements OnInit {
   ngOnInit(): void {
     this.backupDatasource();
     this.getParts();
+    this.jobType = this.localStorageService.jobTypes.find(jobType => jobType.id === this.jobTypeId);
     this.jobPartForm = this.formBuilder.group({
       partId: ['', [Validators.required]],
       quantity: ['', [Validators.required, quantityValidator, Validators.maxLength(10)]]
@@ -91,16 +100,27 @@ export class JobPartListComponent implements OnInit {
   }
 
   private getParts() {
-    this.partService.getAll().then(response => {
-      this.parts = response;
-    });
+    if (this.jobTypeId) {
+      this.partService.getAllByJobType(this.jobTypeId).then(response => {
+        this.parts = response;
+      });
+    } else {
+      this.partService.getAll().then(response => {
+        this.parts = response;
+      });
+    }
   }
 
   private setUpdateMode(index: number, jobPart: JobPartModel) {
-    this.currentUpdateIndex = index;
-    this.currentPartId = jobPart.partId;
-    this.resetForm(jobPart.partId, jobPart.quantity);
-    this.isUpdate = true;
+    if (this.parts.find(part => part.id === jobPart.partId)) {
+      this.currentUpdateIndex = index;
+      this.currentPartId = jobPart.partId;
+      this.resetForm(jobPart.partId, jobPart.quantity);
+      this.isUpdate = true;
+    } else {
+      this.cancelUpdateMode();
+      this.toastService.error(`This part can not be updated as it is not supported for ${this.jobType.name} job.`);
+    }
   }
 
   private cancelUpdateMode() {

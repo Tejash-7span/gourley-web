@@ -15,6 +15,11 @@ export class PartService {
         return this.restService.get(path);
     }
 
+    public getAllByJobType(jobTypeId: number): Promise<PartModel[]> {
+        const path = `parts/all/${jobTypeId}`;
+        return this.restService.get(path);
+    }
+
     public getList(page: number, searchTerm: string = ''): Promise<PagedData<PartModel>> {
         return this.restService.getPagedData('parts', page, searchTerm);
     }

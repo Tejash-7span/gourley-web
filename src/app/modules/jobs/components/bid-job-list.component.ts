@@ -54,8 +54,8 @@ export class BidJobListComponent implements OnInit {
   ngOnInit(): void {
     this.resetAdvancedSearchData();
     this.route.params.subscribe(data => {
-      this.jobTypes = this.localStorageService.jobTypes.filter(type => type.workerEnabled);
-      const firstJobType = this.jobTypes.find(jobType => jobType.workerEnabled);
+      this.jobTypes = this.localStorageService.jobTypes.filter(type => type.jobEnabled && type.id !== JobTypeEnum[JobTypeEnum[JobTypeEnum.All]]);
+      const firstJobType = this.jobTypes.length > 0 ? this.jobTypes[0] : null;
       if (!firstJobType) {
         this.toastService.error('Job Types not found. Please try again or contact your administrator');
       } else {

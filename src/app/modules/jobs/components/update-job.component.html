@@ -316,7 +316,8 @@
                             </div>
                         </div>
                     </form>
-                    <app-job-part-list #jobPartList [datasource]="job.jobParts"></app-job-part-list>
+                    <app-job-part-list #jobPartList [datasource]="job.jobParts" [jobTypeId]="this.jobType.id">
+                    </app-job-part-list>
                 </div>
                 <div class="card-footer">
                     <button type="button" class="btn btn-sm btn-success margin-bottom-10 full-width"

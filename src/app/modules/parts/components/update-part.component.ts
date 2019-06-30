@@ -7,6 +7,8 @@ import { priceValidator } from '../../../general/helpers/number.validator';
 import { PartModel } from '../../../general/models/parts/part.model';
 import { PartService } from '../../../general/services/part.service';
 import { ToastService } from '../../../general/services/toast.service';
+import { JobType } from '../../../general/models/jobtype/job-type.model';
+import { LocalStorageService } from '../../../general/services/localstorage.service';
 
 @Component({
     selector: 'app-update-part',
@@ -21,11 +23,13 @@ export class UpdatePartComponent implements OnInit, AfterViewInit {
     submitted = false;
     id = 0;
     existing: PartModel;
+    jobTypes: JobType[] = [];
 
     constructor(private router: Router,
         private element: ElementRef,
         private route: ActivatedRoute,
         private partService: PartService,
+        private localStorageService: LocalStorageService,
         private toastService: ToastService,
         private formBuilder: FormBuilder) {
     }
@@ -35,13 +39,15 @@ export class UpdatePartComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        this.jobTypes = this.localStorageService.jobTypes.filter(type => type.jobEnabled);
         this.partForm = this.formBuilder.group({
             description: ['', [Validators.required, Validators.maxLength(70)]],
             averagePrice: ['', [Validators.required, priceValidator]],
             crewCost: ['', [Validators.required, priceValidator]],
             priceB: ['', [Validators.required, priceValidator]],
             priceC: ['', [Validators.required, priceValidator]],
-            active: ['']
+            active: [''],
+            jobTypeId: ['']
         });
 
         this.route.params.subscribe(data => {
