@@ -5,6 +5,7 @@ import { ModalModule } from 'ngx-bootstrap/modal/';
 import { ConfirmModalComponent } from './components/confirm-modal.component';
 import { UserImageComponent } from './components/user-image.component';
 import { PaginationDetailsComponent } from './components/pagination-details.component';
+import { JobTypeNamePipe } from './pipes/job-name.pipe';
 
 // Angular
 
@@ -17,12 +18,14 @@ import { PaginationDetailsComponent } from './components/pagination-details.comp
     declarations: [
         ConfirmModalComponent,
         UserImageComponent,
-        PaginationDetailsComponent
+        PaginationDetailsComponent,
+        JobTypeNamePipe,
     ],
     exports: [
         ConfirmModalComponent,
         UserImageComponent,
-        PaginationDetailsComponent
+        PaginationDetailsComponent,
+        JobTypeNamePipe
     ]
 })
 export class SharedModule { }

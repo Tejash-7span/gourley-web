@@ -20,8 +20,11 @@ export class PartService {
         return this.restService.get(path);
     }
 
-    public getList(page: number, searchTerm: string = ''): Promise<PagedData<PartModel>> {
-        return this.restService.getPagedData('parts', page, searchTerm);
+    public getList(jobTypeId: number, page: number, searchTerm: string = ''): Promise<PagedData<PartModel>> {
+        const options = {
+            jobTypeId: jobTypeId.toString(),
+        };
+        return this.restService.getPagedData('parts', page, searchTerm, options);
     }
 
     public get(id: number): Promise<PartModel> {

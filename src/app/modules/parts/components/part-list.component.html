@@ -3,7 +3,17 @@
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <h4 class="page-header">Parts</h4>
+            <h4 class="page-header float-left">Parts</h4>
+            <div class="btn-group float-left margin-bottom-10 full-width" dropdown>
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                    {{jobType.name}} <span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li role="menuitem" *ngFor="let item of jobTypes">
+                        <a class="dropdown-item" (click)="onJobTypeSelect(item)">{{item.name}}</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6">
             <button class="btn btn-primary pull-right margin-bottom-10 full-width" type="button"
@@ -34,7 +44,8 @@
                     <table class="table table-responsive table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th class="width-55">Description</th>
+                                <th class="width-40">Description</th>
+                                <th class="width-15">Type</th>
                                 <th class="width-15 right">Average Price</th>
                                 <th class="width-15 right">Crew Cost</th>
                                 <th class="width-15 center" colspan="2">Options</th>
@@ -43,6 +54,7 @@
                         <tbody>
                             <tr *ngFor="let data of datasource">
                                 <td>{{data.description}}</td>
+                                <td>{{data.jobTypeId | jobTypeName}}</td>
                                 <td class="right">{{data.averagePrice | number:priceFormat}}</td>
                                 <td class="right">{{data.crewCost | number:priceFormat}}</td>
                                 <td class="center">

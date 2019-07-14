@@ -63,6 +63,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ToastService } from './general/services/toast.service';
 import { CalendarModule, DateAdapter } from 'angular-calendar';
 import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { JobTypeNamePipe } from './modules/shared/pipes/job-name.pipe';
 
 export const maskOptions: Partial<IConfig> | (() => Partial<IConfig>) = {
 
@@ -102,7 +103,8 @@ export const maskOptions: Partial<IConfig> | (() => Partial<IConfig>) = {
     P500Component,
     LoginComponent,
     RegisterComponent,
-    LoaderComponent],
+    LoaderComponent
+  ],
   providers: [{
     provide: LocationStrategy,
     useClass: HashLocationStrategy
