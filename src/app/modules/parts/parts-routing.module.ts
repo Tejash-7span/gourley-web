@@ -15,14 +15,6 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: ':type',
-    component: PartListComponent,
-    data: {
-      title: 'Parts'
-    },
-    canActivate: [AuthGuard]
-  },
-  {
     path: 'create',
     component: CreatePartComponent,
     data: {
@@ -33,6 +25,14 @@ const routes: Routes = [
   {
     path: 'update/:id',
     component: UpdatePartComponent,
+    data: {
+      title: 'Parts'
+    },
+    canActivate: [AuthGuard]
+  },
+  {
+    path: ':type',
+    component: PartListComponent,
     data: {
       title: 'Parts'
     },
