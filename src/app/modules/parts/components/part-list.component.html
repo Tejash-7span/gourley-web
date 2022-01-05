@@ -1,9 +1,13 @@
 <app-confirm-modal #deleteConfirmModal type="danger" title="Delete Part"
     message="Are you sure you want to delete this part ?" (confirm)="deletePart($event)"></app-confirm-modal>
+<app-confirm-modal #activePartConfirmModal type="success" title="Active Part"
+    message="Are you sure you want to active this part ?" (confirm)="inactivePart($event)"></app-confirm-modal>
+<app-confirm-modal #inactivePartConfirmModal type="danger" title="Inactive Part"
+    message="Are you sure you want to inactive this part ?" (confirm)="activePart($event)"></app-confirm-modal>
 <div class="animated fadeIn">
     <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6">
-            <h4 class="page-header float-left">Parts</h4>
+            <h4 class="page-header float-left">Parts: </h4>
             <div class="btn-group float-left margin-bottom-10 full-width" dropdown>
                 <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
                     {{jobType.name}} <span class="caret"></span>
@@ -11,6 +15,19 @@
                 <ul *dropdownMenu class="dropdown-menu" role="menu">
                     <li role="menuitem" *ngFor="let item of jobTypes">
                         <a class="dropdown-item" (click)="onJobTypeSelect(item)">{{item.name}}</a>
+                    </li>
+                </ul>
+            </div>
+            <h4 class="float-left ml-5">Status:  </h4>
+            <div class="btn-group margin-bottom-10 full-width ml-3" dropdown>
+                <button dropdownToggle type="button" class="btn btn-primary dropdown-toggle">
+                    {{statusCategory}} <span class="caret"></span>
+                </button>
+                <ul *dropdownMenu class="dropdown-menu" role="menu">
+                    <li role="menuitem">
+                        <a class="dropdown-item" (click)="onStatusChange('All')">All</a>
+                        <a class="dropdown-item" (click)="onStatusChange('Active')">Active</a>
+                        <a class="dropdown-item" (click)="onStatusChange('Inactive')">Inactive</a>
                     </li>
                 </ul>
             </div>
@@ -27,7 +44,10 @@
             <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="offset-lg-6 col-lg-6 col-sm-12 margin-top-10">
+                        <div class="col-lg-6 col-sm-12 margin-top-10">
+                        
+                        </div>
+                        <div class="col-lg-6 col-sm-12 margin-top-10">
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="Search Description"
                                     [(ngModel)]="searchTerm" (keydown.enter)="getList()" />
@@ -47,7 +67,8 @@
                                 <th class="width-40">Description</th>
                                 <th class="width-15">Type</th>
                                 <th class="width-15 right">Average Price</th>
-                                <th class="width-15 right">Crew Cost</th>
+                                <th class="width-10 right">Crew Cost</th>
+                                <th class="width-10 center">Status</th>
                                 <th class="width-15 center" colspan="2">Options</th>
                             </tr>
                         </thead>
@@ -57,6 +78,12 @@
                                 <td>{{data.jobTypeId | jobTypeName}}</td>
                                 <td class="right">{{data.averagePrice | number:priceFormat}}</td>
                                 <td class="right">{{data.crewCost | number:priceFormat}}</td>
+                                <td class="center">
+                                    <button class="btn btn-sm btn-success" type="button"
+                                        (click)="openActiveModel(data.id)" *ngIf="data.active == true">Active</button>
+                                    <button class="btn btn-sm btn-danger" type="button"
+                                        (click)="openInactiveModel(data.id)" *ngIf="data.active == false">Inactive</button>
+                                </td>
                                 <td class="center">
                                     <button class="btn btn-sm btn-success" type="button"
                                         (click)="redirectTo('/masters/parts/update/'+data.id)">Update</button>

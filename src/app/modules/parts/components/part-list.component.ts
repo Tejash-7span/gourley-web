@@ -24,8 +24,16 @@ export class PartListComponent implements OnInit {
   jobType: JobType;
   jobTypes: JobType[] = [];
 
+  statusCategory= "All";
+
   @ViewChild('deleteConfirmModal')
   deleteConfirmModal: ConfirmModalComponent;
+
+  @ViewChild('activePartConfirmModal')
+  activePartConfirmModal: ConfirmModalComponent;
+
+  @ViewChild('inactivePartConfirmModal')
+  inactivePartConfirmModal: ConfirmModalComponent;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -97,5 +105,25 @@ export class PartListComponent implements OnInit {
 
   onJobTypeSelect(jobType: JobType) {
     this.redirectTo(`${ROUTES.parts}/${jobType.id}`);
+  }
+
+  openActiveModel(id){
+    this.inactivePartConfirmModal.show(id);
+  }
+  openInactiveModel(id){
+    this.activePartConfirmModal.show(id);
+  }
+
+  ActivePart(id: number) {
+    console.log(id)
+  }
+
+  inactivePart(id: number) {
+    console.log(id)
+  }
+
+  onStatusChange(value) {
+    this.statusCategory = value;
+    console.log(this.statusCategory);
   }
 }
